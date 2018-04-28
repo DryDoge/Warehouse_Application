@@ -19,10 +19,12 @@ public class LoginView{
     private static JFrame jf;
     private final JTextField text;
     private final JTextField errtext;
-    private JLabel userLabel, passwordLabel;
+    private final JLabel userLabel;
+    private final JLabel passwordLabel;
     private JPasswordField passwordText;
     private JTextField userText;
-    private JButton loginButton, resetButton;
+    private final JButton loginButton;
+    private final JButton resetButton;
 
 
     public LoginView(){
@@ -51,7 +53,6 @@ public class LoginView{
 
         jf.setLayout(null);
 
-
         jf.add(userLabel);
         jf.add(userText);
         jf.add(passwordLabel);
@@ -60,6 +61,7 @@ public class LoginView{
         jf.add(resetButton);
 
         loginButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 String uname = userText.getText();
                 String pass = new String(passwordText.getPassword());
@@ -73,6 +75,7 @@ public class LoginView{
             }
         });
         resetButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 userText.setText("");
                 passwordText.setText("");
