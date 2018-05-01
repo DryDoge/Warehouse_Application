@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 
 public class LoginView{
 
-    private static JFrame jf;
-    private final JTextField errtext;
+    private static JFrame jf = new JFrame("Login Menu");
+    private final JTextField errtext = new JTextField("Incorrect login or password");
 
     private final JPasswordField passwordText;
     private final JTextField userText;
@@ -15,8 +15,6 @@ public class LoginView{
 
 
     public LoginView(){
-        this.errtext = new JTextField("Incorrect login or password");
-        jf = new JFrame("Login Menu");
 
         JLabel userLabel = new JLabel("User:");
         JLabel passwordLabel = new JLabel("Password:");
@@ -27,10 +25,10 @@ public class LoginView{
 
         userLabel.setBounds(30, 20, 100, 40);
         passwordLabel.setBounds(30, 60, 80, 25);
+        resetButton.setBounds(160, 100, 90, 35);
         userText.setBounds(100, 30, 160, 25);
         passwordText.setBounds(100, 60, 160, 25);
         loginButton.setBounds(50, 100, 90, 35);
-        resetButton.setBounds(160, 100, 90, 35);
 
         jf.setSize(300, 180);
         jf.setLocationRelativeTo(null);
@@ -61,7 +59,8 @@ public class LoginView{
         loginButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
                 String uname = userText.getText();
-                char[] upass = passwordText.getPassword();
+                //noinspection deprecation
+                String upass = passwordText.getText();
                 if(uname.equals("Admin") && upass.equals("admin")){
 //                    InventorySystem saa = new InventorySystem();
 //                    saa.setExtendedState(InventorySystem.MAXIMIZED_BOTH);

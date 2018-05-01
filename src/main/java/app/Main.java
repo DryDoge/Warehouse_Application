@@ -1,6 +1,7 @@
 package app;
 
 import db.*;
+import gui.LoginView;
 
 import javax.persistence.*;
 import java.util.List;
@@ -8,9 +9,12 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-//        EntityManagerFactory emf =
-//                Persistence.createEntityManagerFactory("AppPU");
-//        EntityManager em = emf.createEntityManager();
+
+        LoginView l = new LoginView();
+        l.actionLogin();
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("AppPU");
+        EntityManager em = emf.createEntityManager();
 //
 //        Book b1 = em.find(Book.class, 2);
 //        System.out.println(
@@ -39,7 +43,7 @@ public class Main {
 //                b3.getId()+" and title: "+b3.getTitle()
 //        );
 //
-//        EntityTransaction et = em.getTransaction();
+        EntityTransaction et = em.getTransaction();
 //
 ////        et.begin();
 ////        Book b4 = new Book();
