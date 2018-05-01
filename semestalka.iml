@@ -6,7 +6,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Eclipselink" />
         <datasource-mapping>
-          <factory-entry name="AppPU" />
+          <factory-entry name="AppPU" value="fb4aa417-2801-4069-aef6-299fe7b07508" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>

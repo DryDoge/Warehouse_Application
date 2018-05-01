@@ -1,17 +1,18 @@
 package app;
 
-import db.*;
-import gui.LoginView;
+import gui.*;
+
 
 import javax.persistence.*;
-import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        LoginView l = new LoginView();
-        l.actionLogin();
+//        LoginMenu l = new LoginMenu();
+//        l.actionLogin();
+        GuiMain gm = new GuiMain();
+
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
         EntityManager em = emf.createEntityManager();
@@ -43,13 +44,16 @@ public class Main {
 //                b3.getId()+" and title: "+b3.getTitle()
 //        );
 //
-        EntityTransaction et = em.getTransaction();
-//
-////        et.begin();
-////        Book b4 = new Book();
-////        b4.setTitle("Amerika");
-////        em.persist(b4);
-////        et.commit();
+//        EntityTransaction et = em.getTransaction();
+
+//        et.begin();
+//        Napoj n1 = new Napoj();
+//        n1.setCena((short)10);
+//        n1.setDruh("Vodka");
+//        n1.setZnacka("Nicolaus");
+//        n1.setSpotreba(new Date(1000000000));
+//        em.persist(n1);
+//        et.commit();
 //
 //
 //        et.begin();

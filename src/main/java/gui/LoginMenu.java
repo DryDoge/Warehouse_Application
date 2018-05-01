@@ -1,21 +1,17 @@
 package gui;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
-public class LoginView{
+public class LoginMenu extends JFrame{
 
-    private static JFrame jf = new JFrame("Login Menu");
     private final JTextField errtext = new JTextField("Incorrect login or password");
-
     private final JPasswordField passwordText;
     private final JTextField userText;
     private final JButton loginButton;
 
-
-    public LoginView(){
-
+    public LoginMenu(){
+        super("Login Menu");
         JLabel userLabel = new JLabel("User:");
         JLabel passwordLabel = new JLabel("Password:");
         JButton resetButton = new JButton("Clear");
@@ -30,22 +26,28 @@ public class LoginView{
         passwordText.setBounds(100, 60, 160, 25);
         loginButton.setBounds(50, 100, 90, 35);
 
-        jf.setSize(300, 180);
-        jf.setLocationRelativeTo(null);
-        jf.setVisible(true);
-        jf.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        jf.setLayout(null);
-        
+        setSize(300, 180);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setLayout(null);
 
-        jf.add(userLabel);
-        jf.add(userText);
-        jf.add(passwordLabel);
-        jf.add(passwordText);
-        jf.add(loginButton);
-        jf.add(resetButton);
+        add(userLabel);
+        add(userText);
+        add(passwordLabel);
+        add(passwordText);
+        add(loginButton);
+        add(resetButton);
+        
+        passwordText.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    loginButton.doClick();
+                }
+            }
+        });
 
-        
-        
         resetButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 userText.setText("");
@@ -53,28 +55,23 @@ public class LoginView{
             }
         });
     }
-    
-    
+
     public void actionLogin(){
         loginButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent ae) {
                 String uname = userText.getText();
                 //noinspection deprecation
                 String upass = passwordText.getText();
-                if(uname.equals("Admin") && upass.equals("admin")){
-//                    InventorySystem saa = new InventorySystem();
-//                    saa.setExtendedState(InventorySystem.MAXIMIZED_BOTH);
-//                    saa.setVisible(true);
-                    jf.dispose();
+                if(uname.equals("admin") && upass.equals("admin")){
+                    dispose();
+                    new GuiMain();
                 }else{
-                    JOptionPane.showMessageDialog(jf, errtext.getText());
+                    JOptionPane.showMessageDialog(null, errtext.getText());
                     userText.setText("");
                     passwordText.setText("");
                     userText.requestFocus();
                 }
-            } 
+            }
         });
     }
-    
-    
 }
