@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="dataSourceStorageLocal">
-    <data-source name="db18_suchype1@slon.felk.cvut.cz" uuid="fb4aa417-2801-4069-aef6-299fe7b07508">
+    <data-source name="db18_suchype1@slon.felk.cvut.cz" uuid="81650068-4ebc-4054-853f-70817a0b0087">
       <database-info product="PostgreSQL" version="9.3.11" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.2">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
       <user-name>db18_suchype1</user-name>
       <introspection-schemas>db18_suchype1:public</introspection-schemas>
     </data-source>
