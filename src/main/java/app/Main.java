@@ -13,9 +13,9 @@ public class Main {
 //        l.actionLogin();
         GuiMain gm = new GuiMain();
 
-        EntityManagerFactory emf =
-                Persistence.createEntityManagerFactory("AppPU");
-        EntityManager em = emf.createEntityManager();
+//        EntityManagerFactory emf =
+//                Persistence.createEntityManagerFactory("AppPU");
+//        EntityManager em = emf.createEntityManager();
 //
 //        Book b1 = em.find(Book.class, 2);
 //        System.out.println(

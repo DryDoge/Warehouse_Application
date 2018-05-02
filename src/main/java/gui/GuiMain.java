@@ -13,8 +13,10 @@ public class GuiMain extends JFrame {
     private JButton sellsButton;
     private JButton logoutButton;
     private JPanel menuPanel;
-    private JPanel workingPanel;
     private JButton suppliersButton;
+    private JLabel imageLabel;
+
+    private warehouseGUI wh = new warehouseGUI();
 
 
     public GuiMain() {
@@ -22,8 +24,10 @@ public class GuiMain extends JFrame {
         super("Application");
         setContentPane(mainPanel);
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setVisible(true);
         pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
@@ -41,20 +45,38 @@ public class GuiMain extends JFrame {
         logoutButton.setIcon(logoutIcon);
         ImageIcon suppIcon = new ImageIcon("icons/delivery.png", "Suppliers");
         suppliersButton.setIcon(suppIcon);
+        ImageIcon backIcon = new ImageIcon("icons/background1.png","Background");
+        imageLabel.setIcon(backIcon);
 
 
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int optionButton =JOptionPane.showConfirmDialog(
-                        null,"Do you really want to logout?","Confrim logout",JOptionPane.YES_NO_OPTION);
-                if(optionButton == JOptionPane.YES_OPTION) {
+                int optionButton = JOptionPane.showConfirmDialog(
+                        null, "Do you really want to logout?", "Confrim logout", JOptionPane.YES_NO_OPTION);
+                if (optionButton == JOptionPane.YES_OPTION) {
                     dispose();
                     LoginMenu l = new LoginMenu();
+                    wh.dispose();
                     l.actionLogin();
                 }
             }
         });
+
+        warehouseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            wh.setVisible(true);
+            }
+        });
+        homeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                wh.dispose();
+            }
+        });
     }
+
+
 }

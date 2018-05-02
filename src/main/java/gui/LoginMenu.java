@@ -27,10 +27,11 @@ public class LoginMenu extends JFrame{
         loginButton.setBounds(50, 100, 90, 35);
 
         setSize(300, 180);
+        setLayout(null);
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setLayout(null);
+
 
         add(userLabel);
         add(userText);
