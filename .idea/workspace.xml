@@ -2,20 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="019385a2-d1b1-441e-b967-ae046690c0f8" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gui/warehouseGUI.form" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/gui/warehouseGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gui/WarehouseGui/NewWarehouse.form" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/gui/WarehouseGui/NewWarehouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/background1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/beverages.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/delivery.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/emp.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/exit.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/home.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/sells.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/icons/warehouse.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/app/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/GuiMain.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/GuiMain.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/GuiMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/GuiMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/LoginMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/warehouseGUI.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/WarehouseGui/WarehouseGUI.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/warehouseGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/WarehouseGui/WarehouseGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/app/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/app/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/GuiMain$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GuiMain$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/GuiMain$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GuiMain$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/GuiMain$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GuiMain$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/GuiMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/GuiMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/LoginMenu$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/LoginMenu$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/LoginMenu$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/LoginMenu$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/LoginMenu$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/LoginMenu$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/LoginMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/LoginMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouseGUI$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouseGUI.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -27,7 +39,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/semestalka$Main.ic" NAME="Main Coverage Results" MODIFIED="1525215153907" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/semestalka$Main.ic" NAME="Main Coverage Results" MODIFIED="1525360692388" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>app.*</FILTER>
     </SUITE>
   </component>
@@ -73,6 +85,15 @@
         <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
         <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
       </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="db18_suchype1@slon.felk.cvut.cz" type="feb32156:DbDataSourceImpl" />
+        <item name="databases" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="db18_suchype1: database" type="6d9b600a:PostgresImplModel$Database" />
+        <item name="public: schema" type="a16502c0:PostgresImplModel$Schema" />
+        <item name="tables" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="sklad: table" type="a93d6ac6:PostgresImplModel$LocalTable" />
+      </path>
     </expand>
     <select />
   </component>
@@ -81,32 +102,43 @@
       <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-984">
-              <caret line="19" column="43" lean-forward="true" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="43" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="-7">
+              <caret line="66" column="2" selection-start-line="66" selection-start-column="2" selection-end-line="66" selection-end-column="2" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="warehouseGUI.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/gui/warehouseGUI.java">
+      <file leaf-file-name="WarehouseGUI.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/gui/WarehouseGui/WarehouseGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="53" column="36" lean-forward="true" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="36" />
+            <state relative-caret-position="242">
+              <caret line="117" column="55" lean-forward="true" selection-start-line="117" selection-start-column="55" selection-end-line="117" selection-end-column="55" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1631#2434#0" expanded="true" />
-                <element signature="e#2433#2434#0" expanded="true" />
+                <element signature="e#3632#3633#0" expanded="true" />
+                <element signature="e#3673#3674#0" expanded="true" />
+                <element signature="method#setData#0;class#WarehouseGUI#0" />
+                <element signature="method#deleteData#0;class#WarehouseGUI#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="warehouseGUI.form" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/gui/warehouseGUI.form">
+      <file leaf-file-name="WarehouseGUI.form" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/gui/WarehouseGui/WarehouseGUI.form">
           <provider selected="true" editor-type-id="ui-designer" />
+        </entry>
+      </file>
+      <file leaf-file-name="GuiMain.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/gui/GuiMain.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-7">
+              <caret line="81" column="13" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -117,6 +149,12 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>setdata</find>
+      <find>emf</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -145,12 +183,19 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" />
         <option value="$PROJECT_DIR$/src/main/java/gui/LoginMenu.java" />
-        <option value="$PROJECT_DIR$/src/main/java/gui/GuiMain.form" />
-        <option value="$PROJECT_DIR$/src/main/java/gui/GuiMain.java" />
-        <option value="$PROJECT_DIR$/src/main/java/app/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/gui/ComboItem.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gui/GuiMain.form" />
         <option value="$PROJECT_DIR$/src/main/java/gui/warehouseGUI.form" />
+        <option value="$PROJECT_DIR$/src/main/java/app/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/gui/warehouseGUI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gui/WarehouseGui/warehouseGUI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/CustomComparator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/app/SkladComparator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gui/WarehouseGui/NewWarehouse.form" />
+        <option value="$PROJECT_DIR$/src/main/java/gui/WarehouseGui/NewWarehouse.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gui/GuiMain.java" />
+        <option value="$PROJECT_DIR$/src/main/java/gui/WarehouseGui/WarehouseGUI.form" />
+        <option value="$PROJECT_DIR$/src/main/java/gui/WarehouseGui/WarehouseGUI.java" />
       </list>
     </option>
   </component>
@@ -191,15 +236,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="semestalka" type="b2602c69:ProjectViewProjectNode" />
               <item name="suchype1" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="semestalka" type="b2602c69:ProjectViewProjectNode" />
+              <item name="suchype1" type="462c0819:PsiDirectoryNode" />
+              <item name="icons" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="semestalka" type="b2602c69:ProjectViewProjectNode" />
@@ -233,14 +280,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="db" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="semestalka" type="b2602c69:ProjectViewProjectNode" />
-              <item name="suchype1" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="gui" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -250,12 +289,15 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="gui" type="462c0819:PsiDirectoryNode" />
-              <item name="warehouseGUI" type="e9f4de52:FormNode" />
+              <item name="WarehouseGui" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -279,6 +321,7 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Peto\Desktop\skola\java\suchype1\src\main\java\gui\WarehouseGui" />
       <recent name="$PROJECT_DIR$/src/main/resources" />
     </key>
   </component>
@@ -369,6 +412,7 @@
       <workItem from="1525258564116" duration="2242000" />
       <workItem from="1525288175370" duration="52000" />
       <workItem from="1525289156342" duration="12546000" />
+      <workItem from="1525356758978" duration="28936000" />
     </task>
     <task id="LOCAL-00001" summary="logout button">
       <created>1525260779540</created>
@@ -381,7 +425,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41433000" />
+    <option name="totallyTimeSpent" value="70369000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -404,12 +448,12 @@
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="bottom" id="Version Control" order="0" />
-      <window_info anchor="bottom" id="Run" order="6" sideWeight="0.4993573" weight="0.33333334" />
+      <window_info anchor="bottom" id="Run" order="6" sideWeight="0.4993573" weight="0.34146342" />
+      <window_info anchor="right" id="Coverage" order="8" side_tool="true" weight="0.32969153" />
       <window_info anchor="bottom" id="Terminal" order="2" />
-      <window_info id="Persistence" order="7" sideWeight="0.3184282" side_tool="true" visible="true" weight="0.15681234" />
-      <window_info content_ui="combo" id="Project" order="5" sideWeight="0.68157184" visible="true" weight="0.15681234" />
+      <window_info id="Persistence" order="7" sideWeight="0.3197832" side_tool="true" visible="true" weight="0.15874036" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.6802168" visible="true" weight="0.15874036" />
       <window_info anchor="right" id="Bean Validation" order="9" weight="0.32952815" />
-      <window_info anchor="bottom" id="Find" order="5" weight="0.3292683" />
       <window_info anchor="right" id="Theme Preview" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Dependency Viewer" order="7" weight="0.32901555" />
@@ -417,9 +461,9 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="Database Console" order="12" sideWeight="0.4993573" weight="0.3292683" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
-      <window_info anchor="right" id="Coverage" order="8" side_tool="true" weight="0.32969153" />
       <window_info anchor="bottom" id="Message" order="4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="5" weight="0.3292683" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -441,49 +485,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="25" column="39" selection-start-line="25" selection-start-column="39" selection-end-line="25" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gui/LoginMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1239">
-          <caret line="59" column="38" selection-start-line="59" selection-start-column="38" selection-end-line="59" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1873#2509#0" expanded="true" />
-            <element signature="e#2508#2509#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gui/GuiMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="882">
-          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1749#2249#0" expanded="true" />
-            <element signature="e#2248#2249#0" expanded="true" />
-            <element signature="e#2381#2535#0" expanded="true" />
-            <element signature="e#2534#2535#0" expanded="true" />
-            <element signature="e#2531#2686#0" expanded="true" />
-            <element signature="e#2685#2686#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="25" column="39" selection-start-line="25" selection-start-column="39" selection-end-line="25" selection-end-column="39" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -493,8 +496,6 @@
           <caret line="59" column="38" lean-forward="true" selection-start-line="59" selection-start-column="38" selection-end-line="59" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1873#2509#0" expanded="true" />
-            <element signature="e#2508#2509#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -505,12 +506,6 @@
           <caret line="54" column="36" lean-forward="true" selection-start-line="54" selection-start-column="36" selection-end-line="54" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1749#2249#0" expanded="true" />
-            <element signature="e#2248#2249#0" expanded="true" />
-            <element signature="e#2381#2535#0" expanded="true" />
-            <element signature="e#2534#2535#0" expanded="true" />
-            <element signature="e#2531#2686#0" expanded="true" />
-            <element signature="e#2685#2686#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -519,9 +514,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -531,8 +523,6 @@
           <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1873#2509#0" expanded="true" />
-            <element signature="e#2508#2509#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -543,12 +533,6 @@
           <caret line="37" column="39" selection-start-line="37" selection-start-column="39" selection-end-line="37" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1749#2249#0" expanded="true" />
-            <element signature="e#2248#2249#0" expanded="true" />
-            <element signature="e#2381#2535#0" expanded="true" />
-            <element signature="e#2534#2535#0" expanded="true" />
-            <element signature="e#2531#2686#0" expanded="true" />
-            <element signature="e#2685#2686#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -557,9 +541,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="820">
           <caret line="45" column="51" lean-forward="true" selection-start-line="45" selection-start-column="7" selection-end-line="45" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -730,16 +711,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/db/Sklad.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="14" column="23" lean-forward="true" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gui/GuiMain.form">
-      <provider selected="true" editor-type-id="ui-designer" />
-    </entry>
     <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_161/src.zip!/javax/swing/JFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="155">
@@ -747,54 +718,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gui/GuiMain.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/gui/ComboItem.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/gui/GuiMain.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/db/Sklad.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="55" column="32" lean-forward="true" selection-start-line="55" selection-start-column="16" selection-end-line="55" selection-end-column="32" />
+        <state relative-caret-position="168">
+          <caret line="14" column="23" lean-forward="true" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_161/src.zip!/java/util/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="237" column="12" selection-start-line="237" selection-start-column="12" selection-end-line="237" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/SkladComparator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="40" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1749#2249#0" expanded="true" />
-            <element signature="e#2248#2249#0" expanded="true" />
-            <element signature="e#2381#2535#0" expanded="true" />
-            <element signature="e#2534#2535#0" expanded="true" />
-            <element signature="e#2531#2686#0" expanded="true" />
-            <element signature="e#2685#2686#0" expanded="true" />
+            <element signature="e#179#180#0" expanded="true" />
+            <element signature="e#216#217#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gui/ComboItem.java">
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_161/src.zip!/java/util/Comparator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="23" lean-forward="true" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
-          <folding>
-            <element signature="e#242#243#0" expanded="true" />
-            <element signature="e#268#269#0" expanded="true" />
-            <element signature="e#302#303#0" expanded="true" />
-            <element signature="e#328#329#0" expanded="true" />
-            <element signature="e#364#365#0" expanded="true" />
-            <element signature="e#392#393#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gui/LoginMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="28" column="26" lean-forward="true" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-984">
-          <caret line="19" column="43" lean-forward="true" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="43" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="153">
+          <caret line="149" column="8" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -805,17 +762,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gui/warehouseGUI.form">
+    <entry file="file://$PROJECT_DIR$/src/main/java/gui/WarehouseGui/NewWarehouse.form">
       <provider selected="true" editor-type-id="ui-designer" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/gui/warehouseGUI.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/gui/LoginMenu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="53" column="36" lean-forward="true" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="36" />
+        <state relative-caret-position="-132">
+          <caret line="42" column="36" selection-start-line="42" selection-start-column="36" selection-end-line="42" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1631#2434#0" expanded="true" />
-            <element signature="e#2433#2434#0" expanded="true" />
+            <element signature="e#1339#1570#0" expanded="true" />
+            <element signature="e#1569#1570#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gui/WarehouseGui/NewWarehouse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="821">
+          <caret line="67" column="29" selection-start-line="67" selection-start-column="29" selection-end-line="67" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1123#1124#0" expanded="true" />
+            <element signature="e#1164#1165#0" expanded="true" />
+            <element signature="method#addData#0;class#NewWarehouse#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/app/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="66" column="2" selection-start-line="66" selection-start-column="2" selection-end-line="66" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk1.8.0_161/src.zip!/java/awt/event/WindowAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="66" column="16" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gui/GuiMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="81" column="13" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gui/WarehouseGui/WarehouseGUI.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/gui/WarehouseGui/WarehouseGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="117" column="55" lean-forward="true" selection-start-line="117" selection-start-column="55" selection-end-line="117" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3632#3633#0" expanded="true" />
+            <element signature="e#3673#3674#0" expanded="true" />
+            <element signature="method#setData#0;class#WarehouseGUI#0" />
+            <element signature="method#deleteData#0;class#WarehouseGUI#0" />
           </folding>
         </state>
       </provider>

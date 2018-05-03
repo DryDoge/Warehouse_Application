@@ -1,5 +1,8 @@
 package gui;
 
+import gui.WarehouseGui.*;
+
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,8 +19,7 @@ public class GuiMain extends JFrame {
     private JButton suppliersButton;
     private JLabel imageLabel;
 
-    private warehouseGUI wh = new warehouseGUI();
-
+    private static WarehouseGUI wh = null;
 
     public GuiMain() {
 
@@ -31,21 +33,21 @@ public class GuiMain extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
-        ImageIcon homeIcon = new ImageIcon("icons/home.png", "Home");
+        ImageIcon homeIcon = new ImageIcon("icons/mainGui/home.png", "Home");
         homeButton.setIcon(homeIcon);
-        ImageIcon wareIcon = new ImageIcon("icons/warehouse.png", "Warehouse");
+        ImageIcon wareIcon = new ImageIcon("icons/mainGui/warehouse.png", "Warehouse");
         warehouseButton.setIcon(wareIcon);
-        ImageIcon bevIcon = new ImageIcon("icons/beverages.png", "Beverages");
+        ImageIcon bevIcon = new ImageIcon("icons/mainGui/beverages.png", "Beverages");
         productsButton.setIcon(bevIcon);
-        ImageIcon sellsIcon = new ImageIcon("icons/sells.png", "Sells");
+        ImageIcon sellsIcon = new ImageIcon("icons/mainGui/sells.png", "Sells");
         sellsButton.setIcon(sellsIcon);
-        ImageIcon empIcon = new ImageIcon("icons/emp.png", "Employers");
+        ImageIcon empIcon = new ImageIcon("icons/mainGui/emp.png", "Employers");
         employersButton.setIcon(empIcon);
-        ImageIcon logoutIcon = new ImageIcon("icons/exit.png", "Exit");
+        ImageIcon logoutIcon = new ImageIcon("icons/mainGui/exit.png", "Exit");
         logoutButton.setIcon(logoutIcon);
-        ImageIcon suppIcon = new ImageIcon("icons/delivery.png", "Suppliers");
+        ImageIcon suppIcon = new ImageIcon("icons/mainGui/delivery.png", "Suppliers");
         suppliersButton.setIcon(suppIcon);
-        ImageIcon backIcon = new ImageIcon("icons/background1.png","Background");
+        ImageIcon backIcon = new ImageIcon("icons/mainGui/background1.png","Background");
         imageLabel.setIcon(backIcon);
 
 
@@ -57,8 +59,10 @@ public class GuiMain extends JFrame {
                         null, "Do you really want to logout?", "Confrim logout", JOptionPane.YES_NO_OPTION);
                 if (optionButton == JOptionPane.YES_OPTION) {
                     dispose();
+                    if(!(wh == null)){
+                        wh.dispose();
+                    }
                     LoginMenu l = new LoginMenu();
-                    wh.dispose();
                     l.actionLogin();
                 }
             }
@@ -67,15 +71,27 @@ public class GuiMain extends JFrame {
         warehouseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            wh.setVisible(true);
+               if(wh == null) {
+                   wh = new WarehouseGUI();
+                   wh.setData();
+                   wh.setVisible(true);
+               }else{
+                   JOptionPane.showMessageDialog(null,"Warehouse window is already open");
+               }
+
             }
         });
         homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                wh.dispose();
+                if(!(wh == null)){
+                    wh.dispose();
+                }
+
             }
         });
+
+
     }
 
 
