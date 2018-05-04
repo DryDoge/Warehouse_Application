@@ -1,6 +1,7 @@
 package gui.WarehouseGui;
 
-import db.*;
+import db.e.*;
+import db.dao.*;
 
 
 import java.awt.event.*;
@@ -12,7 +13,7 @@ import javax.swing.*;
 
 public class WarehouseGUI extends JFrame {
     private JPanel whPanel;
-    private JComboBox<String> numbersCB;
+    private JComboBox<String> warehousesCB;
     private JLabel telLabel;
     private JLabel streetLabel;
     private JLabel cityLabel;
@@ -25,12 +26,20 @@ public class WarehouseGUI extends JFrame {
     private JButton refreshButton;
     private JList productsList;
     private JList employersList;
+    private JPanel descriptionPanel;
+    private JLabel infoNumberLabel;
+    private JLabel infoWebLabel;
+    private JLabel infoStreetLabel;
+    private JLabel infoCityLabel;
+    private JLabel infoTelLabel;
+    private JLabel infoPCLabel;
+    private JPanel actionsPanel;
+    private JPanel containsPanel;
+    private JPanel employersPanel;
     private JPanel descPanel;
-    private EntityManagerFactory emf =
-            Persistence.createEntityManagerFactory("AppPU");
-    private EntityManager em = emf.createEntityManager();
 
     static private NewWarehouse nw = null;
+    static private UpdateWarehouse uw = null;
 
     public WarehouseGUI() {
         super("Warehouse");
@@ -39,12 +48,8 @@ public class WarehouseGUI extends JFrame {
         pack();
         setSize(800, 700);
         setLocationRelativeTo(null);
-        int optionButton = getDefaultCloseOperation();
-        if (optionButton == WindowConstants.EXIT_ON_CLOSE) {
-            dispose();
-            em.close();
-            emf.close();
-        }
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        ImageIcon backgroundIcon = new ImageIcon("icons/warehouse-back.jpg", "Background");
 
         telLabel.setText("");
         streetLabel.setText("");
@@ -52,15 +57,14 @@ public class WarehouseGUI extends JFrame {
         pscLabel.setText("");
         webLabel.setText("");
         refreshButton.doClick();
-
-        ImageIcon backgroundIcon = new ImageIcon("icons/warehouse-back.jpg", "Background");
         imageLabel.setIcon(backgroundIcon);
 
-        numbersCB.addActionListener(new ActionListener() {
+        warehousesCB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Sklad s1 = em.find(Sklad.class, Integer.valueOf((String) (numbersCB.getSelectedItem())));
+                    int chosenId = Integer.valueOf((String)warehousesCB.getSelectedItem());
+                    Sklad s1 = new daoSklad().getWarehouseById(chosenId);
                     telLabel.setText(s1.getTel());
                     streetLabel.setText(s1.getUlica());
                     cityLabel.setText(s1.getMesto());
@@ -75,17 +79,32 @@ public class WarehouseGUI extends JFrame {
                 }
             }
         });
-
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    Sklad s1 = em.find(Sklad.class, Integer.valueOf((String) (numbersCB.getSelectedItem())));
-                    deleteData(s1);
-                    refreshButton.doClick();
-                } catch (IllegalArgumentException ex) {
-                    JOptionPane.showConfirmDialog(null, "Delete is not possible now", "Warning", JOptionPane.DEFAULT_OPTION);
-                }
+
+                    int optionButton = JOptionPane.showConfirmDialog(null,
+                            "Do you really want to delete this warehouse ?",
+                            "Delete confirmation",JOptionPane.YES_NO_OPTION);
+
+                    if (optionButton == JOptionPane.YES_OPTION){
+                        try {
+                            int chosenId = Integer.valueOf((String)warehousesCB.getSelectedItem());
+                            Sklad s1 = new daoSklad().getWarehouseById(chosenId);
+                            if(deleteData(s1)){
+                                JOptionPane.showMessageDialog(
+                                        null,
+                                        "Succesfully deleted warehouse No. "+ chosenId
+                                );
+
+                            }
+                            refreshButton.doClick();
+                        } catch (IllegalArgumentException ex) {
+                            JOptionPane.showConfirmDialog(null,
+                                     "Delete is not possible now",
+                                    "Warning", JOptionPane.DEFAULT_OPTION);
+                        }
+                    }
             }
         });
         newButton.addActionListener(new ActionListener() {
@@ -103,6 +122,8 @@ public class WarehouseGUI extends JFrame {
         refreshButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                nw = null;
+                uw = null;
                 setData();
             }
         });
@@ -111,10 +132,17 @@ public class WarehouseGUI extends JFrame {
         updateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 try {
-                    Sklad s1 = em.find(Sklad.class, Integer.valueOf((String) (numbersCB.getSelectedItem())));
-                    //TODO Create UpdateWarehouseGUI and updateData function
-                    refreshButton.doClick();
+                    int chosenId = Integer.valueOf((String)warehousesCB.getSelectedItem());
+                    Sklad s1 = new daoSklad().getWarehouseById(chosenId);
+                    if(nw == null) {
+                        uw = new UpdateWarehouse(s1);
+                        uw.setVisible(true);
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Window for updating warehouse is already open");
+                    }
+
                 } catch (IllegalArgumentException ex) {
                     JOptionPane.showConfirmDialog(
                             null, "Update is not possible now",
@@ -124,38 +152,34 @@ public class WarehouseGUI extends JFrame {
             }
         });
 
-        addWindowListener(new  java.awt.event.WindowAdapter(){
-            public void windowClosing(WindowEvent evt){
-                if(!(nw == null)){
+        addWindowListener(new  java.awt.event.WindowAdapter() {
+            public void windowClosing(WindowEvent evt) {
+                if (!(nw == null)) {
                     nw.dispose();
+                    nw = null;
                 }
-                em.close();
-                emf.close();
+                if (!(uw == null)) {
+                    uw.dispose();
+                    uw = null;
+                }
             }
         });
     }
 
     public void setData(){
 
-        numbersCB.removeAllItems();
-        numbersCB.addItem("Select Number");
-        TypedQuery<Sklad> q2 = em.createQuery(
-                "SELECT s FROM Sklad AS s", Sklad.class
-        );
-        List<Sklad> l = q2.getResultList();
-        l.sort(Comparator.comparing(Sklad::getIdsklad));
+        List<Sklad> l = new daoSklad().getAllWarehouses();
+
+        warehousesCB.removeAllItems();
+        warehousesCB.addItem("Select Number");
         for (Sklad s :l) {
             String item = String.valueOf(s.getIdsklad());
-            numbersCB.addItem(item);
+            warehousesCB.addItem(item);
         }
     }
 
-    private void deleteData(Sklad val) {
-        EntityTransaction et = em.getTransaction();
-        et.begin();
-        em.remove(val);
-        et.commit();
+    private boolean deleteData(Sklad s) {
+        new daoSklad().deleteWarehouse(s.getIdsklad());
+        return true;
     }
-
-
 }

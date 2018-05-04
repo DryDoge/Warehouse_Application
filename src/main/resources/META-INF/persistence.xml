@@ -3,20 +3,20 @@
 
     <persistence-unit name="AppPU">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>db.Alko</class>
-        <class>db.Dodava</class>
-        <class>db.Dodavatel</class>
-        <class>db.Kontrola</class>
-        <class>db.Napoj</class>
-        <class>db.Nealko</class>
-        <class>db.Obal</class>
-        <class>db.Obsahuje</class>
-        <class>db.Predaj</class>
-        <class>db.Predavac</class>
-        <class>db.Sklad</class>
-        <class>db.Skladnik</class>
-        <class>db.Zakaznik</class>
-        <class>db.Zamestnanec</class>
+        <class>db.e.Alko</class>
+        <class>db.e.Dodava</class>
+        <class>db.e.Dodavatel</class>
+        <class>db.e.Kontrola</class>
+        <class>db.e.Napoj</class>
+        <class>db.e.Nealko</class>
+        <class>db.e.Obal</class>
+        <class>db.e.Obsahuje</class>
+        <class>db.e.Predaj</class>
+        <class>db.e.Predavac</class>
+        <class>db.e.Sklad</class>
+        <class>db.e.Skladnik</class>
+        <class>db.e.Zakaznik</class>
+        <class>db.e.Zamestnanec</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://slon.felk.cvut.cz:5432/db18_suchype1"/>

@@ -3,42 +3,42 @@ package gui.WarehouseGui;
 import db.e.Sklad;
 import db.dao.daoSklad;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
 
+public class UpdateWarehouse extends JFrame {
+    private JPanel updatePanel;
+    private JPanel optionPanel;
 
-
-public class NewWarehouse extends JFrame{
-    private JPanel newPanel;
-    private JTextField telephoneTextfield;
-    private JTextField webPageTextField;
+    private JTextField telTextField;
+    private JTextField webTextField;
+    private JTextField pcTextField;
     private JTextField streetTextField;
     private JTextField cityTextField;
-    private JTextField postalCodeTextField;
+
     private JButton saveButton;
     private JButton cancelButton;
-    private JPanel optionPanel;
-    private JLabel cityLabel;
-    private JLabel telLabel;
     private JLabel webLabel;
     private JLabel postalCodeLabel;
-    private JLabel infoTelLabel;
-    private JLabel infoStreetLabel;
     private JLabel streetLabel;
-    private JLabel infoCityLabel;
+    private JLabel cityLabel;
+    private JLabel infoTelLabel;
     private JLabel infoPCLabel;
-    private JLabel infoWebLabel;
-    private static int new_id = 1;
+    private JLabel telLabel;
 
-    public NewWarehouse(){
-        super("New warehouse");
-        setContentPane(newPanel);
+    private int id;
+
+
+    public UpdateWarehouse  (Sklad w){
+        super("Update Warehouse No. "+w.getIdsklad());
+        setContentPane(updatePanel);
         pack();
         int optionButton = getDefaultCloseOperation();
         if(optionButton == WindowConstants.EXIT_ON_CLOSE){
@@ -46,6 +46,19 @@ public class NewWarehouse extends JFrame{
         }
         setSize(700,450);
         setLocationRelativeTo(null);
+        this.id = w.getIdsklad();
+        String tel = w.getTel();
+        String street = w.getUlica();
+        String city = w.getMesto();
+        String postalCode = w.getPsc();
+        String web = w.getWeb();
+
+        telTextField.setText(tel);
+        streetTextField.setText(street);
+        cityTextField.setText(city);
+        pcTextField.setText(postalCode);
+        webTextField.setText(web);
+
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
@@ -56,18 +69,22 @@ public class NewWarehouse extends JFrame{
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (addData()) {
-                    JOptionPane.showMessageDialog(null,
-                            "Succesfully added warehouse No. "+new_id);
-                    dispose();
-                }else
-                    JOptionPane.showMessageDialog(null,"Error while adding. Try again");
-
-
+                int optionButton = JOptionPane.showConfirmDialog(null,
+                        "Do you really want to update this warehouse ?",
+                        "Update confirmation",JOptionPane.YES_NO_OPTION);
+                if (optionButton == JOptionPane.YES_OPTION){
+                    if(updateData(id)){
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Succesfully deleted warehouse No. "+ id
+                        );
+                    }
+                        dispose();
+                }
             }
         });
 
-        webPageTextField.addKeyListener(new KeyAdapter() {
+        webTextField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
@@ -76,16 +93,7 @@ public class NewWarehouse extends JFrame{
             }
         });
 
-        telephoneTextfield.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    saveButton.doClick();
-                }
-            }
-        });
-
-        streetTextField.addKeyListener(new KeyAdapter() {
+        telTextField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
@@ -103,7 +111,16 @@ public class NewWarehouse extends JFrame{
             }
         });
 
-        postalCodeTextField.addKeyListener(new KeyAdapter() {
+        streetTextField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    saveButton.doClick();
+                }
+            }
+        });
+
+        pcTextField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode() == KeyEvent.VK_ENTER){
@@ -112,23 +129,19 @@ public class NewWarehouse extends JFrame{
             }
         });
     }
-
-
-
-    private boolean addData(){
+    private boolean updateData(int idWarehouse){
         boolean ret = false;
-        List<Integer> ids = new ArrayList<>();
         String c = cityTextField.getText();
         String s = streetTextField.getText();
-        String w = webPageTextField.getText();
-        String t = telephoneTextfield.getText();
-        String p = postalCodeTextField.getText();
+        String w = webTextField.getText();
+        String t = telTextField.getText();
+        String p = pcTextField.getText();
 
         if(c.equals("")){
             JOptionPane.showConfirmDialog(
                     null,"City is not filled",
                     "Warning",JOptionPane.DEFAULT_OPTION);
-        return ret;
+            return ret;
         }
 
         if(s.equals("")){
@@ -159,30 +172,20 @@ public class NewWarehouse extends JFrame{
                     "Warning",JOptionPane.DEFAULT_OPTION);
             return ret;
         }
+        Sklad storage = new daoSklad().getWarehouseById(idWarehouse);
 
-
-        List<Sklad> l = new daoSklad().getAllWarehouses();
-
-        for (Sklad  st: l) {
-            ids.add(st.getIdsklad());
-        }
-
-        while (ids.contains(new_id)){
-            new_id++;
-        }
-
-        Sklad storage = new Sklad();
-        storage.setIdsklad(new_id);
         storage.setTel(t);
-        storage.setMesto(c);
         storage.setUlica(s);
+        storage.setMesto(c);
         storage.setPsc(p);
         storage.setWeb(w);
-        new daoSklad().addWarehouse(storage);
+
+        new daoSklad().updateWarehouse(storage);
+
         ret = true;
 
         return ret;
-
-
     }
+
+
 }

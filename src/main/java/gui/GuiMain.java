@@ -1,7 +1,7 @@
 package gui;
 
 import gui.WarehouseGui.*;
-
+import db.dao.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -18,38 +18,34 @@ public class GuiMain extends JFrame {
     private JPanel menuPanel;
     private JButton suppliersButton;
     private JLabel imageLabel;
-
     private static WarehouseGUI wh = null;
 
     public GuiMain() {
 
         super("Application");
         setContentPane(mainPanel);
-        //setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
-
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-
         ImageIcon homeIcon = new ImageIcon("icons/mainGui/home.png", "Home");
-        homeButton.setIcon(homeIcon);
         ImageIcon wareIcon = new ImageIcon("icons/mainGui/warehouse.png", "Warehouse");
-        warehouseButton.setIcon(wareIcon);
         ImageIcon bevIcon = new ImageIcon("icons/mainGui/beverages.png", "Beverages");
-        productsButton.setIcon(bevIcon);
         ImageIcon sellsIcon = new ImageIcon("icons/mainGui/sells.png", "Sells");
-        sellsButton.setIcon(sellsIcon);
         ImageIcon empIcon = new ImageIcon("icons/mainGui/emp.png", "Employers");
-        employersButton.setIcon(empIcon);
         ImageIcon logoutIcon = new ImageIcon("icons/mainGui/exit.png", "Exit");
-        logoutButton.setIcon(logoutIcon);
         ImageIcon suppIcon = new ImageIcon("icons/mainGui/delivery.png", "Suppliers");
-        suppliersButton.setIcon(suppIcon);
         ImageIcon backIcon = new ImageIcon("icons/mainGui/background1.png","Background");
-        imageLabel.setIcon(backIcon);
 
+        homeButton.setIcon(homeIcon);
+        warehouseButton.setIcon(wareIcon);
+        productsButton.setIcon(bevIcon);
+        sellsButton.setIcon(sellsIcon);
+        employersButton.setIcon(empIcon);
+        logoutButton.setIcon(logoutIcon);
+        suppliersButton.setIcon(suppIcon);
+        imageLabel.setIcon(backIcon);
 
         logoutButton.addActionListener(new ActionListener() {
             @Override
@@ -67,7 +63,6 @@ public class GuiMain extends JFrame {
                 }
             }
         });
-
         warehouseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,7 +73,6 @@ public class GuiMain extends JFrame {
                }else{
                    JOptionPane.showMessageDialog(null,"Warehouse window is already open");
                }
-
             }
         });
         homeButton.addActionListener(new ActionListener() {
@@ -90,9 +84,5 @@ public class GuiMain extends JFrame {
 
             }
         });
-
-
     }
-
-
 }
