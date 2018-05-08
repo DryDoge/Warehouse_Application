@@ -1,12 +1,8 @@
-package gui.WarehouseGui;
+package gui.warehouses;
 
 import db.e.Sklad;
 import db.dao.daoSklad;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,7 +38,7 @@ public class UpdateWarehouse extends JFrame {
         pack();
         int optionButton = getDefaultCloseOperation();
         if(optionButton == WindowConstants.EXIT_ON_CLOSE){
-            dispose();
+            setVisible(false);
         }
         setSize(700,450);
         setLocationRelativeTo(null);
@@ -76,7 +72,7 @@ public class UpdateWarehouse extends JFrame {
                     if(updateData(id)){
                         JOptionPane.showMessageDialog(
                                 null,
-                                "Succesfully deleted warehouse No. "+ id
+                                "Succesfully updated warehouse No. "+ id
                         );
                     }
                         dispose();

@@ -1,13 +1,13 @@
 package db.e;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 public class Napoj {
+    @Id
+    @Column(name = "idnap", nullable = false)
     private int idnap;
     private String prichut;
     private short cena;
@@ -15,8 +15,8 @@ public class Napoj {
     private String znacka;
     private Date spotreba;
 
-    @Id
-    @Column(name = "idnap", nullable = false)
+
+
     public int getIdnap() {
         return idnap;
     }
@@ -76,6 +76,23 @@ public class Napoj {
     }
 
     @Override
+    public String toString() {
+        if (prichut == null){
+            prichut = "Bez prichute";
+        }
+        return
+                " "+ idnap + " | " + prichut + " | " +
+                        druh + " | " + znacka + " | " + cena + "€ | " + spotreba;
+    }
+
+    @ManyToMany(mappedBy="napoje")
+    private List<Sklad> sklady;
+
+    public List<Sklad> getSklady() {
+        return sklady;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -102,4 +119,5 @@ public class Napoj {
         result = 31 * result + (spotreba != null ? spotreba.hashCode() : 0);
         return result;
     }
+
 }

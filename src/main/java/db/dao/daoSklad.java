@@ -51,7 +51,6 @@ public class daoSklad {
 
         EntityTransaction et = em.getTransaction();
 
-
         et.begin();
         em.remove(s);
         et.commit();
@@ -81,14 +80,4 @@ public class daoSklad {
         emf.close();
     }
 
-    public void addWarehouse(Sklad s){
-        EntityManagerFactory emf =
-                Persistence.createEntityManagerFactory("AppPU");
-        EntityManager em = emf.createEntityManager();
-
-        EntityTransaction et = em.getTransaction();
-        et.begin();
-        em.persist(s);
-        et.commit();
-    }
 }

@@ -1,4 +1,4 @@
-package gui;
+package gui.main;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -9,12 +9,13 @@ public class LoginMenu extends JFrame{
     private final JPasswordField passwordText;
     private final JTextField userText;
     private final JButton loginButton;
+    private final JButton resetButton;
 
     public LoginMenu(){
         super("Login Menu");
         JLabel userLabel = new JLabel("User:");
         JLabel passwordLabel = new JLabel("Password:");
-        JButton resetButton = new JButton("Clear");
+        this.resetButton = new JButton("Clear");
         this.loginButton = new JButton("Login");
         this.userText = new JTextField(20);
         this.passwordText = new JPasswordField(20);
@@ -68,8 +69,7 @@ public class LoginMenu extends JFrame{
                     new GuiMain();
                 }else{
                     JOptionPane.showMessageDialog(null, errtext.getText());
-                    userText.setText("");
-                    passwordText.setText("");
+                    resetButton.doClick();
                     userText.requestFocus();
                 }
             }

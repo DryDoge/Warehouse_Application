@@ -1,11 +1,9 @@
-package gui;
+package gui.main;
 
-import gui.WarehouseGui.*;
-import db.dao.*;
+import gui.warehouses.*;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class GuiMain extends JFrame {
     private JPanel mainPanel;
@@ -47,17 +45,16 @@ public class GuiMain extends JFrame {
         suppliersButton.setIcon(suppIcon);
         imageLabel.setIcon(backIcon);
 
+
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 int optionButton = JOptionPane.showConfirmDialog(
-                        null, "Do you really want to logout?", "Confrim logout", JOptionPane.YES_NO_OPTION);
+                        null, "Do you really want to logout?",
+                        "Confrim logout", JOptionPane.YES_NO_OPTION);
                 if (optionButton == JOptionPane.YES_OPTION) {
                     dispose();
-                    if(!(wh == null)){
-                        wh.dispose();
-                    }
+                    homeButton.doClick();
                     LoginMenu l = new LoginMenu();
                     l.actionLogin();
                 }
@@ -66,23 +63,26 @@ public class GuiMain extends JFrame {
         warehouseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               if(wh == null) {
-                   wh = new WarehouseGUI();
-                   wh.setData();
-                   wh.setVisible(true);
+                if(wh == null || !(wh.isVisible())) {
+                    wh = null;
+                    wh = new WarehouseGUI();
+                    wh.setVisible(true);
+                    wh.setData();
                }else{
-                   JOptionPane.showMessageDialog(null,"Warehouse window is already open");
+                   JOptionPane.showMessageDialog(null,
+                           "Warehouse window is already open");
+                   wh.requestFocus();
                }
             }
         });
         homeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(!(wh == null)){
+                if(wh != null)
                     wh.dispose();
-                }
-
+                wh = null;
             }
         });
+
     }
 }

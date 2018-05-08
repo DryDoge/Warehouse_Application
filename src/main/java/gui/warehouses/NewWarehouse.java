@@ -1,9 +1,9 @@
-package gui.WarehouseGui;
+package gui.warehouses;
 
+import db.dao.daoBasics;
 import db.e.Sklad;
 import db.dao.daoSklad;
 
-import javax.persistence.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,7 +42,7 @@ public class NewWarehouse extends JFrame{
         pack();
         int optionButton = getDefaultCloseOperation();
         if(optionButton == WindowConstants.EXIT_ON_CLOSE){
-            dispose();
+            setVisible(false);
         }
         setSize(700,450);
         setLocationRelativeTo(null);
@@ -139,7 +139,9 @@ public class NewWarehouse extends JFrame{
         }
 
 
-        if(w.equals("") || !(w.matches("^(https?://)?(www\\.)?([\\w]+\\.)+[\u200C\u200B\\w]{2,63}/?$"))){
+        if(w.equals("") || !(w.matches(
+                "^(https?://)?(www\\.)?([\\w]+\\.)+[\u200C\u200B\\w]{2,63}/?$"))
+                ){
             JOptionPane.showConfirmDialog(
                     null,"Web page is not filled or wrong",
                     "Warning",JOptionPane.DEFAULT_OPTION);
@@ -178,7 +180,7 @@ public class NewWarehouse extends JFrame{
         storage.setUlica(s);
         storage.setPsc(p);
         storage.setWeb(w);
-        new daoSklad().addWarehouse(storage);
+        new daoBasics().addAnything(storage);
         ret = true;
 
         return ret;

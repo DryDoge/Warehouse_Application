@@ -5,11 +5,12 @@ import javax.persistence.*;
 @Entity
 @IdClass(ObsahujePK.class)
 public class Obsahuje {
+    @Id
     private int idsklad;
+    @Id
     private int idnap;
     private int mnozstvo;
 
-    @Id
     @Column(name = "idsklad", nullable = false)
     public int getIdsklad() {
         return idsklad;
@@ -19,7 +20,6 @@ public class Obsahuje {
         this.idsklad = idsklad;
     }
 
-    @Id
     @Column(name = "idnap", nullable = false)
     public int getIdnap() {
         return idnap;
@@ -38,6 +38,10 @@ public class Obsahuje {
     public void setMnozstvo(int mnozstvo) {
         this.mnozstvo = mnozstvo;
     }
+
+
+
+
 
     @Override
     public boolean equals(Object o) {

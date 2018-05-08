@@ -1,12 +1,14 @@
 package db.e;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Sklad {
+    @Id
+    @Column(name = "idsklad", nullable = false)
     private int idsklad;
     private String tel;
     private String ulica;
@@ -14,8 +16,8 @@ public class Sklad {
     private String psc;
     private String web;
 
-    @Id
-    @Column(name = "idsklad", nullable = false)
+
+
     public int getIdsklad() {
         return idsklad;
     }
@@ -74,6 +76,20 @@ public class Sklad {
         this.web = web;
     }
 
+
+    @ManyToMany
+    @JoinTable(
+            name="obsahuje",
+            joinColumns = @JoinColumn(name="idsklad", referencedColumnName="idsklad" ),
+            inverseJoinColumns = @JoinColumn(name="idnap", referencedColumnName="idnap"))
+    private List<Napoj> napoje;
+
+
+
+
+
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -113,4 +129,14 @@ public class Sklad {
                 ", web='" + web + '\'' +
                 '}';
     }
+
+    public List<Napoj> getNapoje() {
+        return napoje;
+    }
+
+    public void setNapoje(List<Napoj> napoje) {
+        this.napoje = napoje;
+    }
+
+
 }
