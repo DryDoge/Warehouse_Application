@@ -149,6 +149,8 @@ public class WarehouseGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 nw = null;
                 uw = null;
+                ua = null;
+                ai = null;
                 setData();
 
             }
@@ -308,13 +310,21 @@ public class WarehouseGUI extends JFrame {
     }
 
     private boolean deleteSelectedWarehouse(Sklad s) {
-        new daoSklad().deleteWarehouse(s.getIdsklad());
-        return true;
+        try{
+            new daoSklad().deleteWarehouse(s.getIdsklad());
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
     private boolean deleteSelectedContent(int warehouse, int beverage){
-        new daoObsahuje().deleteContentOfItem(warehouse, beverage);
-        return true;
+        try{
+            new daoObsahuje().deleteContentOfItem(warehouse, beverage);
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 
 }

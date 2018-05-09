@@ -1,7 +1,7 @@
 package gui.warehouses;
 
-import db.e.Sklad;
 import db.dao.daoSklad;
+import db.e.Sklad;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,8 +1,11 @@
 package app;
 
+import db.dao.daoSklad;
+import db.e.Napoj;
+import db.e.Sklad;
 import gui.main.GuiMain;
-import gui.main.LoginMenu;
 
+import java.util.List;
 
 
 public class Main {
@@ -14,7 +17,6 @@ public class Main {
         GuiMain gm = new GuiMain();
 //        Sklad s = new daoSklad().getWarehouseById(1);
 //        List<Napoj> l = s.getNapoje();
-//
 //        System.out.println(l.get(0));
 
 

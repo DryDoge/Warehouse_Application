@@ -1,5 +1,6 @@
 package gui.main;
 
+import gui.products.*;
 import gui.warehouses.*;
 
 import javax.swing.*;
@@ -17,6 +18,7 @@ public class GuiMain extends JFrame {
     private JButton suppliersButton;
     private JLabel imageLabel;
     private static WarehouseGUI wh = null;
+    private static ProductGui pd = null;
 
     public GuiMain() {
 
@@ -70,7 +72,7 @@ public class GuiMain extends JFrame {
                     wh.setData();
                }else{
                    JOptionPane.showMessageDialog(null,
-                           "Warehouse window is already open");
+                           "Warehouses window is already open");
                    wh.requestFocus();
                }
             }
@@ -81,8 +83,27 @@ public class GuiMain extends JFrame {
                 if(wh != null)
                     wh.dispose();
                 wh = null;
+                if(pd != null)
+                    pd.dispose();
+                pd = null;
             }
         });
 
+        productsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(pd == null || !(pd.isVisible())) {
+                    pd = null;
+                    pd = new ProductGui();
+                    pd.setVisible(true);
+                    pd.setData();
+                }else{
+                    JOptionPane.showMessageDialog(null,
+                            "Products window is already open");
+                    pd.requestFocus();
+                }
+
+            }
+        });
     }
 }

@@ -6,7 +6,14 @@
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
-      <secret-storage>master_key</secret-storage>
+      <user-name>db18_suchype1</user-name>
+      <introspection-schemas>db18_suchype1:public</introspection-schemas>
+    </data-source>
+    <data-source name="AppPU/EclipseLink" uuid="1d02da0f-5a9e-480d-aa6e-15394ff3eb93">
+      <database-info product="PostgreSQL" version="9.3.11" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.2">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
       <user-name>db18_suchype1</user-name>
       <introspection-schemas>db18_suchype1:public</introspection-schemas>
     </data-source>

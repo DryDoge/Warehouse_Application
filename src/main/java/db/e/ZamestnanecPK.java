@@ -3,6 +3,7 @@ package db.e;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.Objects;
 
 public class ZamestnanecPK implements Serializable {
     private int idsklad;
@@ -32,19 +33,14 @@ public class ZamestnanecPK implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         ZamestnanecPK that = (ZamestnanecPK) o;
-
-        if (idsklad != that.idsklad) return false;
-        if (idzam != that.idzam) return false;
-
-        return true;
+        return idsklad == that.idsklad &&
+                idzam == that.idzam;
     }
 
     @Override
     public int hashCode() {
-        int result = idsklad;
-        result = 31 * result + idzam;
-        return result;
+
+        return Objects.hash(idsklad, idzam);
     }
 }

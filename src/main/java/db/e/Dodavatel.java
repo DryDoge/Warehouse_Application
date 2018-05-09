@@ -1,19 +1,19 @@
 package db.e;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Dodavatel {
+    @Id
     private int iddod;
     private String nazov;
     private String email;
     private String tel;
     private String web;
 
-    @Id
+
     @Column(name = "iddod", nullable = false)
     public int getIddod() {
         return iddod;
@@ -67,25 +67,26 @@ public class Dodavatel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Dodavatel dodavatel = (Dodavatel) o;
-
-        if (iddod != dodavatel.iddod) return false;
-        if (nazov != null ? !nazov.equals(dodavatel.nazov) : dodavatel.nazov != null) return false;
-        if (email != null ? !email.equals(dodavatel.email) : dodavatel.email != null) return false;
-        if (tel != null ? !tel.equals(dodavatel.tel) : dodavatel.tel != null) return false;
-        if (web != null ? !web.equals(dodavatel.web) : dodavatel.web != null) return false;
-
-        return true;
+        return iddod == dodavatel.iddod &&
+                Objects.equals(nazov, dodavatel.nazov) &&
+                Objects.equals(email, dodavatel.email) &&
+                Objects.equals(tel, dodavatel.tel) &&
+                Objects.equals(web, dodavatel.web);
     }
+
+    @OneToMany(mappedBy="dodavatel")
+    private List<Napoj> napoje;
+
+
+    public List<Napoj> getNapoje() {
+        return napoje;
+    }
+
 
     @Override
     public int hashCode() {
-        int result = iddod;
-        result = 31 * result + (nazov != null ? nazov.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (tel != null ? tel.hashCode() : 0);
-        result = 31 * result + (web != null ? web.hashCode() : 0);
-        return result;
+
+        return Objects.hash(iddod, nazov, email, tel, web);
     }
 }

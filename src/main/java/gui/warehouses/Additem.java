@@ -2,9 +2,8 @@ package gui.warehouses;
 
 import db.dao.daoBasics;
 import db.dao.daoNapoj;
-import db.e.Napoj;
-import db.e.Obsahuje;
-import org.eclipse.persistence.exceptions.EclipseLinkException;
+import db.e.*;
+
 
 import javax.persistence.RollbackException;
 import javax.swing.*;

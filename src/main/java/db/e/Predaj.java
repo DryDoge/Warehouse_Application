@@ -4,6 +4,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class Predaj {
@@ -34,19 +35,14 @@ public class Predaj {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Predaj predaj = (Predaj) o;
-
-        if (idpredaj != predaj.idpredaj) return false;
-        if (mnozstvo != predaj.mnozstvo) return false;
-
-        return true;
+        return idpredaj == predaj.idpredaj &&
+                mnozstvo == predaj.mnozstvo;
     }
 
     @Override
     public int hashCode() {
-        int result = idpredaj;
-        result = 31 * result + mnozstvo;
-        return result;
+
+        return Objects.hash(idpredaj, mnozstvo);
     }
 }

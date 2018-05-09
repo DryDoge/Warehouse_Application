@@ -7,5 +7,13 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://slon.felk.cvut.cz:5432/db18_suchype1</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="AppPU/EclipseLink" uuid="1d02da0f-5a9e-480d-aa6e-15394ff3eb93">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml</remarks>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://slon.felk.cvut.cz:5432/db18_suchype1</jdbc-url>
+    </data-source>
   </component>
 </project>

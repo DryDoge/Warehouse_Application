@@ -1,16 +1,16 @@
 package db.e;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @IdClass(ObsahujePK.class)
 public class Obsahuje {
-    @Id
     private int idsklad;
-    @Id
     private int idnap;
     private int mnozstvo;
 
+    @Id
     @Column(name = "idsklad", nullable = false)
     public int getIdsklad() {
         return idsklad;
@@ -20,6 +20,7 @@ public class Obsahuje {
         this.idsklad = idsklad;
     }
 
+    @Id
     @Column(name = "idnap", nullable = false)
     public int getIdnap() {
         return idnap;
@@ -39,29 +40,19 @@ public class Obsahuje {
         this.mnozstvo = mnozstvo;
     }
 
-
-
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Obsahuje obsahuje = (Obsahuje) o;
-
-        if (idsklad != obsahuje.idsklad) return false;
-        if (idnap != obsahuje.idnap) return false;
-        if (mnozstvo != obsahuje.mnozstvo) return false;
-
-        return true;
+        return idsklad == obsahuje.idsklad &&
+                idnap == obsahuje.idnap &&
+                mnozstvo == obsahuje.mnozstvo;
     }
 
     @Override
     public int hashCode() {
-        int result = idsklad;
-        result = 31 * result + idnap;
-        result = 31 * result + mnozstvo;
-        return result;
+
+        return Objects.hash(idsklad, idnap, mnozstvo);
     }
 }

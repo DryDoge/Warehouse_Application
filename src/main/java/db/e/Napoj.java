@@ -1,22 +1,21 @@
 package db.e;
 
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
+@DiscriminatorColumn(name="typ")
 public class Napoj {
     @Id
-    @Column(name = "idnap", nullable = false)
     private int idnap;
     private String prichut;
     private short cena;
     private String druh;
     private String znacka;
-    private Date spotreba;
+    private String typ;
 
-
-
+    @Column(name = "idnap", nullable = false)
     public int getIdnap() {
         return idnap;
     }
@@ -28,6 +27,8 @@ public class Napoj {
     @Basic
     @Column(name = "prichut", nullable = true, length = 50)
     public String getPrichut() {
+        if (prichut.equals(""))
+            prichut = "Bez prichute";
         return prichut;
     }
 
@@ -66,58 +67,60 @@ public class Napoj {
     }
 
     @Basic
-    @Column(name = "spotreba", nullable = false)
-    public Date getSpotreba() {
-        return spotreba;
+    @Column(name = "typ", nullable = false, length = 20)
+    public String getTyp() {
+        return typ;
     }
 
-    public void setSpotreba(Date spotreba) {
-        this.spotreba = spotreba;
+    public void setTyp(String typ) {
+        this.typ = typ;
     }
 
-    @Override
-    public String toString() {
-        if (prichut == null){
-            prichut = "Bez prichute";
-        }
-        return
-                " "+ idnap + " | " + prichut + " | " +
-                        druh + " | " + znacka + " | " + cena + "€ | " + spotreba;
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="dodavatel")
+    private Dodavatel dodavatel;
+
+    @Column(name = "dodavatel", nullable = false)
+    public Dodavatel getDodavatel() {
+        return dodavatel;
     }
 
-    @ManyToMany(mappedBy="napoje")
+    public void setDodavatel(Dodavatel dodavatel) {
+        this.dodavatel = dodavatel;
+    }
+
+    @ManyToMany(mappedBy = "napoje")
     private List<Sklad> sklady;
 
     public List<Sklad> getSklady() {
         return sklady;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Napoj napoj = (Napoj) o;
-
-        if (idnap != napoj.idnap) return false;
-        if (cena != napoj.cena) return false;
-        if (prichut != null ? !prichut.equals(napoj.prichut) : napoj.prichut != null) return false;
-        if (druh != null ? !druh.equals(napoj.druh) : napoj.druh != null) return false;
-        if (znacka != null ? !znacka.equals(napoj.znacka) : napoj.znacka != null) return false;
-        if (spotreba != null ? !spotreba.equals(napoj.spotreba) : napoj.spotreba != null) return false;
-
-        return true;
+        return idnap == napoj.idnap &&
+                cena == napoj.cena &&
+                Objects.equals(prichut, napoj.prichut) &&
+                Objects.equals(druh, napoj.druh) &&
+                Objects.equals(znacka, napoj.znacka) &&
+                Objects.equals(typ, napoj.typ);
     }
 
     @Override
     public int hashCode() {
-        int result = idnap;
-        result = 31 * result + (prichut != null ? prichut.hashCode() : 0);
-        result = 31 * result + (int) cena;
-        result = 31 * result + (druh != null ? druh.hashCode() : 0);
-        result = 31 * result + (znacka != null ? znacka.hashCode() : 0);
-        result = 31 * result + (spotreba != null ? spotreba.hashCode() : 0);
-        return result;
+
+        return Objects.hash(idnap, prichut, cena, druh, znacka, typ);
     }
 
+    @Override
+    public String toString() {
+        if (prichut.equals(""))
+            prichut = "Bez prichute";
+        return " " + idnap + " | " + prichut + " | " + druh + " | "
+                + znacka + " | " +  typ + " | " + cena+"€";
+    }
 }

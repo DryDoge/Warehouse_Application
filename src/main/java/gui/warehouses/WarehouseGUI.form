@@ -214,7 +214,7 @@
             </constraints>
             <properties/>
             <border type="none" title="Item actions:">
-              <font name="Courier 10 Pitch" size="14" style="1"/>
+              <font name="Courier 10 Pitch" size="16" style="1"/>
               <title-color color="-16777216"/>
             </border>
             <children>
@@ -261,7 +261,10 @@
             <properties>
               <font name="Courier 10 Pitch" size="16" style="1"/>
             </properties>
-            <border type="empty" title="ID: | Flavor: | Type: | Brand: | Price: | Expiration: | Amount:"/>
+            <border type="empty" title="ID: |Flavor: |Type: |Brand: |Price: |Amount:">
+              <font name="DejaVu Sans Mono" size="10" style="0"/>
+              <title-color color="-16777216"/>
+            </border>
             <children>
               <component id="a6e72" class="javax.swing.JList" binding="productsList">
                 <constraints/>
