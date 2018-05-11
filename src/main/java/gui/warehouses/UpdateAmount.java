@@ -22,7 +22,7 @@ public class UpdateAmount extends JFrame {
         if(optionButton == WindowConstants.EXIT_ON_CLOSE){
             setVisible(false);
         }
-        setSize(400, 130);
+        pack();
         setLocationRelativeTo(null);
         newAmountTextField.setText(String.valueOf(o.getMnozstvo()));
 

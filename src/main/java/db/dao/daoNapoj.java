@@ -15,6 +15,7 @@ public class daoNapoj {
         List<Napoj>nealkoList = getAllNonAlcoBeverages();
         allList.addAll(alkoList);
         allList.addAll(nealkoList);
+        allList.sort(Comparator.comparing(Napoj::getIdnap));
         return allList;
     }
 
@@ -89,6 +90,28 @@ public class daoNapoj {
 
         et.begin();
         em.remove(n);
+        et.commit();
+
+        em.close();
+        emf.close();
+    }
+
+    public void updateBeverage(Napoj s){
+        EntityManagerFactory emf =
+                Persistence.createEntityManagerFactory("AppPU");
+        EntityManager em = emf.createEntityManager();
+
+        Napoj beverage = em.find(Napoj.class, s.getIdnap());
+        EntityTransaction et = em.getTransaction();
+
+        et.begin();
+        beverage.setPrichut(s.getPrichut());
+        beverage.setDruh(s.getDruh());
+        beverage.setZnacka(s.getZnacka());
+        beverage.setCena(s.getCena());
+        beverage.setTyp(s.getTyp());
+        beverage.setDodavatel(s.getDodavatel());
+        em.merge(beverage);
         et.commit();
 
         em.close();

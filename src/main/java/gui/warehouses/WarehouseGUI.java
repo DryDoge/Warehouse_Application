@@ -2,6 +2,7 @@ package gui.warehouses;
 
 import db.e.*;
 import db.dao.*;
+import org.eclipse.persistence.exceptions.DatabaseException;
 
 
 import java.awt.event.*;
@@ -48,7 +49,7 @@ public class WarehouseGUI extends JFrame {
         super("Warehouse");
         setContentPane(whPanel);
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setSize(850, 710);
+        setSize(900 , 700);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         ImageIcon backgroundIcon = new ImageIcon("icons/warehouse-back.jpg", "Background");
@@ -136,9 +137,11 @@ public class WarehouseGUI extends JFrame {
                     nw = new NewWarehouse();
                     nw.setVisible(true);
                 }else{
+                    nw.setState(NORMAL);
+                    nw.toFront();
+                    nw.requestFocus();
                     JOptionPane.showMessageDialog(null,
                             "Window for adding warehouse is already open");
-                    nw.requestFocus();
                 }
 
             }
@@ -169,9 +172,12 @@ public class WarehouseGUI extends JFrame {
                         uw = new UpdateWarehouse(s1);
                         uw.setVisible(true);
                     }else{
+                        uw.setState(NORMAL);
+                        uw.toFront();
+                        uw.requestFocus();
                         JOptionPane.showMessageDialog(null,
                                 "Window for updating warehouse is already open");
-                        uw.requestFocus();
+
                     }
 
                 } catch (IllegalArgumentException ex) {
@@ -232,9 +238,11 @@ public class WarehouseGUI extends JFrame {
                         ua = new UpdateAmount(c);
                         ua.setVisible(true);
                     }else{
+                        ua.setState(NORMAL);
+                        ua.toFront();
+                        ua.requestFocus();
                         JOptionPane.showMessageDialog(null,
                                 "Window for updating amount is already open");
-                        ua.requestFocus();
                     }
 
                 } catch (IllegalArgumentException ex) {
@@ -261,9 +269,12 @@ public class WarehouseGUI extends JFrame {
                         ai.setVisible(true);
                         ai.setData();
                     } else {
+                        ai.setState(NORMAL);
+                        ai.toFront();
+                        ai.requestFocus();
                         JOptionPane.showMessageDialog(null,
                                 "Window for adding item is already open");
-                        ai.requestFocus();
+
                     }
                 }catch (NumberFormatException ex){
                     JOptionPane.showConfirmDialog(
@@ -313,7 +324,7 @@ public class WarehouseGUI extends JFrame {
         try{
             new daoSklad().deleteWarehouse(s.getIdsklad());
             return true;
-        }catch (Exception e){
+        }catch (DatabaseException e){
             return false;
         }
     }
@@ -322,9 +333,55 @@ public class WarehouseGUI extends JFrame {
         try{
             new daoObsahuje().deleteContentOfItem(warehouse, beverage);
             return true;
-        }catch (Exception e){
+        }catch (DatabaseException e){
             return false;
         }
+    }
+
+    static boolean areValidData(String c, String s, String w, String t, String p){
+        boolean ret = false;
+
+        if(c.equals("")){
+            JOptionPane.showConfirmDialog(
+                    null,"City is not filled",
+                    "Warning",JOptionPane.DEFAULT_OPTION);
+            return ret;
+        }
+
+        if(s.equals("")){
+            JOptionPane.showConfirmDialog(
+                    null,"Street is not filled",
+                    "Warning",JOptionPane.DEFAULT_OPTION);
+            return ret;
+        }
+
+
+        if(w.equals("") || !(w.matches(
+                "^(https?://)?(www\\.)?([\\w]+\\.)+[\u200C\u200B\\w]{2,63}/?$"))
+                ){
+            JOptionPane.showConfirmDialog(
+                    null,"Web page is not filled or wrong",
+                    "Warning",JOptionPane.DEFAULT_OPTION);
+            return ret;
+        }
+
+        if((t.length()!= 9) || !(t.matches("[0-9]+"))){
+            JOptionPane.showConfirmDialog(
+                    null,"Telephone number is not filled or wrong",
+                    "Warning",JOptionPane.DEFAULT_OPTION);
+            return ret;
+        }
+
+        if((p.length()!= 5) || !(p.matches("[0-9]+"))){
+            JOptionPane.showConfirmDialog(
+                    null,"Postal code is not filled or wrong",
+                    "Warning",JOptionPane.DEFAULT_OPTION);
+            return ret;
+        }
+
+        ret = true;
+
+        return ret;
     }
 
 }

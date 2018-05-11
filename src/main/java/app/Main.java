@@ -1,9 +1,7 @@
 package app;
 
-import db.dao.daoSklad;
-import db.e.Napoj;
-import db.e.Sklad;
 import gui.main.GuiMain;
+import gui.main.LoginMenu;
 
 import java.util.List;
 

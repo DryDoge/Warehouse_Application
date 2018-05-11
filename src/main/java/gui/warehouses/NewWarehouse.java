@@ -39,12 +39,11 @@ public class NewWarehouse extends JFrame{
     public NewWarehouse(){
         super("New warehouse");
         setContentPane(newPanel);
-        pack();
         int optionButton = getDefaultCloseOperation();
         if(optionButton == WindowConstants.EXIT_ON_CLOSE){
             setVisible(false);
         }
-        setSize(700,450);
+        pack();
         setLocationRelativeTo(null);
 
         cancelButton.addActionListener(new ActionListener() {
@@ -124,43 +123,8 @@ public class NewWarehouse extends JFrame{
         String t = telephoneTextfield.getText();
         String p = postalCodeTextField.getText();
 
-        if(c.equals("")){
-            JOptionPane.showConfirmDialog(
-                    null,"City is not filled",
-                    "Warning",JOptionPane.DEFAULT_OPTION);
-        return ret;
-        }
-
-        if(s.equals("")){
-            JOptionPane.showConfirmDialog(
-                    null,"Street is not filled",
-                    "Warning",JOptionPane.DEFAULT_OPTION);
+        if(!(WarehouseGUI.areValidData(c,s,w,t,p)))
             return ret;
-        }
-
-
-        if(w.equals("") || !(w.matches(
-                "^(https?://)?(www\\.)?([\\w]+\\.)+[\u200C\u200B\\w]{2,63}/?$"))
-                ){
-            JOptionPane.showConfirmDialog(
-                    null,"Web page is not filled or wrong",
-                    "Warning",JOptionPane.DEFAULT_OPTION);
-            return ret;
-        }
-
-        if((t.length()!= 9) || !(t.matches("[0-9]+"))){
-            JOptionPane.showConfirmDialog(
-                    null,"Telephone number is not filled or wrong",
-                    "Warning",JOptionPane.DEFAULT_OPTION);
-            return ret;
-        }
-
-        if((p.length()!= 5) || !(p.matches("[0-9]+"))){
-            JOptionPane.showConfirmDialog(
-                    null,"Postal code is not filled or wrong",
-                    "Warning",JOptionPane.DEFAULT_OPTION);
-            return ret;
-        }
 
 
         List<Sklad> l = new daoSklad().getAllWarehouses();
@@ -184,7 +148,5 @@ public class NewWarehouse extends JFrame{
         ret = true;
 
         return ret;
-
-
     }
 }

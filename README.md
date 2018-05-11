@@ -2,8 +2,7 @@
 
 **Autor:** Peter Suchý
 
-**Popis:** Aplikácia, ktorá bude slúžit na správu zásob na sklade a aktuálnych cien.
-Takisto na evidenciu dodavateľov, zamestnancov a informácií o predajoch.
+**Popis:** Aplikácia, ktorá bude slúžit na správu skladov, produktov a dodávateľov.
 
 **Databázový model:**
-![Databázový model](/uploads/ceb903d58d72727bcab833eef29f15fb/Warehouse.png)
+![Databázový model](/uploads/5903a1542f254e6604a959f87ad878e1/Warehouse__1_.png)

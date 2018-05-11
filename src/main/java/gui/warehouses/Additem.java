@@ -27,7 +27,7 @@ public class Additem extends JFrame{
         super("Add item to warehouse");
         warehouseID = wareID;
         setContentPane(addItemPanel);
-        setSize(400, 170);
+        pack();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setData();

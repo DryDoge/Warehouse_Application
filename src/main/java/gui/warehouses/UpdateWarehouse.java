@@ -35,12 +35,11 @@ public class UpdateWarehouse extends JFrame {
     public UpdateWarehouse  (Sklad w){
         super("Update Warehouse No. "+w.getIdsklad());
         setContentPane(updatePanel);
-        pack();
         int optionButton = getDefaultCloseOperation();
         if(optionButton == WindowConstants.EXIT_ON_CLOSE){
             setVisible(false);
         }
-        setSize(700,450);
+        pack();
         setLocationRelativeTo(null);
         this.id = w.getIdsklad();
         String tel = w.getTel();
@@ -62,6 +61,7 @@ public class UpdateWarehouse extends JFrame {
                 dispose();
             }
         });
+
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,8 +74,9 @@ public class UpdateWarehouse extends JFrame {
                                 null,
                                 "Succesfully updated warehouse No. "+ id
                         );
-                    }
                         dispose();
+                    }
+
                 }
             }
         });
@@ -133,41 +134,9 @@ public class UpdateWarehouse extends JFrame {
         String t = telTextField.getText();
         String p = pcTextField.getText();
 
-        if(c.equals("")){
-            JOptionPane.showConfirmDialog(
-                    null,"City is not filled",
-                    "Warning",JOptionPane.DEFAULT_OPTION);
+        if(!(WarehouseGUI.areValidData(c,s,w,t,p)))
             return ret;
-        }
 
-        if(s.equals("")){
-            JOptionPane.showConfirmDialog(
-                    null,"Street is not filled",
-                    "Warning",JOptionPane.DEFAULT_OPTION);
-            return ret;
-        }
-
-
-        if(w.equals("") || !(w.matches("^(https?://)?(www\\.)?([\\w]+\\.)+[\u200C\u200B\\w]{2,63}/?$"))){
-            JOptionPane.showConfirmDialog(
-                    null,"Web page is not filled or wrong",
-                    "Warning",JOptionPane.DEFAULT_OPTION);
-            return ret;
-        }
-
-        if((t.length()!= 9) || !(t.matches("[0-9]+"))){
-            JOptionPane.showConfirmDialog(
-                    null,"Telephone number is not filled or wrong",
-                    "Warning",JOptionPane.DEFAULT_OPTION);
-            return ret;
-        }
-
-        if((p.length()!= 5) || !(p.matches("[0-9]+"))){
-            JOptionPane.showConfirmDialog(
-                    null,"Postal code is not filled or wrong",
-                    "Warning",JOptionPane.DEFAULT_OPTION);
-            return ret;
-        }
         Sklad storage = new daoSklad().getWarehouseById(idWarehouse);
 
         storage.setTel(t);

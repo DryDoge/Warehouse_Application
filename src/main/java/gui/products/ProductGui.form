@@ -1,56 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.products.ProductGui">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.products.ProductsGui">
   <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="500" height="474"/>
     </constraints>
     <properties>
+      <background color="-1"/>
       <foreground color="-1"/>
     </properties>
     <border type="none"/>
     <children>
-      <grid id="c1655" binding="infoPanel" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="c1655" binding="infoPanel" layout-manager="GridLayoutManager" row-count="8" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-1"/>
           <font name="DejaVu Sans Mono" size="16" style="1"/>
           <foreground color="-1"/>
         </properties>
         <border type="etched" title="Description:">
-          <font name="DejaVu Sans Mono" size="14" style="1"/>
+          <font name="Courier New" size="14" style="1"/>
           <title-color color="-16777216"/>
         </border>
         <children>
-          <component id="88089" class="javax.swing.JLabel">
+          <component id="88089" class="javax.swing.JLabel" binding="idLabel">
             <constraints>
-              <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="3" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="DejaVu Sans Mono" size="20" style="1"/>
               <text value="ID:"/>
             </properties>
           </component>
-          <component id="84dc4" class="javax.swing.JComboBox" binding="beveragesCB">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties/>
-          </component>
           <component id="2bb2d" class="javax.swing.JLabel">
             <constraints>
-              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="DejaVu Sans Mono" size="20" style="1"/>
-              <text value="Type:"/>
+              <text value="Category:"/>
             </properties>
           </component>
           <component id="a6538" class="javax.swing.JLabel" binding="typeInfoLabel">
             <constraints>
-              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="4" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="DejaVu Sans Mono" size="16" style="0"/>
@@ -59,7 +55,7 @@
           </component>
           <component id="374e6" class="javax.swing.JLabel">
             <constraints>
-              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="DejaVu Sans Mono" size="20" style="1"/>
@@ -68,7 +64,7 @@
           </component>
           <component id="f81f4" class="javax.swing.JLabel" binding="flavorInfoLabel">
             <constraints>
-              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="3" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="DejaVu Sans Mono" size="16" style="0"/>
@@ -77,7 +73,7 @@
           </component>
           <component id="9b9a9" class="javax.swing.JLabel">
             <constraints>
-              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="DejaVu Sans Mono" size="20" style="1"/>
@@ -86,24 +82,16 @@
           </component>
           <component id="ec8ee" class="javax.swing.JLabel">
             <constraints>
-              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="DejaVu Sans Mono" size="20" style="1"/>
               <text value="Price:"/>
             </properties>
           </component>
-          <component id="11d89" class="javax.swing.JButton" binding="refreshButton" default-binding="true">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Refresh"/>
-            </properties>
-          </component>
           <component id="b5593" class="javax.swing.JLabel" binding="brandInfoLabel">
             <constraints>
-              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="5" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="DejaVu Sans Mono" size="16" style="0"/>
@@ -112,7 +100,7 @@
           </component>
           <component id="ea995" class="javax.swing.JLabel" binding="priceInfoLabel">
             <constraints>
-              <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="6" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="DejaVu Sans Mono" size="16" style="0"/>
@@ -121,7 +109,7 @@
           </component>
           <component id="6b648" class="javax.swing.JLabel">
             <constraints>
-              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="DejaVu Sans Mono" size="20" style="1"/>
@@ -130,13 +118,71 @@
           </component>
           <component id="c93b3" class="javax.swing.JLabel" binding="supplierInfoLabel">
             <constraints>
-              <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="7" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <font name="DejaVu Sans Mono" size="16" style="0"/>
               <text value="Label"/>
             </properties>
           </component>
+          <component id="11d89" class="javax.swing.JButton" binding="refreshButton" default-binding="true">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <foreground color="-12828863"/>
+              <text value="Refresh"/>
+            </properties>
+          </component>
+          <component id="fba57" class="javax.swing.JRadioButton" binding="allRadioButton" default-binding="true">
+            <constraints>
+              <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-1"/>
+              <foreground color="-12828863"/>
+              <selected value="true"/>
+              <text value="All"/>
+            </properties>
+          </component>
+          <component id="253fb" class="javax.swing.JRadioButton" binding="alcoRadioButton" default-binding="true">
+            <constraints>
+              <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-1"/>
+              <foreground color="-12828863"/>
+              <text value="Alco"/>
+            </properties>
+          </component>
+          <component id="d7b56" class="javax.swing.JRadioButton" binding="nonalcoRadioButton" default-binding="true">
+            <constraints>
+              <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-1"/>
+              <foreground color="-12828863"/>
+              <text value="Nonalco"/>
+            </properties>
+          </component>
+          <component id="84dc4" class="javax.swing.JComboBox" binding="beveragesCB">
+            <constraints>
+              <grid row="0" column="2" row-span="1" col-span="3" vsize-policy="0" hsize-policy="2" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <foreground color="-12828863"/>
+            </properties>
+          </component>
+          <hspacer id="ebe72">
+            <constraints>
+              <grid row="2" column="5" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
+          <hspacer id="c5c16">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+          </hspacer>
         </children>
       </grid>
       <grid id="2cc5e" binding="actionPanel" layout-manager="GridLayoutManager" row-count="2" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -145,10 +191,11 @@
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-1"/>
           <foreground color="-1"/>
         </properties>
         <border type="etched" title="Actions:">
-          <font name="DejaVu Sans Mono" size="14" style="1"/>
+          <font name="Courier New" size="14" style="1"/>
           <title-color color="-16777216"/>
         </border>
         <children>
@@ -157,6 +204,7 @@
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <foreground color="-12828863"/>
               <text value="Update..."/>
             </properties>
           </component>
@@ -178,6 +226,7 @@
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <foreground color="-12828863"/>
               <text value="New..."/>
             </properties>
           </component>
@@ -186,6 +235,7 @@
               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <foreground color="-12828863"/>
               <text value="Delete..."/>
             </properties>
           </component>
@@ -201,9 +251,12 @@
         <constraints>
           <grid row="0" column="1" row-span="2" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <background color="-1"/>
+          <foreground color="-1"/>
+        </properties>
         <border type="none" title="Stored:&#10;">
-          <font name="DejaVu Sans Mono" size="16" style="1"/>
+          <font name="Courier New" size="14" style="1"/>
           <title-color color="-16777216"/>
         </border>
         <children>
@@ -212,16 +265,23 @@
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <background color="-1"/>
+              <font name="Courier New" size="11" style="0"/>
               <foreground color="-1"/>
             </properties>
             <border type="etched" title="ID: |City: |Web: |Tel:">
-              <font name="DejaVu Sans Mono" size="10" style="0"/>
+              <font name="Courier New" size="10" style="0"/>
               <title-color color="-16777216"/>
             </border>
             <children>
               <component id="c2f9e" class="javax.swing.JList" binding="warehousesList">
                 <constraints/>
-                <properties/>
+                <properties>
+                  <background color="-1"/>
+                  <font name="Courier New" size="12" style="1"/>
+                  <model/>
+                  <selectionMode value="0"/>
+                </properties>
               </component>
             </children>
           </scrollpane>
