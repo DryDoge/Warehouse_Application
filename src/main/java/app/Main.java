@@ -2,13 +2,13 @@ package app;
 
 import gui.main.GuiMain;
 import gui.main.LoginMenu;
-
 import java.util.List;
 
 
 public class Main {
 
-    public static void main(String[] args) {
+
+    public static void main(String[] args){
 
 //        LoginMenu l = new LoginMenu();
 //        l.actionLogin();
@@ -16,6 +16,7 @@ public class Main {
 //        Sklad s = new daoSklad().getWarehouseById(1);
 //        List<Napoj> l = s.getNapoje();
 //        System.out.println(l.get(0));
+
 
 
 

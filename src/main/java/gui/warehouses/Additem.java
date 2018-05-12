@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Additem extends JFrame{
     private JPanel addItemPanel;
@@ -22,6 +23,7 @@ public class Additem extends JFrame{
     private JButton addButton;
     private JButton cancelButton;
     private static int warehouseID;
+    private static final Logger logr = WarehouseGUI.getLogr();
 
     Additem(int wareID) {
         super("Add item to warehouse");
@@ -40,8 +42,9 @@ public class Additem extends JFrame{
                     int chosenId = Integer.valueOf((String) beveragesComboBox.getSelectedItem());
                     Napoj n = new daoNapoj().getBeverageByID(chosenId);
                     inforamtionsLabel.setText(n.toString());
-                }catch (NumberFormatException ex) {
+                }catch (IllegalArgumentException | NullPointerException ex) {
                     inforamtionsLabel.setText("Please choose number!");
+                    logr.info("No beverage was selected to add in warehouse");
                 }
             }
         });
@@ -66,16 +69,18 @@ public class Additem extends JFrame{
                     } else
                         JOptionPane.showMessageDialog(null,
                                 "Error while adding. Try again");
-                } catch (NumberFormatException ex){
+                } catch (IllegalArgumentException | NullPointerException ex){
                     JOptionPane.showConfirmDialog(
                             null, "Choose beverage first!",
                             "Warning", JOptionPane.DEFAULT_OPTION);
+                    logr.warning("No beverage was selected to add in warehouse");
                 } catch (RollbackException | org.eclipse.persistence.exceptions.DatabaseException eex){
                     JOptionPane.showConfirmDialog(
                             null,
                             "Selected beverage is already in this warehouse!\n"
                                     + "Please select other!",
                             "Warning", JOptionPane.DEFAULT_OPTION);
+                    logr.warning("Selected beverage is already in warehouse");
                     setData();
                 }
 

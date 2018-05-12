@@ -6,6 +6,7 @@ import gui.warehouses.*;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.logging.LogManager;
 
 public class GuiMain extends JFrame {
     private JPanel mainPanel;
@@ -24,6 +25,7 @@ public class GuiMain extends JFrame {
     public GuiMain() {
 
         super("Application");
+        LogManager.getLogManager().reset();
         setContentPane(mainPanel);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);

@@ -2,13 +2,20 @@ package gui.warehouses;
 
 import db.e.*;
 import db.dao.*;
+import gui.products.NewBeverage;
 import org.eclipse.persistence.exceptions.DatabaseException;
 
 
 import java.awt.event.*;
 
+import java.io.IOException;
 import java.util.*;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.RollbackException;
 import javax.swing.*;
+import javax.validation.constraints.Null;
 
 public class WarehouseGUI extends JFrame {
     private JPanel whPanel;
@@ -39,14 +46,28 @@ public class WarehouseGUI extends JFrame {
     private JScrollPane containsScrollPanel;
     private JButton updateItemButton;
     private JPanel descPanel;
-
     static private NewWarehouse nw = null;
     static private UpdateWarehouse uw = null;
     static private UpdateAmount ua = null;
     static private Additem ai = null;
+    private final static Logger logr = Logger.getLogger(WarehouseGUI.class.getName());
+    static {
+        try {
+            FileHandler fh = new FileHandler("WarehousesLogger.txt");
+            fh.setLevel(Level.WARNING);
+            logr.addHandler(fh);
+        } catch (IOException e) {
+            logr.log(Level.SEVERE, " File logger not working", e);
+        }
+    }
+
+    static Logger getLogr() {
+        return logr;
+    }
 
     public WarehouseGUI() {
         super("Warehouse");
+        logr.setLevel(Level.INFO);
         setContentPane(whPanel);
         //setExtendedState(JFrame.MAXIMIZED_BOTH);
         setSize(900 , 700);
@@ -93,6 +114,7 @@ public class WarehouseGUI extends JFrame {
                     DefaultListModel<String> listModel = new DefaultListModel<>();
                     listModel.addElement("Choose number of warehouse first!");
                     productsList.setModel(listModel);
+                    logr.info("No warehouse was selected to show");
                 }
             }
         });
@@ -116,15 +138,13 @@ public class WarehouseGUI extends JFrame {
                         }
                     }
 
-                } catch (IllegalArgumentException ex) {
-                            JOptionPane.showConfirmDialog(null,
-                                     "Delete is not possible now",
-                                    "Warning", JOptionPane.DEFAULT_OPTION);
-                } catch (NullPointerException exp){
-                    JOptionPane.showConfirmDialog(
-                            null, "Choose warehouse first!",
+                } catch (IllegalArgumentException | NullPointerException ex) {
+                    JOptionPane.showConfirmDialog(null,
+                            "Choose warehouse first!",
                             "Warning", JOptionPane.DEFAULT_OPTION);
+                    logr.warning("No warehouse was selected to delete");
                 }
+
             }
 
         });
@@ -180,10 +200,11 @@ public class WarehouseGUI extends JFrame {
 
                     }
 
-                } catch (IllegalArgumentException ex) {
+                } catch (IllegalArgumentException | NullPointerException ex) {
                     JOptionPane.showConfirmDialog(
                             null, "Update is not possible now",
                             "Warning", JOptionPane.DEFAULT_OPTION);
+                    logr.warning("No warehouse was selected to update");
                 }
 
             }
@@ -210,14 +231,11 @@ public class WarehouseGUI extends JFrame {
                             refreshButton.doClick();
                         }
                     }
-                } catch (IllegalArgumentException ex) {
+                } catch (IllegalArgumentException | NullPointerException ex) {
                     JOptionPane.showConfirmDialog(
-                            null, "Delete is not possible now",
+                            null, "Choose beverage first",
                             "Warning", JOptionPane.DEFAULT_OPTION);
-                } catch (NullPointerException exp){
-                    JOptionPane.showConfirmDialog(
-                            null, "Choose beverage first!",
-                            "Warning", JOptionPane.DEFAULT_OPTION);
+                    logr.warning("No beverage was selected to delete from warehouse");
                 }
             }
         });
@@ -245,16 +263,12 @@ public class WarehouseGUI extends JFrame {
                                 "Window for updating amount is already open");
                     }
 
-                } catch (IllegalArgumentException ex) {
+                } catch (IllegalArgumentException | NullPointerException ex) {
                     JOptionPane.showConfirmDialog(
-                            null, "Update is not possible now",
+                            null, "Choose beverage first",
                             "Warning", JOptionPane.DEFAULT_OPTION);
-                } catch (NullPointerException exp){
-                    JOptionPane.showConfirmDialog(
-                            null, "Choose beverage first!",
-                            "Warning", JOptionPane.DEFAULT_OPTION);
+                    logr.warning("No beverage was selected to update in warehouse");
                 }
-
             }
         });
 
@@ -276,10 +290,11 @@ public class WarehouseGUI extends JFrame {
                                 "Window for adding item is already open");
 
                     }
-                }catch (NumberFormatException ex){
+                }catch (IllegalArgumentException | NullPointerException ex){
                     JOptionPane.showConfirmDialog(
                             null, "Choose warehouse first!",
                             "Warning", JOptionPane.DEFAULT_OPTION);
+                    logr.warning("No warehouse was selected to add beverage");
                 }
             }
         });
@@ -294,7 +309,6 @@ public class WarehouseGUI extends JFrame {
                     uw.dispose();
                     uw = null;
                 }
-
                 if (!(ua == null)) {
                     ua.dispose();
                     ua = null;
@@ -304,11 +318,10 @@ public class WarehouseGUI extends JFrame {
                     ai = null;
                 }
                 dispose();
+                dispose();
             }
         });
     }
-
-
 
     public void setData(){
         List<Sklad> l = new daoSklad().getAllWarehouses();
@@ -324,7 +337,8 @@ public class WarehouseGUI extends JFrame {
         try{
             new daoSklad().deleteWarehouse(s.getIdsklad());
             return true;
-        }catch (DatabaseException e){
+        }catch (RollbackException e){
+            logr.warning("Selected warehouse cannot be deleted");
             return false;
         }
     }
@@ -333,52 +347,41 @@ public class WarehouseGUI extends JFrame {
         try{
             new daoObsahuje().deleteContentOfItem(warehouse, beverage);
             return true;
-        }catch (DatabaseException e){
+        }catch (RollbackException e){
+            logr.warning("Selected item cannot be deleted from warehouse");
             return false;
         }
     }
 
-    static boolean areValidData(String c, String s, String w, String t, String p){
+    static boolean areValidData(String city, String street, String web, String telephone, String poctalCode){
         boolean ret = false;
-
-        if(c.equals("")){
+        if(city.equals("")){
             JOptionPane.showConfirmDialog(
-                    null,"City is not filled",
-                    "Warning",JOptionPane.DEFAULT_OPTION);
+                    null,"City is not filled","Warning",JOptionPane.DEFAULT_OPTION);
             return ret;
         }
-
-        if(s.equals("")){
+        if(street.equals("")){
             JOptionPane.showConfirmDialog(
-                    null,"Street is not filled",
-                    "Warning",JOptionPane.DEFAULT_OPTION);
+                    null,"Street is not filled","Warning",JOptionPane.DEFAULT_OPTION);
             return ret;
         }
-
-
-        if(w.equals("") || !(w.matches(
+        if(web.equals("") || !(web.matches(
                 "^(https?://)?(www\\.)?([\\w]+\\.)+[\u200C\u200B\\w]{2,63}/?$"))
                 ){
             JOptionPane.showConfirmDialog(
-                    null,"Web page is not filled or wrong",
-                    "Warning",JOptionPane.DEFAULT_OPTION);
+                    null,"Web page is not filled or wrong","Warning",JOptionPane.DEFAULT_OPTION);
             return ret;
         }
-
-        if((t.length()!= 9) || !(t.matches("[0-9]+"))){
+        if((telephone.length()!= 9) || !(telephone.matches("[0-9]+"))){
             JOptionPane.showConfirmDialog(
-                    null,"Telephone number is not filled or wrong",
-                    "Warning",JOptionPane.DEFAULT_OPTION);
+                    null,"Telephone number is not filled or wrong","Warning",JOptionPane.DEFAULT_OPTION);
             return ret;
         }
-
-        if((p.length()!= 5) || !(p.matches("[0-9]+"))){
+        if((poctalCode.length()!= 5) || !(poctalCode.matches("[0-9]+"))){
             JOptionPane.showConfirmDialog(
-                    null,"Postal code is not filled or wrong",
-                    "Warning",JOptionPane.DEFAULT_OPTION);
+                    null,"Postal code is not filled or wrong","Warning",JOptionPane.DEFAULT_OPTION);
             return ret;
         }
-
         ret = true;
 
         return ret;

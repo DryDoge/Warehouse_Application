@@ -28,11 +28,10 @@ public class UpdateWarehouse extends JFrame {
     private JLabel infoTelLabel;
     private JLabel infoPCLabel;
     private JLabel telLabel;
-
     private int id;
 
 
-    public UpdateWarehouse  (Sklad w){
+    UpdateWarehouse(Sklad w){
         super("Update Warehouse No. "+w.getIdsklad());
         setContentPane(updatePanel);
         int optionButton = getDefaultCloseOperation();

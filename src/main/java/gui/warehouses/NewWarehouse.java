@@ -36,7 +36,7 @@ public class NewWarehouse extends JFrame{
     private JLabel infoWebLabel;
     private static int new_id = 1;
 
-    public NewWarehouse(){
+    NewWarehouse(){
         super("New warehouse");
         setContentPane(newPanel);
         int optionButton = getDefaultCloseOperation();

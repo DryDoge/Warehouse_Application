@@ -5,12 +5,12 @@ import db.dao.daoDodavatel;
 import db.e.Dodavatel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
+
+
 
 public class NewSupplier extends JFrame {
     private JPanel newSupplierPanel;
@@ -25,7 +25,7 @@ public class NewSupplier extends JFrame {
     private static int new_id = 1;
 
 
-    public NewSupplier() {
+    NewSupplier() {
         super("New supplier");
         setContentPane(newSupplierPanel);
         int optionButton = getDefaultCloseOperation();

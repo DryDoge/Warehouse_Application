@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class NewBeverage extends JFrame {
     private JTextField flavorTextField;
@@ -22,8 +23,9 @@ public class NewBeverage extends JFrame {
     private JButton cancelButton;
     private JPanel actionPanel;
     private static int new_id = 1;
+    private static Logger logr = ProductsGui.getLogr();
 
-    public NewBeverage(){
+    NewBeverage(){
         super("New beverage");
         setContentPane(newBeveragePanel);
         int optionButton = getDefaultCloseOperation();
@@ -109,11 +111,12 @@ public class NewBeverage extends JFrame {
         try{
             chosenSupp = (String)suppliersCB.getSelectedItem();
             dod = new daoDodavatel().getSupplierByName(chosenSupp);
-        }catch (javax.persistence.NoResultException | IllegalArgumentException ex){
+        }catch (javax.persistence.NoResultException | IllegalArgumentException | NullPointerException ex){
             JOptionPane.showConfirmDialog(
                     null,"Supplier is not selected",
                     "Warning",JOptionPane.DEFAULT_OPTION);
-            return ret;
+            logr.info("Supplier was not selected while creating new beverage");
+            dod = null;
         }
 
 

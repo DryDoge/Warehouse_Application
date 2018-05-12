@@ -15,7 +15,7 @@ public class UpdateAmount extends JFrame {
     private JButton saveButton;
     private JButton cancelButton;
 
-    public UpdateAmount(Obsahuje o){
+    UpdateAmount(Obsahuje o){
         super("Update amount of item No. " + o.getIdnap() + " in warehouse No. "+ o.getIdsklad());
         setContentPane(updateamountPanel);
         int optionButton = getDefaultCloseOperation();

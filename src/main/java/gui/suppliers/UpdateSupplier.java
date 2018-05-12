@@ -19,7 +19,7 @@ public class UpdateSupplier extends JFrame {
     private JTextField telTF;
     private int id;
 
-    public UpdateSupplier(Dodavatel d){
+    UpdateSupplier(Dodavatel d){
     super("Update supplier No. "+d.getIddod());
     setContentPane(updateSupplierPanel);
     int optionButton = getDefaultCloseOperation();

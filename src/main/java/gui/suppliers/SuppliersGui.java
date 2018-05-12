@@ -3,13 +3,17 @@ package gui.suppliers;
 import db.dao.daoDodavatel;
 import db.e.Dodavatel;
 import db.e.Napoj;
-import org.eclipse.persistence.exceptions.*;
 
+import javax.persistence.RollbackException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SuppliersGui extends JFrame
 {
@@ -31,12 +35,25 @@ public class SuppliersGui extends JFrame
     private JPanel supplyPanel;
     private NewSupplier  ns = null;
     private UpdateSupplier us = null;
+    private final static Logger logr = Logger.getLogger(SuppliersGui.class.getName());
+    static {
+        try {
+            FileHandler fh = new FileHandler("SuppliersLogger.txt");
+            fh.setLevel(Level.WARNING);
+            logr.addHandler(fh);
+        } catch (IOException e) {
+            logr.log(Level.SEVERE, " File logger not working", e);
+        }
+    }
 
+    public static Logger getLogr() {
+        return logr;
+    }
 
     public SuppliersGui(){
         super("Supplier");
+        logr.setLevel(Level.INFO);
         setContentPane(mainPanel);
-        //setExtendedState(JFrame.MAXIMIZED_BOTH);
         setSize(750 , 700);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -48,6 +65,7 @@ public class SuppliersGui extends JFrame
         webLabel.setText("");
         background.setIcon(backgroundIcon);
         refreshButton.doClick();
+        logr.setLevel(Level.INFO);
 
         refreshButton.addActionListener(new ActionListener() {
             @Override
@@ -87,6 +105,7 @@ public class SuppliersGui extends JFrame
                     DefaultListModel<String> listModel = new DefaultListModel<>();
                     listModel.addElement("Choose number of supplier first!");
                     supplyList.setModel(listModel);
+                    logr.info("No supplier was selected");
                 }
             }
         });
@@ -97,7 +116,7 @@ public class SuppliersGui extends JFrame
                 try {
                     int chosenId = Integer.valueOf((String) suppliersCB.getSelectedItem());
                     int optionButton = JOptionPane.showConfirmDialog(null,
-                            "Do you really want to delete this warehouse ?",
+                            "Do you really want to delete this supplier?",
                             "Delete confirmation",JOptionPane.YES_NO_OPTION);
                     if (optionButton == JOptionPane.YES_OPTION) {
                         Dodavatel d = new daoDodavatel().getSupplierById(chosenId);
@@ -109,14 +128,11 @@ public class SuppliersGui extends JFrame
                             refreshButton.doClick();
                         }
                     }
-                } catch (IllegalArgumentException ex) {
-                    JOptionPane.showConfirmDialog(null,
-                            "Delete is not possible now",
-                            "Warning", JOptionPane.DEFAULT_OPTION);
-                } catch (NullPointerException exp){
+                } catch (IllegalArgumentException | NullPointerException ex) {
                     JOptionPane.showConfirmDialog(
                             null, "Choose supplier first!",
                             "Warning", JOptionPane.DEFAULT_OPTION);
+                    logr.warning("No supplier was selected to delete");
                 }
             }
         });
@@ -155,13 +171,12 @@ public class SuppliersGui extends JFrame
                         us.requestFocus();
                         JOptionPane.showMessageDialog(null,
                                 "Window for updating beverage is already open");
-
                     }
-
-                } catch (IllegalArgumentException ex) {
+                } catch (IllegalArgumentException | NullPointerException ex) {
                     JOptionPane.showConfirmDialog(
                             null, "Update is not possible now",
                             "Warning", JOptionPane.DEFAULT_OPTION);
+                    logr.warning("No supplier was selected to update");
                 }
             }
         });
@@ -192,12 +207,13 @@ public class SuppliersGui extends JFrame
         }
     }
 
-    private boolean deleteSelectedSupplier(Dodavatel d) {
+    private boolean deleteSelectedSupplier(Dodavatel d){
         try {
 
             new daoDodavatel().deleteSupplier(d.getIddod());
             return true;
-        }catch (DatabaseException e){
+        }catch (RollbackException e){
+            logr.warning("Cannot delete supplier from database");
             return false;
         }
     }
@@ -209,17 +225,17 @@ public class SuppliersGui extends JFrame
         return m.matches();
     }
 
-    static boolean areValidData(String n, String w, String t, String e){
+    static boolean areValidData(String name, String web, String telephone, String email){
         boolean ret = false;
 
-        if (n.equals("")) {
+        if (name.equals("")) {
             JOptionPane.showConfirmDialog(
                     null, "Street is not filled",
                     "Warning", JOptionPane.DEFAULT_OPTION);
             return ret;
         }
 
-        if (w.equals("") || !(w.matches(
+        if (web.equals("") || !(web.matches(
                 "^(https?://)?(www\\.)?([\\w]+\\.)+[\u200C\u200B\\w]{2,63}/?$"))
                 ) {
             JOptionPane.showConfirmDialog(
@@ -228,14 +244,14 @@ public class SuppliersGui extends JFrame
             return ret;
         }
 
-        if ((t.length() != 9) || !(t.matches("[0-9]+"))) {
+        if ((telephone.length() != 9) || !(telephone.matches("[0-9]+"))) {
             JOptionPane.showConfirmDialog(
                     null, "Telephone number is not filled or wrong",
                     "Warning", JOptionPane.DEFAULT_OPTION);
             return ret;
         }
 
-        if(!(isValidEmailAddress(e)) || e.equals("")){
+        if(!(isValidEmailAddress(email)) || email.equals("")){
             JOptionPane.showConfirmDialog(
                     null, "Email is not filled or wrong",
                     "Warning", JOptionPane.DEFAULT_OPTION);

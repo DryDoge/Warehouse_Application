@@ -4,12 +4,17 @@ import db.dao.daoNapoj;
 import db.e.*;
 import org.eclipse.persistence.exceptions.*;
 
+import javax.persistence.RollbackException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProductsGui extends JFrame {
 
@@ -36,9 +41,24 @@ public class ProductsGui extends JFrame {
     private JLabel idLabel;
     private static NewBeverage nb = null;
     private static UpdateBeverage ub = null;
+    private final static Logger logr = Logger.getLogger(ProductsGui.class.getName());
+    static {
+        try {
+            FileHandler fh = new FileHandler("BeveragesLogger.txt");
+            fh.setLevel(Level.WARNING);
+            logr.addHandler(fh);
+        } catch (IOException e) {
+            logr.log(Level.SEVERE, " File logger not working", e);
+        }
+    }
+
+    static Logger getLogr() {
+        return logr;
+    }
 
     public ProductsGui(){
         super("Beverage");
+        logr.setLevel(Level.INFO);
         setContentPane(mainPanel);
         setSize(850 , 750);
         setLocationRelativeTo(null);
@@ -62,7 +82,10 @@ public class ProductsGui extends JFrame {
                     typeInfoLabel.setText(n.getDruh());
                     brandInfoLabel.setText(n.getZnacka());
                     priceInfoLabel.setText(String.valueOf(n.getCena())+"€");
-                    supplierInfoLabel.setText(n.getDodavatel().getNazov());
+                    if(n.getDodavatel() == null)
+                        supplierInfoLabel.setText("No supplier");
+                    else
+                        supplierInfoLabel.setText(n.getDodavatel().getNazov());
 
                     List<Sklad> list = n.getSklady();
                     list.sort(Comparator.comparing(Sklad::getIdsklad));
@@ -87,6 +110,7 @@ public class ProductsGui extends JFrame {
                     DefaultListModel<String> listModel = new DefaultListModel<>();
                     listModel.addElement("Choose number of beverage first!");
                     warehousesList.setModel(listModel);
+                    logr.info("No beverage was chosen to show");
                 }
             }
         });
@@ -110,14 +134,11 @@ public class ProductsGui extends JFrame {
                         }
                     }
 
-                } catch (IllegalArgumentException ex) {
+                } catch (IllegalArgumentException | NullPointerException ex) {
                     JOptionPane.showConfirmDialog(null,
-                            "Delete is not possible now",
+                            "Choose beverage first",
                             "Warning", JOptionPane.DEFAULT_OPTION);
-                } catch (NullPointerException exp){
-                    JOptionPane.showConfirmDialog(
-                            null, "Choose beverage first!",
-                            "Warning", JOptionPane.DEFAULT_OPTION);
+                    logr.warning("No beverage was selected to delete");
                 }
             }
 
@@ -188,14 +209,14 @@ public class ProductsGui extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    int chosenId = Integer.valueOf((String)beveragesCB.getSelectedItem());
+                    int chosenId = Integer.valueOf((String) beveragesCB.getSelectedItem());
                     Napoj n = new daoNapoj().getBeverageByID(chosenId);
 
-                    if(ub == null || !(ub.isVisible())) {
+                    if (ub == null || !(ub.isVisible())) {
                         ub = null;
                         ub = new UpdateBeverage(n);
                         ub.setVisible(true);
-                    }else{
+                    } else {
                         ub.setState(NORMAL);
                         ub.toFront();
                         ub.requestFocus();
@@ -203,11 +224,11 @@ public class ProductsGui extends JFrame {
                                 "Window for updating beverage is already open");
 
                     }
-
-                } catch (IllegalArgumentException ex) {
+                } catch (IllegalArgumentException  | NullPointerException ex) {
                     JOptionPane.showConfirmDialog(
-                            null, "Update is not possible now",
+                            null, "Choose beverage first",
                             "Warning", JOptionPane.DEFAULT_OPTION);
+                    logr.warning("No beverage was selected to update");
                 }
             }
         });
@@ -251,7 +272,8 @@ public class ProductsGui extends JFrame {
 
             new daoNapoj().deleteBeverage(n.getIdnap());
             return true;
-        }catch (DatabaseException e){
+        }catch (RollbackException e){
+            logr.warning("Selected beverage cannot be deleted");
             return false;
         }
     }

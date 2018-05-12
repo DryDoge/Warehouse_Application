@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class UpdateBeverage extends JFrame {
 
@@ -25,8 +26,9 @@ public class UpdateBeverage extends JFrame {
     private JPanel actionPanel;
     private JPanel updatePanel;
     private int id;
+    private static final Logger logr = ProductsGui.getLogr();
 
-    public UpdateBeverage(Napoj n) {
+    UpdateBeverage(Napoj n) {
         super("Update beverage No. " + n.getIdnap());
         setContentPane(updatePanel);
         int optionButton = getDefaultCloseOperation();
@@ -61,7 +63,7 @@ public class UpdateBeverage extends JFrame {
             String item = String.valueOf(s.getNazov());
             suppliersCB.addItem(item);
         }
-        suppliersCB.setSelectedIndex(n.getIdnap());
+        suppliersCB.setSelectedItem(n.getIdnap());
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
@@ -110,12 +112,14 @@ public class UpdateBeverage extends JFrame {
         try{
             chosenSupp = (String)suppliersCB.getSelectedItem();
             dod = new daoDodavatel().getSupplierByName(chosenSupp);
-        }catch (javax.persistence.NoResultException ex){
+        }catch (javax.persistence.NoResultException | IllegalArgumentException | NullPointerException ex){
             JOptionPane.showConfirmDialog(
                     null,"Supplier is not selected",
                     "Warning",JOptionPane.DEFAULT_OPTION);
-            return ret;
+            logr.info("Supplier was not selected while updating beverage");
+            dod = null;
         }
+
         Napoj beverage = new daoNapoj().getBeverageByID(id);
 
         if(f.equals(""))
@@ -129,7 +133,6 @@ public class UpdateBeverage extends JFrame {
             beverage.setTyp("Alko");
         else
             beverage.setTyp("Nealko");
-
         beverage.setDodavatel(dod);
 
         new daoNapoj().updateBeverage(beverage);

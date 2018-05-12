@@ -6,9 +6,7 @@
         <class>db.e.Dodavatel</class>
         <class>db.e.Napoj</class>
         <class>db.e.Obsahuje</class>
-        <class>db.e.Predaj</class>
         <class>db.e.Sklad</class>
-        <class>db.e.Zamestnanec</class>
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://slon.felk.cvut.cz:5432/db18_suchype1"/>
