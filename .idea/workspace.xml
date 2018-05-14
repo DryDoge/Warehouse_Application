@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="019385a2-d1b1-441e-b967-ae046690c0f8" name="Default" comment="Added logging - working">
+    <list default="true" id="019385a2-d1b1-441e-b967-ae046690c0f8" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/dao/daoBasics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/dao/daoBasics.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/dao/daoDodavatel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/dao/daoDodavatel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/dao/daoNapoj.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/dao/daoNapoj.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/dao/daoObsahuje.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/dao/daoObsahuje.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/db/dao/daoSklad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/dao/daoSklad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/db/e/Sklad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/db/e/Sklad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/main/GuiMain.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/main/GuiMain.form" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/main/GuiMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/main/GuiMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/main/LoginMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/main/LoginMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/products/NewBeverage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/products/NewBeverage.java" afterDir="false" />
@@ -12,7 +18,12 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/suppliers/NewSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/suppliers/NewSupplier.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/suppliers/SuppliersGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/suppliers/SuppliersGui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/gui/suppliers/UpdateSupplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/suppliers/UpdateSupplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/gui/warehouses/Additem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/warehouses/Additem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/warehouses/Additem.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/warehouses/AddNewItem.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/warehouses/Additem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/warehouses/AddNewItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/warehouses/NewWarehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/warehouses/NewWarehouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/warehouses/UpdateAmount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/warehouses/UpdateAmount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/warehouses/UpdateWarehouse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/warehouses/UpdateWarehouse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/gui/warehouses/WarehouseGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/gui/warehouses/WarehouseGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/db/e/Sklad.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/db/e/Sklad.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/main/GuiMain$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/main/GuiMain$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/main/GuiMain$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/main/GuiMain$2.class" afterDir="false" />
@@ -28,11 +39,21 @@
       <change beforePath="$PROJECT_DIR$/target/classes/gui/products/NewBeverage$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/products/NewBeverage$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/products/NewBeverage$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/products/NewBeverage$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/products/NewBeverage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/products/NewBeverage.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/Additem$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/Additem$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/Additem$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/Additem$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/Additem$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/Additem$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/Additem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/Additem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/Additem$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/Additem$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/Additem$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/Additem.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/NewWarehouse$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/NewWarehouse$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/NewWarehouse$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/NewWarehouse$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/NewWarehouse$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/NewWarehouse$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/NewWarehouse$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/NewWarehouse$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/NewWarehouse$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/NewWarehouse$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/NewWarehouse$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/NewWarehouse$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/NewWarehouse$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/NewWarehouse$7.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/NewWarehouse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/NewWarehouse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/UpdateAmount$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/UpdateAmount$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/UpdateAmount$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/UpdateAmount$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/UpdateAmount$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/UpdateAmount$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/UpdateAmount.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/UpdateAmount.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/UpdateWarehouse$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/UpdateWarehouse$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/gui/warehouses/UpdateWarehouse$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/gui/warehouses/UpdateWarehouse$2.class" afterDir="false" />
@@ -125,7 +146,7 @@
     <favorites_list name="semestalka" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -243,6 +264,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -290,7 +312,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -448,6 +469,7 @@
       <workItem from="1526129526434" duration="9362000" />
       <workItem from="1526298374506" duration="5641000" />
       <workItem from="1526308643524" duration="5273000" />
+      <workItem from="1526313999739" duration="72000" />
     </task>
     <task id="LOCAL-00001" summary="logout button">
       <created>1525260779540</created>
@@ -477,11 +499,18 @@
       <option name="project" value="LOCAL" />
       <updated>1526139257319</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added Javadoc">
+      <created>1526314071047</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1526314071047</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="219145000" />
+    <option name="totallyTimeSpent" value="219217000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -496,31 +525,31 @@
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" order="4" />
-      <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.50064266" side_tool="true" weight="0.32791328" />
-      <window_info anchor="right" id="Maven Projects" order="6" weight="0.3280061" />
-      <window_info anchor="bottom" id="Database Changes" order="1" show_stripe_button="false" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="Designer" order="0" />
-      <window_info anchor="right" id="Database" order="3" weight="0.20951156" />
-      <window_info id="Structure" order="6" sideWeight="0.44444445" side_tool="true" weight="0.16645244" />
-      <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
-      <window_info id="UI Designer" order="1" />
-      <window_info anchor="bottom" id="Debug" order="9" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="12" weight="0.3296875" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.32655826" />
       <window_info anchor="right" id="Palette&#9;" order="1" />
       <window_info id="Image Layers" order="4" />
       <window_info anchor="bottom" id="Java Enterprise" order="14" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.50064266" side_tool="true" weight="0.32791328" />
+      <window_info anchor="right" id="Maven Projects" order="6" weight="0.3280061" />
+      <window_info anchor="bottom" id="Database Changes" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="0" weight="0.3292683" />
       <window_info anchor="bottom" id="Run" order="6" sideWeight="0.4993573" weight="0.30081302" />
       <window_info anchor="bottom" id="Terminal" order="2" weight="0.3292683" />
+      <window_info id="Capture Tool" order="2" />
       <window_info id="Persistence" order="7" sideWeight="0.20301783" side_tool="true" weight="0.38328913" />
-      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.796748" visible="true" weight="0.22879177" />
+      <window_info id="Designer" order="0" />
+      <window_info active="true" content_ui="combo" id="Project" order="5" sideWeight="0.796748" visible="true" weight="0.23200513" />
       <window_info anchor="right" id="Bean Validation" order="10" weight="0.32952815" />
+      <window_info anchor="right" id="Database" order="3" weight="0.20951156" />
+      <window_info id="Structure" order="6" sideWeight="0.44444445" side_tool="true" weight="0.16645244" />
+      <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
+      <window_info id="UI Designer" order="1" />
       <window_info anchor="right" id="Theme Preview" order="2" />
       <window_info id="Favorites" order="3" sideWeight="0.20325203" side_tool="true" weight="0.22365038" />
+      <window_info anchor="bottom" id="Debug" order="9" weight="0.4" />
       <window_info anchor="bottom" id="Dependency Viewer" order="7" weight="0.32901555" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.32655826" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="5" type="SLIDING" weight="0.4" />
       <window_info anchor="bottom" id="JPA Console" order="8" weight="0.3296875" />
@@ -546,7 +575,8 @@
     <MESSAGE value="products RD - working" />
     <MESSAGE value="Suppliers, Products, Warehouses - CRUD working" />
     <MESSAGE value="Added logging - working" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added logging - working" />
+    <MESSAGE value="Added Javadoc" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Javadoc" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
