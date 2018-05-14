@@ -18,9 +18,16 @@ public class UpdateSupplier extends JFrame {
     private JTextField emailTF;
     private JTextField telTF;
     private int id;
+    private Dodavatel supplierToUpdate = null;
 
+    /**
+     * Class constructor specifying which supplier is going to be updated.
+     *
+     * @param d Supplier to update.
+     */
     UpdateSupplier(Dodavatel d){
     super("Update supplier No. "+d.getIddod());
+    this.supplierToUpdate = d;
     setContentPane(updateSupplierPanel);
     int optionButton = getDefaultCloseOperation();
     if (optionButton == WindowConstants.EXIT_ON_CLOSE) {
@@ -29,11 +36,11 @@ public class UpdateSupplier extends JFrame {
     pack();
     setLocationRelativeTo(null);
 
-    this.id = d.getIddod();
-    String name = d.getNazov();
-    String email = d.getEmail();
-    String tel = d.getTel();
-    String web = d.getWeb();
+    this.id = supplierToUpdate.getIddod();
+    String name = supplierToUpdate.getNazov();
+    String email = supplierToUpdate.getEmail();
+    String tel = supplierToUpdate.getTel();
+    String web = supplierToUpdate.getWeb();
 
     nameTF.setText(name);
     emailTF.setText(email);
@@ -54,7 +61,8 @@ public class UpdateSupplier extends JFrame {
                         "Do you really want to update this supplier ?",
                         "Update confirmation", JOptionPane.YES_NO_OPTION);
                 if (optionButton == JOptionPane.YES_OPTION) {
-                    if (updateData(id)) {
+                    if (updateSelectedSupplier()) {
+                        new daoDodavatel().updateSupplier(supplierToUpdate);
                         JOptionPane.showMessageDialog(
                                 null,
                                 "Succesfully updated Supplier No. " + id
@@ -66,7 +74,12 @@ public class UpdateSupplier extends JFrame {
         });
     }
 
-    private boolean updateData(int id){
+    /**
+     * Update selected supplier from user's inputs.
+     *
+     * @return True on success, false otherwise.
+     */
+    private boolean updateSelectedSupplier(){
         boolean ret = false;
         String n = nameTF.getText();
         String w = webTF.getText();
@@ -75,15 +88,10 @@ public class UpdateSupplier extends JFrame {
 
         if(!(SuppliersGui.areValidData(n, w, t, e)))
             return ret;
-
-        Dodavatel supp = new daoDodavatel().getSupplierById(id);
-
-        supp.setNazov(n);
-        supp.setTel(t);
-        supp.setEmail(e);
-        supp.setWeb(w);
-
-        new daoDodavatel().updateSupplier(supp);
+        supplierToUpdate.setNazov(n);
+        supplierToUpdate.setTel(t);
+        supplierToUpdate.setEmail(e);
+        supplierToUpdate.setWeb(w);
         ret = true;
 
         return ret;

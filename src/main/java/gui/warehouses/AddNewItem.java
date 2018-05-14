@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.logging.Logger;
 
-public class Additem extends JFrame{
+public class AddNewItem extends JFrame{
     private JPanel addItemPanel;
     private JComboBox<String> beveragesComboBox;
     private JLabel idLabel;
@@ -25,7 +25,12 @@ public class Additem extends JFrame{
     private static int warehouseID;
     private static final Logger logr = WarehouseGUI.getLogr();
 
-    Additem(int wareID) {
+    /**
+     *Class constructor for adding a beverage to the warehouse.
+     *
+     * @param wareID Id of the warehouse in which we want to add an item.
+     */
+    AddNewItem(int wareID) {
         super("Add item to warehouse");
         warehouseID = wareID;
         setContentPane(addItemPanel);
@@ -60,7 +65,9 @@ public class Additem extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    if (addBeverageToWarehouse()) {
+                    int beverageId = Integer.valueOf((String) beveragesComboBox.getSelectedItem());
+                    String amount = amountTextField.getText();
+                    if (addBeverageToWarehouse(beverageId, amount)) {
                         JOptionPane.showMessageDialog(null,
                                 "Succesfully added beverage No. "
                                         + beveragesComboBox.getSelectedItem() + " with "
@@ -83,35 +90,35 @@ public class Additem extends JFrame{
                     logr.warning("Selected beverage is already in warehouse");
                     setData();
                 }
-
-
             }
         });
-
     }
 
-    private boolean addBeverageToWarehouse() {
-
-        int beveId = Integer.valueOf((String) beveragesComboBox.getSelectedItem());
-        String amount = amountTextField.getText();
-
-
+    /**
+     * Add a beverage to the warehouse.
+     *
+     * @param beveId Id of added beverage.
+     * @param amount Number of pieces.
+     * @return true on success, false otherwise.
+     */
+    private boolean addBeverageToWarehouse(int beveId, String amount) {
         if(amount.equals("") || amount.equals("0") || !(amount.matches("[0-9]+"))){
             JOptionPane.showConfirmDialog(
                     null,"Amount is not filled or wrong",
                     "Warning",JOptionPane.DEFAULT_OPTION);
             return false;
         }
-
         Obsahuje con = new Obsahuje();
         con.setIdsklad(warehouseID);
         con.setIdnap(beveId);
         con.setMnozstvo(Integer.valueOf(amount));
         new daoBasics().addAnything(con);
-
         return true;
     }
 
+    /**
+     * Get all Beverages from database and prepare them for choosing.
+     */
     void setData(){
         List<Napoj> l = new daoNapoj().getAllBeverages();
         beveragesComboBox.removeAllItems();

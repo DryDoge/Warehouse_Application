@@ -35,7 +35,11 @@ public class NewWarehouse extends JFrame{
     private JLabel infoPCLabel;
     private JLabel infoWebLabel;
     private static int new_id = 1;
+    private Sklad newWarehouse = null;
 
+    /**
+     * Class constructor for creating new warehouse.
+     */
     NewWarehouse(){
         super("New warehouse");
         setContentPane(newPanel);
@@ -55,7 +59,8 @@ public class NewWarehouse extends JFrame{
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (addData()) {
+                if (createNewWarehouse()) {
+                    new daoBasics().addAnything(newWarehouse);
                     JOptionPane.showMessageDialog(null,
                             "Succesfully added warehouse No. "+new_id);
                     dispose();
@@ -113,8 +118,12 @@ public class NewWarehouse extends JFrame{
     }
 
 
-
-    private boolean addData(){
+    /**
+     * Create new warehouse from user's inputs.
+     *
+     * @return True on success, false otherwise.
+     */
+    private boolean createNewWarehouse(){
         boolean ret = false;
         List<Integer> ids = new ArrayList<>();
         String c = cityTextField.getText();
@@ -122,31 +131,27 @@ public class NewWarehouse extends JFrame{
         String w = webPageTextField.getText();
         String t = telephoneTextfield.getText();
         String p = postalCodeTextField.getText();
-
+        List<Sklad> l = new daoSklad().getAllWarehouses();
+        //Checks whether city, street, web page, telephone number and postal code are valid
         if(!(WarehouseGUI.areValidData(c,s,w,t,p)))
             return ret;
-
-
-        List<Sklad> l = new daoSklad().getAllWarehouses();
-
+        // Generate the smallest possible id for new warehouse
         for (Sklad  st: l) {
             ids.add(st.getIdsklad());
         }
-
         while (ids.contains(new_id)){
             new_id++;
         }
+        // Create new warehouse
+        newWarehouse  = new Sklad();
+        newWarehouse.setIdsklad(new_id);
+        newWarehouse.setTel(t);
+        newWarehouse.setMesto(c);
+        newWarehouse.setUlica(s);
+        newWarehouse.setPsc(p);
+        newWarehouse.setWeb(w);
 
-        Sklad storage = new Sklad();
-        storage.setIdsklad(new_id);
-        storage.setTel(t);
-        storage.setMesto(c);
-        storage.setUlica(s);
-        storage.setPsc(p);
-        storage.setWeb(w);
-        new daoBasics().addAnything(storage);
         ret = true;
-
         return ret;
     }
 }

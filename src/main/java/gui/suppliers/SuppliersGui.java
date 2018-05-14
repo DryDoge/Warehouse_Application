@@ -46,10 +46,9 @@ public class SuppliersGui extends JFrame
         }
     }
 
-    public static Logger getLogr() {
-        return logr;
-    }
-
+    /**
+     * Class constructor for suppliers.
+     */
     public SuppliersGui(){
         super("Supplier");
         logr.setLevel(Level.INFO);
@@ -196,7 +195,9 @@ public class SuppliersGui extends JFrame
             }
         });
     }
-
+    /**
+     * Get all suppliers and prepare them for choosing.
+     */
     public void setData() {
         List<Dodavatel> l = new daoDodavatel().getAllSuppliers();
         suppliersCB.removeAllItems();
@@ -207,6 +208,12 @@ public class SuppliersGui extends JFrame
         }
     }
 
+    /**
+     * Deletes chosen supplier.
+     *
+     * @param d The supplier who is going to be deleted.
+     * @return True on success, false otherwise.
+     */
     private boolean deleteSelectedSupplier(Dodavatel d){
         try {
 
@@ -218,6 +225,12 @@ public class SuppliersGui extends JFrame
         }
     }
 
+    /**
+     * Checks if email is correct.
+     *
+     * @param email Email adress which is going to be checked.
+     * @return True if it is right, false otherwise.
+     */
     private static boolean isValidEmailAddress(String email) {
         String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
@@ -225,6 +238,15 @@ public class SuppliersGui extends JFrame
         return m.matches();
     }
 
+    /**
+     * Checks whether name, web page, telephone number and email are filled correctly
+     *
+     * @param name Name of the supplier.
+     * @param web Web page of the supplier.
+     * @param telephone Telephone number of the supplier.
+     * @param email Email of supplier.
+     * @return True if all are correct, false otherwise.
+     */
     static boolean areValidData(String name, String web, String telephone, String email){
         boolean ret = false;
 

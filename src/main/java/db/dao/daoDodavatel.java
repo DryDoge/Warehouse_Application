@@ -8,7 +8,11 @@ import java.util.List;
 
 public class daoDodavatel {
 
-
+    /**
+     * Gets all suppliers from database.
+     *
+     * @return List of suppliers.
+     */
     public List<Dodavatel> getAllSuppliers(){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
@@ -30,6 +34,12 @@ public class daoDodavatel {
         return l;
     }
 
+    /**
+     * Gets the supplier from database by its id.
+     *
+     * @param id Id of the supplier.
+     * @return Supplier.
+     */
     public Dodavatel getSupplierById(int id){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
@@ -42,6 +52,12 @@ public class daoDodavatel {
         return d;
     }
 
+    /**
+     * Gets the supplier from database by its name.
+     *
+     * @param name Name of the supplier.
+     * @return Supplier.
+     */
     public Dodavatel getSupplierByName(String name){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
@@ -59,6 +75,11 @@ public class daoDodavatel {
         return d;
     }
 
+    /**
+     * Delete the supplier from database.
+     *
+     * @param idSupplier Id of the supplier who is going to be deleted.
+     * */
     public void deleteSupplier(int idSupplier){
 
         EntityManagerFactory emf =
@@ -77,6 +98,11 @@ public class daoDodavatel {
         emf.close();
     }
 
+    /**
+     * Update the supplier in database.
+     *
+     * @param d The supplier who is going to be updated.
+     */
     public void updateSupplier(Dodavatel d){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");

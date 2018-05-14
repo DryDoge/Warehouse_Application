@@ -7,6 +7,12 @@ import javax.persistence.Persistence;
 
 public class daoBasics {
 
+    /**
+     * Add object to database
+     *
+     * @param t The object which is going to be inserted.
+     * @param <T> Class of the inserting object.
+     */
     public<T> void addAnything(T t){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");

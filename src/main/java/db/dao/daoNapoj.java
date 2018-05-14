@@ -9,6 +9,11 @@ import java.util.List;
 
 public class daoNapoj {
 
+    /**
+     * Gets all beverages from database.
+     *
+     * @return List of beverages.
+     */
     public List<Napoj> getAllBeverages(){
         List<Napoj> allList = new ArrayList<>();
         List<Napoj> alkoList = getAllAlcoBeverages();
@@ -19,7 +24,11 @@ public class daoNapoj {
         return allList;
     }
 
-
+    /**
+     * Gets all nonalcoholic beverages from database.
+     *
+     * @return List of nonalcoholic beverages.
+     */
     public List<Napoj> getAllNonAlcoBeverages(){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
@@ -42,6 +51,11 @@ public class daoNapoj {
         return l;
     }
 
+    /**
+     * Gets all alcoholic beverages from database.
+     *
+     * @return List of alcoholic beverages.
+     */
     public List<Napoj>getAllAlcoBeverages(){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
@@ -64,7 +78,12 @@ public class daoNapoj {
         return l;
 
     }
-
+    /**
+     * Gets the beverage from database by its id.
+     *
+     * @param id Id of the beverage.
+     * @return Beverage.
+     */
     public Napoj getBeverageByID(int id) {
         EntityManagerFactory emf =
                     Persistence.createEntityManagerFactory("AppPU");
@@ -77,7 +96,11 @@ public class daoNapoj {
             return n;
     }
 
-
+    /**
+     * Delete the beverage from database.
+     *
+     * @param idBeverage Id of the beverage which is going to be deleted.
+     */
     public void deleteBeverage(int idBeverage){
 
         EntityManagerFactory emf =
@@ -96,21 +119,26 @@ public class daoNapoj {
         emf.close();
     }
 
-    public void updateBeverage(Napoj s){
+    /**
+     * Update the beverage in database.
+     *
+     * @param n The beverage which is going to be updated.
+     */
+    public void updateBeverage(Napoj n){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
         EntityManager em = emf.createEntityManager();
 
-        Napoj beverage = em.find(Napoj.class, s.getIdnap());
+        Napoj beverage = em.find(Napoj.class, n.getIdnap());
         EntityTransaction et = em.getTransaction();
 
         et.begin();
-        beverage.setPrichut(s.getPrichut());
-        beverage.setDruh(s.getDruh());
-        beverage.setZnacka(s.getZnacka());
-        beverage.setCena(s.getCena());
-        beverage.setTyp(s.getTyp());
-        beverage.setDodavatel(s.getDodavatel());
+        beverage.setPrichut(n.getPrichut());
+        beverage.setDruh(n.getDruh());
+        beverage.setZnacka(n.getZnacka());
+        beverage.setCena(n.getCena());
+        beverage.setTyp(n.getTyp());
+        beverage.setDodavatel(n.getDodavatel());
         em.merge(beverage);
         et.commit();
 

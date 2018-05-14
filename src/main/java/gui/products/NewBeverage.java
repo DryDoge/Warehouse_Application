@@ -24,7 +24,11 @@ public class NewBeverage extends JFrame {
     private JPanel actionPanel;
     private static int new_id = 1;
     private static Logger logr = ProductsGui.getLogr();
+    private static Napoj newBeverage = null;
 
+    /**
+     * Class constructor for creating new beverage.
+     */
     NewBeverage(){
         super("New beverage");
         setContentPane(newBeveragePanel);
@@ -68,7 +72,8 @@ public class NewBeverage extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (addData()) {
+                if (createNewBeverage()) {
+                    new daoBasics().addAnything(newBeverage);
                     JOptionPane.showMessageDialog(null,
                             "Succesfully added beverage No. "+new_id);
                     dispose();
@@ -78,7 +83,12 @@ public class NewBeverage extends JFrame {
         });
     }
 
-    private boolean addData(){
+    /**
+     * Create new beverage from user's inputs.
+     *
+     * @return True on success, false otherwise.
+     */
+    private boolean createNewBeverage(){
         boolean ret = false;
         List<Integer> ids = new ArrayList<>();
         String f = flavorTextField.getText();
@@ -87,27 +97,17 @@ public class NewBeverage extends JFrame {
         String p = priceTextField.getText();
         String chosenSupp;
         Dodavatel dod;
-
+        //Checks whether category, price, brand are valid
         if(!(ProductsGui.areValidData(c, b, p)))
             return ret;
-
+        //Checks whether type is selected
         if(!(alcoholicRadioButton.isSelected()) && !(nonalcoholicRadioButton.isSelected())){
             JOptionPane.showConfirmDialog(
                     null,"Type is not selected",
                     "Warning",JOptionPane.DEFAULT_OPTION);
-        return ret;
+            return ret;
         }
-
-
-        List<Napoj> l = new daoNapoj().getAllBeverages();
-        for (Napoj  st: l) {
-            ids.add(st.getIdnap());
-        }
-
-        while (ids.contains(new_id)){
-            new_id++;
-        }
-
+        //Set supplier
         try{
             chosenSupp = (String)suppliersCB.getSelectedItem();
             dod = new daoDodavatel().getSupplierByName(chosenSupp);
@@ -118,28 +118,31 @@ public class NewBeverage extends JFrame {
             logr.info("Supplier was not selected while creating new beverage");
             dod = null;
         }
-
-
-        Napoj beverage = new Napoj();
-        beverage.setIdnap(new_id);
+        // Generate the smallest possible id for new beverage
+        List<Napoj> l = new daoNapoj().getAllBeverages();
+        for (Napoj  st: l) {
+            ids.add(st.getIdnap());
+        }
+        while (ids.contains(new_id)){
+            new_id++;
+        }
+        // Create new beverage
+        newBeverage = new Napoj();
+        newBeverage.setIdnap(new_id);
         if(f.equals(""))
-            beverage.setPrichut("Bez prichute");
+            newBeverage.setPrichut("Bez prichute");
         else
-            beverage.setPrichut(f);
-        beverage.setDruh(c);
-        beverage.setZnacka(b);
-        beverage.setCena(Short.valueOf(p));
+            newBeverage.setPrichut(f);
+        newBeverage.setDruh(c);
+        newBeverage.setZnacka(b);
+        newBeverage.setCena(Short.valueOf(p));
         if (alcoholicRadioButton.isSelected())
-            beverage.setTyp("Alko");
+            newBeverage.setTyp("Alko");
         else
-            beverage.setTyp("Nealko");
-
-        beverage.setDodavatel(dod);
-
-        new daoBasics().addAnything(beverage);
+            newBeverage.setTyp("Nealko");
+        newBeverage.setDodavatel(dod);
 
         ret = true;
-
         return ret;
     }
 }

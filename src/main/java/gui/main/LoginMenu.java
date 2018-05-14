@@ -11,7 +11,10 @@ public class LoginMenu extends JFrame{
     private final JButton loginButton;
     private final JButton resetButton;
 
-    public LoginMenu(){
+    /**
+     * Class constructor for logging into application.
+     */
+    LoginMenu(){
         super("Login Menu");
         JLabel userLabel = new JLabel("User:");
         JLabel passwordLabel = new JLabel("Password:");
@@ -33,7 +36,6 @@ public class LoginMenu extends JFrame{
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-
         add(userLabel);
         add(userText);
         add(passwordLabel);
@@ -50,28 +52,35 @@ public class LoginMenu extends JFrame{
             }
         });
 
-        resetButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                userText.setText("");
-                passwordText.setText("");
+        userText.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == KeyEvent.VK_ENTER){
+                    loginButton.doClick();
+                }
             }
+        });
+
+        resetButton.addActionListener(e -> {
+            userText.setText("");
+            passwordText.setText("");
         });
     }
 
-    public void actionLogin(){
-        loginButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ae) {
-                String uname = userText.getText();
-                //noinspection deprecation
-                String upass = passwordText.getText();
-                if(uname.equals("admin") && upass.equals("admin")){
-                    dispose();
-                    new GuiMain();
-                }else{
-                    JOptionPane.showMessageDialog(null, errtext.getText());
-                    resetButton.doClick();
-                    userText.requestFocus();
-                }
+    /**
+     * Simulates login to the application.
+     */
+    void actionLogin(){
+        loginButton.addActionListener(ae -> {
+            String uname = userText.getText();
+            String upass = passwordText.getText();
+            if(uname.equals("admin") && upass.equals("admin")){
+                dispose();
+                new GuiMain();
+            }else{
+                JOptionPane.showMessageDialog(null, errtext.getText());
+                resetButton.doClick();
+                userText.requestFocus();
             }
         });
     }

@@ -42,6 +42,9 @@ public class ProductsGui extends JFrame {
     private static NewBeverage nb = null;
     private static UpdateBeverage ub = null;
     private final static Logger logr = Logger.getLogger(ProductsGui.class.getName());
+    static Logger getLogr() {
+        return logr;
+    }
     static {
         try {
             FileHandler fh = new FileHandler("BeveragesLogger.txt");
@@ -52,9 +55,10 @@ public class ProductsGui extends JFrame {
         }
     }
 
-    static Logger getLogr() {
-        return logr;
-    }
+    /**
+     * Class constructor for beverages.
+     *
+     */
 
     public ProductsGui(){
         super("Beverage");
@@ -250,6 +254,9 @@ public class ProductsGui extends JFrame {
 
     }
 
+    /**
+     * Get selected type of beverages and prepare them for choosing.
+     */
     public void setData() {
         List<Napoj> l;
         if (allRadioButton.isSelected()){
@@ -267,6 +274,11 @@ public class ProductsGui extends JFrame {
         }
     }
 
+    /**
+     * Removes a beverage and all information about its.
+     * @param n Beverage
+     * @return true on success, false otherwise
+     */
     private boolean deleteSelectedBeverage(Napoj n) {
         try {
 
@@ -278,6 +290,13 @@ public class ProductsGui extends JFrame {
         }
     }
 
+    /**
+     * Checks whether category, brand and price are filled correctly.
+     * @param c Category of a beverage.
+     * @param b Brand of a beverage.
+     * @param p Price of a beverage.
+     * @return True on success, false otherwise.
+     */
     static boolean areValidData(String c, String b, String p){
         boolean ret = false;
         if(c.equals("")){

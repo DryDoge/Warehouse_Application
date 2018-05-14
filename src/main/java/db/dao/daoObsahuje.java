@@ -5,12 +5,22 @@ import db.e.Obsahuje;
 import javax.persistence.*;
 
 public class daoObsahuje {
-
+    /**
+     * Gets amount of the beverage from the warehouse.
+     * @param storage The id of the warehouse in which beverage is stored.
+     * @param beverage The id of the Beverage which amount we need.
+     * @return Amount of the selected beverages in the warehouse.
+     */
     public int getAmount(int storage, int beverage){
         Obsahuje o  = getContentInfo(storage, beverage);
         return o.getMnozstvo();
     }
 
+    /**
+     * Deletes the chosen beverage from selected warehouse.
+     *  @param storage The id of the warehouse in which beverage is stored.
+     *  @param beverage The id of the Beverage we want to delete from the warehouse.
+     */
     public void deleteContentOfItem(int storage, int beverage){
 
         EntityManagerFactory emf =
@@ -32,6 +42,10 @@ public class daoObsahuje {
         emf.close();
     }
 
+    /**
+     * Update the chosen content.
+     *  @param ob The content which is going to be updated.
+     */
     public void updateAmount(Obsahuje ob){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
@@ -50,6 +64,13 @@ public class daoObsahuje {
         emf.close();
     }
 
+    /**
+     * Gets Content of the beverage from the warehouse.
+     *
+     * @param storage The id of the warehouse in which beverage is stored.
+     * @param beverage The id of the Beverage we want to delete from the warehouse.
+     * @return Content.
+     */
     public Obsahuje getContentInfo(int storage, int beverage){
 
         EntityManagerFactory emf =

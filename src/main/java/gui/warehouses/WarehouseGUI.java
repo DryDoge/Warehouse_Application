@@ -2,8 +2,6 @@ package gui.warehouses;
 
 import db.e.*;
 import db.dao.*;
-import gui.products.NewBeverage;
-import org.eclipse.persistence.exceptions.DatabaseException;
 
 
 import java.awt.event.*;
@@ -15,7 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.RollbackException;
 import javax.swing.*;
-import javax.validation.constraints.Null;
 
 public class WarehouseGUI extends JFrame {
     private JPanel whPanel;
@@ -49,8 +46,11 @@ public class WarehouseGUI extends JFrame {
     static private NewWarehouse nw = null;
     static private UpdateWarehouse uw = null;
     static private UpdateAmount ua = null;
-    static private Additem ai = null;
+    static private AddNewItem ai = null;
     private final static Logger logr = Logger.getLogger(WarehouseGUI.class.getName());
+    static Logger getLogr() {
+        return logr;
+    }
     static {
         try {
             FileHandler fh = new FileHandler("WarehousesLogger.txt");
@@ -61,10 +61,9 @@ public class WarehouseGUI extends JFrame {
         }
     }
 
-    static Logger getLogr() {
-        return logr;
-    }
-
+    /**
+     * Class constructor for warehouses.
+     */
     public WarehouseGUI() {
         super("Warehouse");
         logr.setLevel(Level.INFO);
@@ -279,7 +278,7 @@ public class WarehouseGUI extends JFrame {
                     if (ai == null || !(ai.isVisible())) {
                         ai = null;
                         int chosenId = Integer.valueOf((String) warehousesCB.getSelectedItem());
-                        ai = new Additem(chosenId);
+                        ai = new AddNewItem(chosenId);
                         ai.setVisible(true);
                         ai.setData();
                     } else {
@@ -323,6 +322,9 @@ public class WarehouseGUI extends JFrame {
         });
     }
 
+    /**
+     * Get all warehouses and prepare them for choosing.
+     */
     public void setData(){
         List<Sklad> l = new daoSklad().getAllWarehouses();
         warehousesCB.removeAllItems();
@@ -333,6 +335,12 @@ public class WarehouseGUI extends JFrame {
         }
     }
 
+    /**
+     * Deletes chosen warehouse.
+     *
+     * @param s The warehouse who is going to be deleted.
+     * @return True on success, false otherwise.
+     */
     private boolean deleteSelectedWarehouse(Sklad s) {
         try{
             new daoSklad().deleteWarehouse(s.getIdsklad());
@@ -343,6 +351,13 @@ public class WarehouseGUI extends JFrame {
         }
     }
 
+    /**
+     * Removes the chosen beverage from selected warehouse.
+     *
+     * @param warehouse The warehouse which from we are going to remove the beverage.
+     * @param beverage  The beverage which is going to be deleted from the warehouse.
+     * @return True on success, false otherwise.
+     */
     private boolean deleteSelectedContent(int warehouse, int beverage){
         try{
             new daoObsahuje().deleteContentOfItem(warehouse, beverage);
@@ -353,6 +368,16 @@ public class WarehouseGUI extends JFrame {
         }
     }
 
+    /**
+     * Checks whether city, street, web page, telephone number and postal code are correct.
+     *
+     * @param city City where the warehouse is located.
+     * @param street Street on which the warehouse is located.
+     * @param web Web page of the warehouse.
+     * @param telephone Telephone number of the warehouse.
+     * @param poctalCode Postal code of the warehouse.
+     * @return True if all are correct, false otherwise.
+     */
     static boolean areValidData(String city, String street, String web, String telephone, String poctalCode){
         boolean ret = false;
         if(city.equals("")){

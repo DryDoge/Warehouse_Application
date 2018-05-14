@@ -25,11 +25,17 @@ public class UpdateBeverage extends JFrame {
     private JButton cancelButton;
     private JPanel actionPanel;
     private JPanel updatePanel;
-    private int id;
     private static final Logger logr = ProductsGui.getLogr();
+    private Napoj beverageToUpdate = null;
 
+    /**
+     * Class constructor specifying which beverage is going to be updated.
+     *
+     * @param n Beverage to update.
+     */
     UpdateBeverage(Napoj n) {
         super("Update beverage No. " + n.getIdnap());
+        this.beverageToUpdate = n;
         setContentPane(updatePanel);
         int optionButton = getDefaultCloseOperation();
         if (optionButton == WindowConstants.EXIT_ON_CLOSE) {
@@ -38,11 +44,10 @@ public class UpdateBeverage extends JFrame {
         pack();
         setLocationRelativeTo(null);
 
-        this.id = n.getIdnap();
-        String flavor = n.getPrichut();
-        String category = n.getDruh();
-        String brand = n.getZnacka();
-        int price = n.getCena();
+        String flavor = beverageToUpdate.getPrichut();
+        String category = beverageToUpdate.getDruh();
+        String brand = beverageToUpdate.getZnacka();
+        int price = beverageToUpdate.getCena();
 
         flavorTF.setText(flavor);
         categoryTF.setText(category);
@@ -79,10 +84,11 @@ public class UpdateBeverage extends JFrame {
                         "Do you really want to update this beverage ?",
                         "Update confirmation", JOptionPane.YES_NO_OPTION);
                 if (optionButton == JOptionPane.YES_OPTION) {
-                    if (updateData(id)) {
+                    if (updateSelectedBeverage()) {
+                        new daoNapoj().updateBeverage(beverageToUpdate);
                         JOptionPane.showMessageDialog(
                                 null,
-                                "Succesfully updated beverage No. " + id
+                                "Succesfully updated beverage No. " + beverageToUpdate.getIdnap()
                         );
                         dispose();
                     }
@@ -90,7 +96,13 @@ public class UpdateBeverage extends JFrame {
             }
         });
     }
-    private boolean updateData(int id) {
+
+    /**
+     * Update beverage from user's inputs.
+     *
+     * @return True on success, false otherwise.
+     */
+    private boolean updateSelectedBeverage() {
         boolean ret = false;
         String f = flavorTF.getText();
         String c = categoryTF.getText();
@@ -98,17 +110,14 @@ public class UpdateBeverage extends JFrame {
         String p = priceTF.getText();
         String chosenSupp;
         Dodavatel dod;
-
         if(!(ProductsGui.areValidData(c, b, p)))
             return ret;
-
         if(!(alcoholicRadioButton.isSelected()) && !(nonalcoholicRadioButton.isSelected())){
             JOptionPane.showConfirmDialog(
                 null,"Type is not selected",
                 "Warning",JOptionPane.DEFAULT_OPTION);
             return ret;
         }
-
         try{
             chosenSupp = (String)suppliersCB.getSelectedItem();
             dod = new daoDodavatel().getSupplierByName(chosenSupp);
@@ -119,23 +128,19 @@ public class UpdateBeverage extends JFrame {
             logr.info("Supplier was not selected while updating beverage");
             dod = null;
         }
-
-        Napoj beverage = new daoNapoj().getBeverageByID(id);
-
+        //Update beverage
         if(f.equals(""))
-            beverage.setPrichut("Bez prichute");
+            beverageToUpdate.setPrichut("Bez prichute");
         else
-            beverage.setPrichut(f);
-        beverage.setDruh(c);
-        beverage.setZnacka(b);
-        beverage.setCena(Short.valueOf(p));
+            beverageToUpdate.setPrichut(f);
+        beverageToUpdate.setDruh(c);
+        beverageToUpdate.setZnacka(b);
+        beverageToUpdate.setCena(Short.valueOf(p));
         if (alcoholicRadioButton.isSelected())
-            beverage.setTyp("Alko");
+            beverageToUpdate.setTyp("Alko");
         else
-            beverage.setTyp("Nealko");
-        beverage.setDodavatel(dod);
-
-        new daoNapoj().updateBeverage(beverage);
+            beverageToUpdate.setTyp("Nealko");
+        beverageToUpdate.setDodavatel(dod);
         ret = true;
 
         return ret;

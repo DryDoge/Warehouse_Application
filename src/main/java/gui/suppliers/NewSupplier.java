@@ -23,8 +23,11 @@ public class NewSupplier extends JFrame {
     private JPanel actionPanel;
     private JLabel infoTelLabel;
     private static int new_id = 1;
+    private Dodavatel newSupplier = null;
 
-
+    /**
+     * Class constructor for creating new supplier.
+     */
     NewSupplier() {
         super("New supplier");
         setContentPane(newSupplierPanel);
@@ -45,7 +48,8 @@ public class NewSupplier extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (addData()) {
+                if (createNewSupplier()) {
+                    new daoBasics().addAnything(newSupplier);
                     JOptionPane.showMessageDialog(null,
                             "Succesfully added Supplier No. " + new_id);
                     dispose();
@@ -55,36 +59,38 @@ public class NewSupplier extends JFrame {
         });
     }
 
-    private boolean addData() {
+    /**
+     * Create new supplier from user's inputs.
+     *
+     * @return true on success, false otherwise
+     */
+    private boolean createNewSupplier() {
         boolean ret = false;
         List<Integer> ids = new ArrayList<>();
         String n = nameTF.getText();
         String w = webTF.getText();
         String t = telTF.getText();
         String e = emailTF.getText();
-
+        List<Dodavatel> l = new daoDodavatel().getAllSuppliers();
+        //Checks whether name, web page, telephone number and email are valid
         if (!(SuppliersGui.areValidData(n, w, t, e)))
             return ret;
-
-        List<Dodavatel> l = new daoDodavatel().getAllSuppliers();
-
+        // Generate the smallest possible id for new beverage
         for (Dodavatel d : l) {
             ids.add(d.getIddod());
         }
-
         while (ids.contains(new_id)) {
             new_id++;
         }
+        // Create new supplier
+        newSupplier = new Dodavatel();
+        newSupplier.setIddod(new_id);
+        newSupplier.setNazov(n);
+        newSupplier.setEmail(e);
+        newSupplier.setWeb(w);
+        newSupplier.setTel(t);
 
-        Dodavatel supplier = new Dodavatel();
-        supplier.setIddod(new_id);
-        supplier.setNazov(n);
-        supplier.setEmail(e);
-        supplier.setWeb(w);
-        supplier.setTel(t);
-        new daoBasics().addAnything(supplier);
         ret = true;
-
         return ret;
     }
 }

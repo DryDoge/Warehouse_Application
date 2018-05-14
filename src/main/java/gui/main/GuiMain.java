@@ -11,7 +11,6 @@ import java.util.logging.LogManager;
 public class GuiMain extends JFrame {
     private JPanel mainPanel;
     private JButton homeButton;
-    private JButton employersButton;
     private JButton productsButton;
     private JButton warehouseButton;
     private JButton logoutButton;
@@ -22,8 +21,10 @@ public class GuiMain extends JFrame {
     private static ProductsGui pd = null;
     private static SuppliersGui sp = null;
 
+    /**
+     * Class constructor for main GUI.
+     */
     public GuiMain() {
-
         super("Application");
         LogManager.getLogManager().reset();
         setContentPane(mainPanel);
@@ -34,7 +35,7 @@ public class GuiMain extends JFrame {
         ImageIcon homeIcon = new ImageIcon("icons/mainGui/home.png", "Home");
         ImageIcon wareIcon = new ImageIcon("icons/mainGui/warehouse.png", "Warehouse");
         ImageIcon bevIcon = new ImageIcon("icons/mainGui/beverages.png", "Beverages");
-        ImageIcon empIcon = new ImageIcon("icons/mainGui/emp.png", "Employers");
+        //ImageIcon empIcon = new ImageIcon("icons/mainGui/emp.png", "Employers");
         ImageIcon logoutIcon = new ImageIcon("icons/mainGui/exit.png", "Exit");
         ImageIcon suppIcon = new ImageIcon("icons/mainGui/delivery.png", "Suppliers");
         ImageIcon backIcon = new ImageIcon("icons/mainGui/background1.png","Background");
@@ -42,7 +43,6 @@ public class GuiMain extends JFrame {
         homeButton.setIcon(homeIcon);
         warehouseButton.setIcon(wareIcon);
         productsButton.setIcon(bevIcon);
-        employersButton.setIcon(empIcon);
         logoutButton.setIcon(logoutIcon);
         suppliersButton.setIcon(suppIcon);
         imageLabel.setIcon(backIcon);

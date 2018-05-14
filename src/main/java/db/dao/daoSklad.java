@@ -8,6 +8,11 @@ import java.util.List;
 
 public class daoSklad {
 
+    /**
+     * Gets all warehouses from database.
+     *
+     * @return List of warehouses.
+     */
     public List<Sklad> getAllWarehouses(){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
@@ -29,6 +34,12 @@ public class daoSklad {
         return l;
     }
 
+    /**
+     * Gets the warehouse from database by its id.
+     *
+     * @param id Id of the warehouse.
+     * @return Warehouse.
+     */
     public Sklad getWarehouseById(int id){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
@@ -41,6 +52,11 @@ public class daoSklad {
         return s;
     }
 
+    /**
+     * Delete the warehouse from database.
+     *
+     * @param idWarehouse Id of the warehouse which is going to be deleted.
+     */
     public void deleteWarehouse(int idWarehouse){
 
         EntityManagerFactory emf =
@@ -59,6 +75,12 @@ public class daoSklad {
         emf.close();
     }
 
+
+    /**
+     * Update the warehouse in database.
+     *
+     * @param s The warehouse which is going to be updated.
+     */
     public void updateWarehouse(Sklad s){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");

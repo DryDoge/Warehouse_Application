@@ -80,7 +80,10 @@ public class Sklad {
     private List<Napoj> napoje;
 
     public List<Napoj> getNapoje() {
-        return napoje;
+        return napoje;}
+
+    public void setNapoje(List<Napoj> napoje) {
+        this.napoje = napoje;
     }
 
     @Override
@@ -102,3 +105,5 @@ public class Sklad {
         return Objects.hash(idsklad, tel, ulica, mesto, psc, web);
     }
 }
+
+
