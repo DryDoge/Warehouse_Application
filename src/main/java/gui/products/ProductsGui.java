@@ -47,7 +47,7 @@ public class ProductsGui extends JFrame {
     }
     static {
         try {
-            FileHandler fh = new FileHandler("BeveragesLogger.txt");
+            FileHandler fh = new FileHandler("logs/BeveragesLogger.txt");
             fh.setLevel(Level.WARNING);
             logr.addHandler(fh);
         } catch (IOException e) {
@@ -279,7 +279,7 @@ public class ProductsGui extends JFrame {
      * @param n Beverage
      * @return true on success, false otherwise
      */
-    private boolean deleteSelectedBeverage(Napoj n) {
+    public boolean deleteSelectedBeverage(Napoj n) {
         try {
 
             new daoNapoj().deleteBeverage(n.getIdnap());
@@ -297,7 +297,7 @@ public class ProductsGui extends JFrame {
      * @param p Price of a beverage.
      * @return True on success, false otherwise.
      */
-    static boolean areValidData(String c, String b, String p){
+    public boolean areValidData(String c, String b, String p){
         boolean ret = false;
         if(c.equals("")){
             JOptionPane.showConfirmDialog(

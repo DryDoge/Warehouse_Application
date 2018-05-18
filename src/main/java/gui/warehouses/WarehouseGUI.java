@@ -53,7 +53,7 @@ public class WarehouseGUI extends JFrame {
     }
     static {
         try {
-            FileHandler fh = new FileHandler("WarehousesLogger.txt");
+            FileHandler fh = new FileHandler("logs/WarehousesLogger.txt");
             fh.setLevel(Level.WARNING);
             logr.addHandler(fh);
         } catch (IOException e) {

@@ -98,7 +98,7 @@ public class NewBeverage extends JFrame {
         String chosenSupp;
         Dodavatel dod;
         //Checks whether category, price, brand are valid
-        if(!(ProductsGui.areValidData(c, b, p)))
+        if(!(new ProductsGui().areValidData(c, b, p)))
             return ret;
         //Checks whether type is selected
         if(!(alcoholicRadioButton.isSelected()) && !(nonalcoholicRadioButton.isSelected())){

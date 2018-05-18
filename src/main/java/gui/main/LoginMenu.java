@@ -1,9 +1,11 @@
 package gui.main;
 
-import javax.swing.*;
-import java.awt.event.*;
 
-public class LoginMenu extends JFrame{
+import javax.swing.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+public class LoginMenu extends JFrame {
 
     private final JTextField errtext = new JTextField("Incorrect login or password");
     private final JPasswordField passwordText;

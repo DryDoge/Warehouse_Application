@@ -38,7 +38,7 @@ public class SuppliersGui extends JFrame
     private final static Logger logr = Logger.getLogger(SuppliersGui.class.getName());
     static {
         try {
-            FileHandler fh = new FileHandler("SuppliersLogger.txt");
+            FileHandler fh = new FileHandler("logs/SuppliersLogger.txt");
             fh.setLevel(Level.WARNING);
             logr.addHandler(fh);
         } catch (IOException e) {

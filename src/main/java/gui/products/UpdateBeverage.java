@@ -110,7 +110,7 @@ public class UpdateBeverage extends JFrame {
         String p = priceTF.getText();
         String chosenSupp;
         Dodavatel dod;
-        if(!(ProductsGui.areValidData(c, b, p)))
+        if(!(new ProductsGui().areValidData(c, b, p)))
             return ret;
         if(!(alcoholicRadioButton.isSelected()) && !(nonalcoholicRadioButton.isSelected())){
             JOptionPane.showConfirmDialog(
