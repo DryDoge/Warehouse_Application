@@ -72,7 +72,11 @@ public class NewBeverage extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (createNewBeverage()) {
+                String flavor = flavorTextField.getText();
+                String category = categoryTextField.getText();
+                String brand = brandTextField.getText();
+                short price = Short.valueOf(priceTextField.getText());
+                if (createNewBeverage(flavor, category, brand, price)) {
                     new daoBasics().addAnything(newBeverage);
                     JOptionPane.showMessageDialog(null,
                             "Succesfully added beverage No. "+new_id);
@@ -84,21 +88,22 @@ public class NewBeverage extends JFrame {
     }
 
     /**
-     * Create new beverage from user's inputs.
+     * Create new supplier from user's inputs.
      *
+     * @param f Flavor of beverage.
+     * @param c Category of beverage.
+     * @param b Brand of beverage.
+     * @param p Price of beverage.
      * @return True on success, false otherwise.
      */
-    private boolean createNewBeverage(){
+    boolean createNewBeverage(String f, String c, String b, short p){
         boolean ret = false;
         List<Integer> ids = new ArrayList<>();
-        String f = flavorTextField.getText();
-        String c = categoryTextField.getText();
-        String b = brandTextField.getText();
-        String p = priceTextField.getText();
         String chosenSupp;
         Dodavatel dod;
+        String type = "Nealko";
         //Checks whether category, price, brand are valid
-        if(!(new ProductsGui().areValidData(c, b, p)))
+        if(!(new ProductsGui().areValidData(c, b, String.valueOf(p))))
             return ret;
         //Checks whether type is selected
         if(!(alcoholicRadioButton.isSelected()) && !(nonalcoholicRadioButton.isSelected())){
@@ -135,11 +140,12 @@ public class NewBeverage extends JFrame {
             newBeverage.setPrichut(f);
         newBeverage.setDruh(c);
         newBeverage.setZnacka(b);
-        newBeverage.setCena(Short.valueOf(p));
-        if (alcoholicRadioButton.isSelected())
-            newBeverage.setTyp("Alko");
-        else
-            newBeverage.setTyp("Nealko");
+        newBeverage.setCena(p);
+        if (alcoholicRadioButton.isSelected()) {
+            type = "Alko";
+            newBeverage.setTyp(type);
+        }else
+            newBeverage.setTyp(type);
         newBeverage.setDodavatel(dod);
 
         ret = true;

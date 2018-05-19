@@ -38,6 +38,8 @@ public class NewSupplier extends JFrame {
         pack();
         setLocationRelativeTo(null);
 
+
+
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -48,7 +50,11 @@ public class NewSupplier extends JFrame {
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (createNewSupplier()) {
+                String name = nameTF.getText();
+                String web = webTF.getText();
+                String tel = telTF.getText();
+                String email = emailTF.getText();
+                if (createNewSupplier(name, web, tel, email)) {
                     new daoBasics().addAnything(newSupplier);
                     JOptionPane.showMessageDialog(null,
                             "Succesfully added Supplier No. " + new_id);
@@ -62,15 +68,15 @@ public class NewSupplier extends JFrame {
     /**
      * Create new supplier from user's inputs.
      *
-     * @return true on success, false otherwise
+     * @param n Name of supplier
+     * @param e Email address of supplier.
+     * @param w Web page.
+     * @param t Telephone number (9 digits).
+     * @return True on success, false otherwise.
      */
-    private boolean createNewSupplier() {
+    private boolean createNewSupplier(String n, String w, String t, String e) {
         boolean ret = false;
         List<Integer> ids = new ArrayList<>();
-        String n = nameTF.getText();
-        String w = webTF.getText();
-        String t = telTF.getText();
-        String e = emailTF.getText();
         List<Dodavatel> l = new daoDodavatel().getAllSuppliers();
         //Checks whether name, web page, telephone number and email are valid
         if (!(SuppliersGui.areValidData(n, w, t, e)))

@@ -1,4 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
+<record>
+  <date>2018-05-19T13:57:51</date>
+  <millis>1526731071478</millis>
+  <sequence>20</sequence>
+  <logger>gui.products.ProductsGui</logger>
+  <level>WARNING</level>
+  <class>gui.products.ProductsGui$8</class>
+  <method>actionPerformed</method>
+  <thread>14</thread>
+  <message>No beverage was selected to update</message>
+</record>
+<record>
+  <date>2018-05-19T13:57:53</date>
+  <millis>1526731073334</millis>
+  <sequence>21</sequence>
+  <logger>gui.products.ProductsGui</logger>
+  <level>WARNING</level>
+  <class>gui.products.ProductsGui$2</class>
+  <method>actionPerformed</method>
+  <thread>14</thread>
+  <message>No beverage was selected to delete</message>
+</record>
+<record>
+  <date>2018-05-19T13:57:55</date>
+  <millis>1526731075453</millis>
+  <sequence>22</sequence>
+  <logger>gui.products.ProductsGui</logger>
+  <level>WARNING</level>
+  <class>gui.products.ProductsGui$8</class>
+  <method>actionPerformed</method>
+  <thread>14</thread>
+  <message>No beverage was selected to update</message>
+</record>
+<record>
+  <date>2018-05-19T13:58:16</date>
+  <millis>1526731096911</millis>
+  <sequence>23</sequence>
+  <logger>gui.products.ProductsGui</logger>
+  <level>WARNING</level>
+  <class>gui.products.ProductsGui$2</class>
+  <method>actionPerformed</method>
+  <thread>14</thread>
+  <message>No beverage was selected to delete</message>
+</record>
 </log>

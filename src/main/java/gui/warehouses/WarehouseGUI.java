@@ -378,7 +378,7 @@ public class WarehouseGUI extends JFrame {
      * @param poctalCode Postal code of the warehouse.
      * @return True if all are correct, false otherwise.
      */
-    static boolean areValidData(String city, String street, String web, String telephone, String poctalCode){
+    public static boolean areValidData(String city, String street, String web, String telephone, String poctalCode){
         boolean ret = false;
         if(city.equals("")){
             JOptionPane.showConfirmDialog(

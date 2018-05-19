@@ -56,81 +56,40 @@ public class NewWarehouse extends JFrame{
                 dispose();
             }
         });
+
         saveButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (createNewWarehouse()) {
+                String city = cityTextField.getText();
+                String street = streetTextField.getText();
+                String web = webPageTextField.getText();
+                String tel = telephoneTextfield.getText();
+                String pcode = postalCodeTextField.getText();
+                if (createNewWarehouse(city, street, web, tel, pcode)) {
                     new daoBasics().addAnything(newWarehouse);
                     JOptionPane.showMessageDialog(null,
-                            "Succesfully added warehouse No. "+new_id);
+                            "Succesfully added warehouse No. " + new_id);
                     dispose();
-                }else
-                    JOptionPane.showMessageDialog(null,"Error while adding. Try again");
-
-
-            }
-        });
-
-        webPageTextField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    saveButton.doClick();
-                }
-            }
-        });
-
-        telephoneTextfield.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    saveButton.doClick();
-                }
-            }
-        });
-
-        streetTextField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    saveButton.doClick();
-                }
-            }
-        });
-
-        cityTextField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    saveButton.doClick();
-                }
-            }
-        });
-
-        postalCodeTextField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    saveButton.doClick();
-                }
+                } else
+                    JOptionPane.showMessageDialog(null, "Error while adding. Try again");
             }
         });
     }
 
-
     /**
      * Create new warehouse from user's inputs.
      *
+     * @param c Name of City.
+     * @param s Name of street and number.
+     * @param w Web page.
+     * @param t Telephone number (9 digits).
+     * @param p Postal code of city (5 digits).
      * @return True on success, false otherwise.
      */
-    private boolean createNewWarehouse(){
+    public boolean createNewWarehouse(String c, String s, String w, String t, String p){
         boolean ret = false;
         List<Integer> ids = new ArrayList<>();
-        String c = cityTextField.getText();
-        String s = streetTextField.getText();
-        String w = webPageTextField.getText();
-        String t = telephoneTextfield.getText();
-        String p = postalCodeTextField.getText();
+
         List<Sklad> l = new daoSklad().getAllWarehouses();
         //Checks whether city, street, web page, telephone number and postal code are valid
         if(!(WarehouseGUI.areValidData(c,s,w,t,p)))

@@ -279,7 +279,7 @@ public class ProductsGui extends JFrame {
      * @param n Beverage
      * @return true on success, false otherwise
      */
-    public boolean deleteSelectedBeverage(Napoj n) {
+    private boolean deleteSelectedBeverage(Napoj n) {
         try {
 
             new daoNapoj().deleteBeverage(n.getIdnap());

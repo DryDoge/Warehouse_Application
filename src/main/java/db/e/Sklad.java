@@ -1,6 +1,7 @@
 package db.e;
 
 import javax.persistence.*;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
@@ -80,6 +81,7 @@ public class Sklad {
     private List<Napoj> napoje;
 
     public List<Napoj> getNapoje() {
+        napoje.sort(Comparator.comparing(Napoj::getIdnap));
         return napoje;}
 
     public void setNapoje(List<Napoj> napoje) {
