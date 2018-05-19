@@ -26,8 +26,7 @@ public class AddNewItem extends JFrame{
     private static final Logger logr = WarehouseGUI.getLogr();
 
     /**
-     *Class constructor for adding a beverage to the warehouse.
-     *
+     *Class constructor for adding a beverage to the warehouse.     *
      * @param wareID Id of the warehouse in which we want to add an item.
      */
     AddNewItem(int wareID) {
@@ -49,7 +48,7 @@ public class AddNewItem extends JFrame{
                     inforamtionsLabel.setText(n.toString());
                 }catch (IllegalArgumentException | NullPointerException ex) {
                     inforamtionsLabel.setText("Please choose number!");
-                    logr.info("No beverage was selected to add in warehouse");
+                    logr.info("No beverage was selected to add in warehouse.");
                 }
             }
         });
@@ -71,23 +70,23 @@ public class AddNewItem extends JFrame{
                         JOptionPane.showMessageDialog(null,
                                 "Succesfully added beverage No. "
                                         + beveragesComboBox.getSelectedItem() + " with "
-                                        + amountTextField.getText() + " pieces");
+                                        + amountTextField.getText() + " pieces.");
                         dispose();
                     } else
                         JOptionPane.showMessageDialog(null,
-                                "Error while adding. Try again");
+                                "Error while adding. Try again!");
                 } catch (IllegalArgumentException | NullPointerException ex){
                     JOptionPane.showConfirmDialog(
                             null, "Choose beverage first!",
                             "Warning", JOptionPane.DEFAULT_OPTION);
-                    logr.warning("No beverage was selected to add in warehouse");
+                    logr.warning("No beverage was selected to add in warehouse.");
                 } catch (RollbackException | org.eclipse.persistence.exceptions.DatabaseException eex){
                     JOptionPane.showConfirmDialog(
                             null,
                             "Selected beverage is already in this warehouse!\n"
                                     + "Please select other!",
                             "Warning", JOptionPane.DEFAULT_OPTION);
-                    logr.warning("Selected beverage is already in warehouse");
+                    logr.warning("Selected beverage is already in warehouse.");
                     setData();
                 }
             }
@@ -96,7 +95,6 @@ public class AddNewItem extends JFrame{
 
     /**
      * Add a beverage to the warehouse.
-     *
      * @param beveId Id of added beverage.
      * @param amount Number of pieces.
      * @return true on success, false otherwise.
@@ -104,7 +102,7 @@ public class AddNewItem extends JFrame{
     private boolean addBeverageToWarehouse(int beveId, String amount) {
         if(amount.equals("") || amount.equals("0") || !(amount.matches("[0-9]+"))){
             JOptionPane.showConfirmDialog(
-                    null,"Amount is not filled or wrong",
+                    null,"Amount is not filled or wrong!",
                     "Warning",JOptionPane.DEFAULT_OPTION);
             return false;
         }

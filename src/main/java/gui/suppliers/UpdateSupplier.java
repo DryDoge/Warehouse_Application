@@ -65,7 +65,7 @@ public class UpdateSupplier extends JFrame {
                         new daoDodavatel().updateSupplier(supplierToUpdate);
                         JOptionPane.showMessageDialog(
                                 null,
-                                "Succesfully updated Supplier No. " + id
+                                "Succesfully updated Supplier No. " + id + "."
                         );
                         dispose();
                     }
@@ -76,7 +76,6 @@ public class UpdateSupplier extends JFrame {
 
     /**
      * Update selected supplier from user's inputs.
-     *
      * @return True on success, false otherwise.
      */
     private boolean updateSelectedSupplier(){

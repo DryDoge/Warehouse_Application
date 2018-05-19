@@ -49,7 +49,7 @@ public class UpdateAmount extends JFrame {
                         new daoObsahuje().updateAmount(ContainsToUpdate);
                         JOptionPane.showMessageDialog(
                                 null,
-                                "Succesfully updated amount"
+                                "Succesfully updated amount."
                         );
                     }
                     dispose();
@@ -69,7 +69,6 @@ public class UpdateAmount extends JFrame {
 
     /**
      * Update amount of item from user's input.
-     *
      * @return True on success, false otherwise.
      */
     private boolean updateAmount(){
@@ -77,7 +76,7 @@ public class UpdateAmount extends JFrame {
         String newAmount = newAmountTextField.getText();
         if((newAmount.equals("")) || (newAmount.equals("0")) || !(newAmount.matches("[0-9]+"))){
             JOptionPane.showConfirmDialog(
-                    null,"Amount is not filled or wrong",
+                    null,"Amount is not filled or wrong!",
                     "Warning",JOptionPane.DEFAULT_OPTION);
             return false;
         }

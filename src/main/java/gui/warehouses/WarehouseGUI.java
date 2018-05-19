@@ -57,7 +57,7 @@ public class WarehouseGUI extends JFrame {
             fh.setLevel(Level.WARNING);
             logr.addHandler(fh);
         } catch (IOException e) {
-            logr.log(Level.SEVERE, " File logger not working", e);
+            logr.log(Level.SEVERE, " File logger not working.", e);
         }
     }
 
@@ -113,7 +113,7 @@ public class WarehouseGUI extends JFrame {
                     DefaultListModel<String> listModel = new DefaultListModel<>();
                     listModel.addElement("Choose number of warehouse first!");
                     productsList.setModel(listModel);
-                    logr.info("No warehouse was selected to show");
+                    logr.info("No warehouse was selected to show.");
                 }
             }
         });
@@ -131,7 +131,7 @@ public class WarehouseGUI extends JFrame {
                         if (deleteSelectedWarehouse(s1)) {
                             JOptionPane.showMessageDialog(
                                     null,
-                                    "Succesfully deleted warehouse No. " + chosenId
+                                    "Succesfully deleted warehouse No. " + chosenId +"."
                             );
                             refreshButton.doClick();
                         }
@@ -141,7 +141,7 @@ public class WarehouseGUI extends JFrame {
                     JOptionPane.showConfirmDialog(null,
                             "Choose warehouse first!",
                             "Warning", JOptionPane.DEFAULT_OPTION);
-                    logr.warning("No warehouse was selected to delete");
+                    logr.warning("No warehouse was selected to delete.");
                 }
 
             }
@@ -160,7 +160,7 @@ public class WarehouseGUI extends JFrame {
                     nw.toFront();
                     nw.requestFocus();
                     JOptionPane.showMessageDialog(null,
-                            "Window for adding warehouse is already open");
+                            "Window for adding warehouse is already open.");
                 }
 
             }
@@ -195,15 +195,15 @@ public class WarehouseGUI extends JFrame {
                         uw.toFront();
                         uw.requestFocus();
                         JOptionPane.showMessageDialog(null,
-                                "Window for updating warehouse is already open");
+                                "Window for updating warehouse is already open.");
 
                     }
 
                 } catch (IllegalArgumentException | NullPointerException ex) {
                     JOptionPane.showConfirmDialog(
-                            null, "Update is not possible now",
+                            null, "Update is not possible now!",
                             "Warning", JOptionPane.DEFAULT_OPTION);
-                    logr.warning("No warehouse was selected to update");
+                    logr.warning("No warehouse was selected to update.");
                 }
 
             }
@@ -225,16 +225,16 @@ public class WarehouseGUI extends JFrame {
                             JOptionPane.showMessageDialog(
                                     null,
                                     "Succesfully deleted beverage No. " + beverageID
-                                            + " from warehouse No. " + warehouseId
+                                            + " from warehouse No. " + warehouseId+"."
                             );
                             refreshButton.doClick();
                         }
                     }
                 } catch (IllegalArgumentException | NullPointerException ex) {
                     JOptionPane.showConfirmDialog(
-                            null, "Choose beverage first",
+                            null, "Choose beverage first!",
                             "Warning", JOptionPane.DEFAULT_OPTION);
-                    logr.warning("No beverage was selected to delete from warehouse");
+                    logr.warning("No beverage was selected to delete from warehouse.");
                 }
             }
         });
@@ -259,14 +259,14 @@ public class WarehouseGUI extends JFrame {
                         ua.toFront();
                         ua.requestFocus();
                         JOptionPane.showMessageDialog(null,
-                                "Window for updating amount is already open");
+                                "Window for updating amount is already open.");
                     }
 
                 } catch (IllegalArgumentException | NullPointerException ex) {
                     JOptionPane.showConfirmDialog(
-                            null, "Choose beverage first",
+                            null, "Choose beverage first!",
                             "Warning", JOptionPane.DEFAULT_OPTION);
-                    logr.warning("No beverage was selected to update in warehouse");
+                    logr.warning("No beverage was selected to update in warehouse.");
                 }
             }
         });
@@ -286,14 +286,14 @@ public class WarehouseGUI extends JFrame {
                         ai.toFront();
                         ai.requestFocus();
                         JOptionPane.showMessageDialog(null,
-                                "Window for adding item is already open");
+                                "Window for adding item is already open.");
 
                     }
                 }catch (IllegalArgumentException | NullPointerException ex){
                     JOptionPane.showConfirmDialog(
                             null, "Choose warehouse first!",
                             "Warning", JOptionPane.DEFAULT_OPTION);
-                    logr.warning("No warehouse was selected to add beverage");
+                    logr.warning("No warehouse was selected to add beverage.");
                 }
             }
         });
@@ -337,7 +337,6 @@ public class WarehouseGUI extends JFrame {
 
     /**
      * Deletes chosen warehouse.
-     *
      * @param s The warehouse who is going to be deleted.
      * @return True on success, false otherwise.
      */
@@ -346,14 +345,13 @@ public class WarehouseGUI extends JFrame {
             new daoSklad().deleteWarehouse(s.getIdsklad());
             return true;
         }catch (RollbackException e){
-            logr.warning("Selected warehouse cannot be deleted");
+            logr.warning("Selected warehouse cannot be deleted.");
             return false;
         }
     }
 
     /**
      * Removes the chosen beverage from selected warehouse.
-     *
      * @param warehouse The warehouse which from we are going to remove the beverage.
      * @param beverage  The beverage which is going to be deleted from the warehouse.
      * @return True on success, false otherwise.
@@ -363,7 +361,7 @@ public class WarehouseGUI extends JFrame {
             new daoObsahuje().deleteContentOfItem(warehouse, beverage);
             return true;
         }catch (RollbackException e){
-            logr.warning("Selected item cannot be deleted from warehouse");
+            logr.warning("Selected item cannot be deleted from warehouse.");
             return false;
         }
     }

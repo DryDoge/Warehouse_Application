@@ -68,17 +68,16 @@ public class NewWarehouse extends JFrame{
                 if (createNewWarehouse(city, street, web, tel, pcode)) {
                     new daoBasics().addAnything(newWarehouse);
                     JOptionPane.showMessageDialog(null,
-                            "Succesfully added warehouse No. " + new_id);
+                            "Succesfully added warehouse No. " + new_id + ".");
                     dispose();
                 } else
-                    JOptionPane.showMessageDialog(null, "Error while adding. Try again");
+                    JOptionPane.showMessageDialog(null, "Error while adding. Try again!");
             }
         });
     }
 
     /**
-     * Create new warehouse from user's inputs.
-     *
+     * Create new warehouse from user's inputs.     *
      * @param c Name of City.
      * @param s Name of street and number.
      * @param w Web page.
@@ -86,7 +85,7 @@ public class NewWarehouse extends JFrame{
      * @param p Postal code of city (5 digits).
      * @return True on success, false otherwise.
      */
-    public boolean createNewWarehouse(String c, String s, String w, String t, String p){
+    boolean createNewWarehouse(String c, String s, String w, String t, String p){
         boolean ret = false;
         List<Integer> ids = new ArrayList<>();
 

@@ -29,8 +29,7 @@ public class UpdateBeverage extends JFrame {
     private Napoj beverageToUpdate = null;
 
     /**
-     * Class constructor specifying which beverage is going to be updated.
-     *
+     * Class constructor specifying which beverage is going to be updated.     *
      * @param n Beverage to update.
      */
     UpdateBeverage(Napoj n) {
@@ -88,7 +87,7 @@ public class UpdateBeverage extends JFrame {
                         new daoNapoj().updateBeverage(beverageToUpdate);
                         JOptionPane.showMessageDialog(
                                 null,
-                                "Succesfully updated beverage No. " + beverageToUpdate.getIdnap()
+                                "Succesfully updated beverage No. " + beverageToUpdate.getIdnap() + "."
                         );
                         dispose();
                     }
@@ -99,7 +98,6 @@ public class UpdateBeverage extends JFrame {
 
     /**
      * Update beverage from user's inputs.
-     *
      * @return True on success, false otherwise.
      */
     private boolean updateSelectedBeverage() {
@@ -114,7 +112,7 @@ public class UpdateBeverage extends JFrame {
             return ret;
         if(!(alcoholicRadioButton.isSelected()) && !(nonalcoholicRadioButton.isSelected())){
             JOptionPane.showConfirmDialog(
-                null,"Type is not selected",
+                null,"Type is not selected!",
                 "Warning",JOptionPane.DEFAULT_OPTION);
             return ret;
         }
@@ -123,9 +121,9 @@ public class UpdateBeverage extends JFrame {
             dod = new daoDodavatel().getSupplierByName(chosenSupp);
         }catch (javax.persistence.NoResultException | IllegalArgumentException | NullPointerException ex){
             JOptionPane.showConfirmDialog(
-                    null,"Supplier is not selected",
+                    null,"Supplier is not selected!",
                     "Warning",JOptionPane.DEFAULT_OPTION);
-            logr.info("Supplier was not selected while updating beverage");
+            logr.info("Supplier was not selected while updating beverage.");
             dod = null;
         }
         //Update beverage

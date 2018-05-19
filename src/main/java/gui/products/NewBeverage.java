@@ -79,10 +79,11 @@ public class NewBeverage extends JFrame {
                 if (createNewBeverage(flavor, category, brand, price)) {
                     new daoBasics().addAnything(newBeverage);
                     JOptionPane.showMessageDialog(null,
-                            "Succesfully added beverage No. "+new_id);
+                            "Succesfully added beverage No. "+new_id+".");
                     dispose();
                 }else
-                    JOptionPane.showMessageDialog(null,"Error while adding. Try again");
+                    JOptionPane.showMessageDialog(null,
+                            "Error while adding. Try again!");
             }
         });
     }
@@ -96,19 +97,19 @@ public class NewBeverage extends JFrame {
      * @param p Price of beverage.
      * @return True on success, false otherwise.
      */
-    boolean createNewBeverage(String f, String c, String b, short p){
+    private boolean createNewBeverage(String f, String c, String b, short p){
         boolean ret = false;
         List<Integer> ids = new ArrayList<>();
         String chosenSupp;
         Dodavatel dod;
-        String type = "Nealko";
         //Checks whether category, price, brand are valid
         if(!(new ProductsGui().areValidData(c, b, String.valueOf(p))))
             return ret;
         //Checks whether type is selected
-        if(!(alcoholicRadioButton.isSelected()) && !(nonalcoholicRadioButton.isSelected())){
+        if(!(alcoholicRadioButton.isSelected())
+                && !(nonalcoholicRadioButton.isSelected())){
             JOptionPane.showConfirmDialog(
-                    null,"Type is not selected",
+                    null,"Type is not selected!",
                     "Warning",JOptionPane.DEFAULT_OPTION);
             return ret;
         }
@@ -118,9 +119,9 @@ public class NewBeverage extends JFrame {
             dod = new daoDodavatel().getSupplierByName(chosenSupp);
         }catch (javax.persistence.NoResultException | IllegalArgumentException | NullPointerException ex){
             JOptionPane.showConfirmDialog(
-                    null,"Supplier is not selected",
+                    null,"Supplier is not selected!",
                     "Warning",JOptionPane.DEFAULT_OPTION);
-            logr.info("Supplier was not selected while creating new beverage");
+            logr.info("Supplier was not selected while creating new beverage.");
             dod = null;
         }
         // Generate the smallest possible id for new beverage
@@ -141,11 +142,10 @@ public class NewBeverage extends JFrame {
         newBeverage.setDruh(c);
         newBeverage.setZnacka(b);
         newBeverage.setCena(p);
-        if (alcoholicRadioButton.isSelected()) {
-            type = "Alko";
-            newBeverage.setTyp(type);
-        }else
-            newBeverage.setTyp(type);
+        if (alcoholicRadioButton.isSelected())
+            newBeverage.setTyp("Alko");
+        else
+            newBeverage.setTyp("Nealko");
         newBeverage.setDodavatel(dod);
 
         ret = true;

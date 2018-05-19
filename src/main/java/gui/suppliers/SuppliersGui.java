@@ -42,7 +42,7 @@ public class SuppliersGui extends JFrame
             fh.setLevel(Level.WARNING);
             logr.addHandler(fh);
         } catch (IOException e) {
-            logr.log(Level.SEVERE, " File logger not working", e);
+            logr.log(Level.SEVERE, " File logger not working.", e);
         }
     }
 
@@ -104,7 +104,7 @@ public class SuppliersGui extends JFrame
                     DefaultListModel<String> listModel = new DefaultListModel<>();
                     listModel.addElement("Choose number of supplier first!");
                     supplyList.setModel(listModel);
-                    logr.info("No supplier was selected");
+                    logr.info("No supplier was selected.");
                 }
             }
         });
@@ -122,7 +122,7 @@ public class SuppliersGui extends JFrame
                         if (deleteSelectedSupplier(d)) {
                             JOptionPane.showMessageDialog(
                                     null,
-                                    "Succesfully deleted supplier No. " + chosenId
+                                    "Succesfully deleted supplier No. " + chosenId + "."
                             );
                             refreshButton.doClick();
                         }
@@ -131,7 +131,7 @@ public class SuppliersGui extends JFrame
                     JOptionPane.showConfirmDialog(
                             null, "Choose supplier first!",
                             "Warning", JOptionPane.DEFAULT_OPTION);
-                    logr.warning("No supplier was selected to delete");
+                    logr.warning("No supplier was selected to delete.");
                 }
             }
         });
@@ -147,7 +147,7 @@ public class SuppliersGui extends JFrame
                     ns.toFront();
                     ns.requestFocus();
                     JOptionPane.showMessageDialog(null,
-                            "Window for adding beverage is already open");
+                            "Window for adding beverage is already open.");
 
                 }
             }
@@ -169,13 +169,13 @@ public class SuppliersGui extends JFrame
                         us.toFront();
                         us.requestFocus();
                         JOptionPane.showMessageDialog(null,
-                                "Window for updating beverage is already open");
+                                "Window for updating beverage is already open.");
                     }
                 } catch (IllegalArgumentException | NullPointerException ex) {
                     JOptionPane.showConfirmDialog(
-                            null, "Update is not possible now",
+                            null, "Update is not possible now!",
                             "Warning", JOptionPane.DEFAULT_OPTION);
-                    logr.warning("No supplier was selected to update");
+                    logr.warning("No supplier was selected to update.");
                 }
             }
         });
@@ -209,8 +209,7 @@ public class SuppliersGui extends JFrame
     }
 
     /**
-     * Deletes chosen supplier.
-     *
+     * Deletes chosen supplier.     *
      * @param d The supplier who is going to be deleted.
      * @return True on success, false otherwise.
      */
@@ -220,14 +219,13 @@ public class SuppliersGui extends JFrame
             new daoDodavatel().deleteSupplier(d.getIddod());
             return true;
         }catch (RollbackException e){
-            logr.warning("Cannot delete supplier from database");
+            logr.warning("Cannot delete supplier from database.");
             return false;
         }
     }
 
     /**
      * Checks if email is correct.
-     *
      * @param email Email adress which is going to be checked.
      * @return True if it is right, false otherwise.
      */
@@ -239,8 +237,7 @@ public class SuppliersGui extends JFrame
     }
 
     /**
-     * Checks whether name, web page, telephone number and email are filled correctly
-     *
+     * Checks whether name, web page, telephone number and email are filled correctly.
      * @param name Name of the supplier.
      * @param web Web page of the supplier.
      * @param telephone Telephone number of the supplier.
@@ -252,7 +249,7 @@ public class SuppliersGui extends JFrame
 
         if (name.equals("")) {
             JOptionPane.showConfirmDialog(
-                    null, "Street is not filled",
+                    null, "Street is not filled!",
                     "Warning", JOptionPane.DEFAULT_OPTION);
             return ret;
         }
@@ -261,27 +258,26 @@ public class SuppliersGui extends JFrame
                 "^(https?://)?(www\\.)?([\\w]+\\.)+[\u200C\u200B\\w]{2,63}/?$"))
                 ) {
             JOptionPane.showConfirmDialog(
-                    null, "Web page is not filled or wrong",
+                    null, "Web page is not filled or wrong!",
                     "Warning", JOptionPane.DEFAULT_OPTION);
             return ret;
         }
 
         if ((telephone.length() != 9) || !(telephone.matches("[0-9]+"))) {
             JOptionPane.showConfirmDialog(
-                    null, "Telephone number is not filled or wrong",
+                    null, "Telephone number is not filled or wrong!",
                     "Warning", JOptionPane.DEFAULT_OPTION);
             return ret;
         }
 
         if(!(isValidEmailAddress(email)) || email.equals("")){
             JOptionPane.showConfirmDialog(
-                    null, "Email is not filled or wrong",
+                    null, "Email is not filled or wrong!",
                     "Warning", JOptionPane.DEFAULT_OPTION);
             return ret;
         }
 
         ret = true;
-
         return ret;
     }
 }

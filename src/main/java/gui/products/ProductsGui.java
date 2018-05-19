@@ -51,7 +51,7 @@ public class ProductsGui extends JFrame {
             fh.setLevel(Level.WARNING);
             logr.addHandler(fh);
         } catch (IOException e) {
-            logr.log(Level.SEVERE, " File logger not working", e);
+            logr.log(Level.SEVERE, " File logger not working.", e);
         }
     }
 
@@ -59,7 +59,6 @@ public class ProductsGui extends JFrame {
      * Class constructor for beverages.
      *
      */
-
     public ProductsGui(){
         super("Beverage");
         logr.setLevel(Level.INFO);
@@ -114,7 +113,7 @@ public class ProductsGui extends JFrame {
                     DefaultListModel<String> listModel = new DefaultListModel<>();
                     listModel.addElement("Choose number of beverage first!");
                     warehousesList.setModel(listModel);
-                    logr.info("No beverage was chosen to show");
+                    logr.info("No beverage was chosen to show.");
                 }
             }
         });
@@ -132,7 +131,7 @@ public class ProductsGui extends JFrame {
                         if (deleteSelectedBeverage(n1)) {
                             JOptionPane.showMessageDialog(
                                     null,
-                                    "Succesfully deleted beverage No. " + chosenId
+                                    "Succesfully deleted beverage No. " + chosenId +"."
                             );
                             refreshButton.doClick();
                         }
@@ -140,13 +139,11 @@ public class ProductsGui extends JFrame {
 
                 } catch (IllegalArgumentException | NullPointerException ex) {
                     JOptionPane.showConfirmDialog(null,
-                            "Choose beverage first",
+                            "Choose beverage first!",
                             "Warning", JOptionPane.DEFAULT_OPTION);
-                    logr.warning("No beverage was selected to delete");
+                    logr.warning("No beverage was selected to delete.");
                 }
             }
-
-
         });
 
         refreshButton.addActionListener(new ActionListener() {
@@ -170,7 +167,7 @@ public class ProductsGui extends JFrame {
                     nb.toFront();
                     nb.requestFocus();
                     JOptionPane.showMessageDialog(null,
-                            "Window for adding beverage is already open");
+                            "Window for adding beverage is already open.");
 
                 }
             }
@@ -225,14 +222,14 @@ public class ProductsGui extends JFrame {
                         ub.toFront();
                         ub.requestFocus();
                         JOptionPane.showMessageDialog(null,
-                                "Window for updating beverage is already open");
+                                "Window for updating beverage is already open.");
 
                     }
                 } catch (IllegalArgumentException  | NullPointerException ex) {
                     JOptionPane.showConfirmDialog(
-                            null, "Choose beverage first",
+                            null, "Choose beverage first!",
                             "Warning", JOptionPane.DEFAULT_OPTION);
-                    logr.warning("No beverage was selected to update");
+                    logr.warning("No beverage was selected to update.");
                 }
             }
         });
@@ -251,7 +248,6 @@ public class ProductsGui extends JFrame {
                 dispose();
             }
         });
-
     }
 
     /**
@@ -276,8 +272,8 @@ public class ProductsGui extends JFrame {
 
     /**
      * Removes a beverage and all information about its.
-     * @param n Beverage
-     * @return true on success, false otherwise
+     * @param n Beverage.
+     * @return True on success, false otherwise.
      */
     private boolean deleteSelectedBeverage(Napoj n) {
         try {
@@ -285,7 +281,7 @@ public class ProductsGui extends JFrame {
             new daoNapoj().deleteBeverage(n.getIdnap());
             return true;
         }catch (RollbackException e){
-            logr.warning("Selected beverage cannot be deleted");
+            logr.warning("Selected beverage cannot be deleted.");
             return false;
         }
     }
@@ -301,14 +297,14 @@ public class ProductsGui extends JFrame {
         boolean ret = false;
         if(c.equals("")){
             JOptionPane.showConfirmDialog(
-                    null,"Category is not filled",
+                    null,"Category is not filled!",
                     "Warning",JOptionPane.DEFAULT_OPTION);
             return ret;
         }
 
         if(b.equals("")){
             JOptionPane.showConfirmDialog(
-                    null,"Brand is not filled",
+                    null,"Brand is not filled!",
                     "Warning",JOptionPane.DEFAULT_OPTION);
             return ret;
         }
@@ -316,7 +312,7 @@ public class ProductsGui extends JFrame {
 
         if(Integer.valueOf(p) == null || Integer.valueOf(p) <= 0){
             JOptionPane.showConfirmDialog(
-                    null,"Price is not filled or wrong",
+                    null,"Price is not filled or wrong!",
                     "Warning",JOptionPane.DEFAULT_OPTION);
             return ret;
         }

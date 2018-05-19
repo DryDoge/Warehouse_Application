@@ -17,6 +17,9 @@ public class MyThread extends Thread {
         this.lab = label;
     }
 
+    /**
+     * Set actual time to Jlabel.
+     */
     public void run() {
         logr.info("Running thread");
         String time = getActualTime();

@@ -57,17 +57,16 @@ public class NewSupplier extends JFrame {
                 if (createNewSupplier(name, web, tel, email)) {
                     new daoBasics().addAnything(newSupplier);
                     JOptionPane.showMessageDialog(null,
-                            "Succesfully added Supplier No. " + new_id);
+                            "Succesfully added Supplier No. " + new_id+".");
                     dispose();
                 } else
-                    JOptionPane.showMessageDialog(null, "Error while adding. Try again");
+                    JOptionPane.showMessageDialog(null, "Error while adding. Try again!");
             }
         });
     }
 
     /**
      * Create new supplier from user's inputs.
-     *
      * @param n Name of supplier
      * @param e Email address of supplier.
      * @param w Web page.

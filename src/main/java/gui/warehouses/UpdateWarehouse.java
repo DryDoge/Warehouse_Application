@@ -33,7 +33,6 @@ public class UpdateWarehouse extends JFrame {
 
     /**
      * Class constructor specifying which warehouse is going to be updated.
-     *
      * @param w Warehouse to update.
      */
     UpdateWarehouse(Sklad w){
@@ -78,7 +77,7 @@ public class UpdateWarehouse extends JFrame {
                         new daoSklad().updateWarehouse(warehouseToUpdate);
                         JOptionPane.showMessageDialog(
                                 null,
-                                "Succesfully updated warehouse No. "+ warehouseToUpdate.getIdsklad()
+                                "Succesfully updated warehouse No. "+ warehouseToUpdate.getIdsklad()+"."
                         );
                         dispose();
                     }
@@ -86,56 +85,10 @@ public class UpdateWarehouse extends JFrame {
                 }
             }
         });
-
-        webTextField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    saveButton.doClick();
-                }
-            }
-        });
-
-        telTextField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    saveButton.doClick();
-                }
-            }
-        });
-
-        cityTextField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    saveButton.doClick();
-                }
-            }
-        });
-
-        streetTextField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    saveButton.doClick();
-                }
-            }
-        });
-
-        pcTextField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode() == KeyEvent.VK_ENTER){
-                    saveButton.doClick();
-                }
-            }
-        });
     }
 
     /**
      * Update selected warehouse from user's inputs.
-     *
      * @return True on success, false otherwise.
      */
     private boolean updateSelectedWarehouse(){
