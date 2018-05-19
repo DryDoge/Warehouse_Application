@@ -16,7 +16,7 @@ public class LoginMenu extends JFrame {
     /**
      * Class constructor for logging into application.
      */
-    LoginMenu(){
+    public LoginMenu(){
         super("Login Menu");
         JLabel userLabel = new JLabel("User:");
         JLabel passwordLabel = new JLabel("Password:");
@@ -72,7 +72,7 @@ public class LoginMenu extends JFrame {
     /**
      * Simulates login to the application.
      */
-    void actionLogin(){
+    public void actionLogin(){
         loginButton.addActionListener(ae -> {
             String uname = userText.getText();
             String upass = passwordText.getText();
