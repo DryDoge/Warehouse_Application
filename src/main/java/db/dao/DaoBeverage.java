@@ -1,49 +1,52 @@
 package db.dao;
 
-import db.e.Napoj;
+import db.entity.Beverage;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class daoNapoj {
+
+
+/*
+Class for communicating with database - table beverage and for queries using this table.
+*/
+public class DaoBeverage {
 
     /**
      * Gets all beverages from database.
-     *
      * @return List of beverages.
      */
-    public List<Napoj> getAllBeverages(){
-        List<Napoj> allList = new ArrayList<>();
-        List<Napoj> alkoList = getAllAlcoBeverages();
-        List<Napoj>nealkoList = getAllNonAlcoBeverages();
+    public List<Beverage> getAllBeverages(){
+        List<Beverage> allList = new ArrayList<>();
+        List<Beverage> alkoList = getAllAlcoBeverages();
+        List<Beverage>nealkoList = getAllNonAlcoBeverages();
         allList.addAll(alkoList);
         allList.addAll(nealkoList);
-        allList.sort(Comparator.comparing(Napoj::getIdnap));
+        allList.sort(Comparator.comparing(Beverage::getId));
         return allList;
     }
 
     /**
      * Gets all nonalcoholic beverages from database.
-     *
      * @return List of nonalcoholic beverages.
      */
-    public List<Napoj> getAllNonAlcoBeverages(){
+    public List<Beverage> getAllNonAlcoBeverages(){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
         EntityManager em = emf.createEntityManager();
-        TypedQuery<Napoj> q2 = em.createQuery(
-                "SELECT na FROM Napoj AS na WHERE (na.typ = :typ)" ,
-                Napoj.class
+        TypedQuery<Beverage> q2 = em.createQuery(
+                "SELECT na FROM Beverage AS na WHERE (na.type = :type)" ,
+                Beverage.class
         );
-        q2.setParameter("typ", "Nealko");
+        q2.setParameter("type", "Nealko");
 
-        List<Napoj> l = q2.getResultList();
+        List<Beverage> l = q2.getResultList();
 
-        l.sort(Comparator.comparing(Napoj::getIdnap));
-        for (Napoj n :l) {
-            em.refresh(n);
+        l.sort(Comparator.comparing(Beverage::getId));
+        for (Beverage b :l) {
+            em.refresh(b);
         }
         em.close();
         emf.close();
@@ -53,24 +56,23 @@ public class daoNapoj {
 
     /**
      * Gets all alcoholic beverages from database.
-     *
      * @return List of alcoholic beverages.
      */
-    public List<Napoj>getAllAlcoBeverages(){
+    public List<Beverage>getAllAlcoBeverages(){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
         EntityManager em = emf.createEntityManager();
-        TypedQuery<Napoj> q2 = em.createQuery(
-                "SELECT na FROM Napoj AS na WHERE (na.typ = :typ)" ,
-                Napoj.class
+        TypedQuery<Beverage> q2 = em.createQuery(
+                "SELECT a FROM Beverage AS a WHERE (a.type = :type)" ,
+                Beverage.class
         );
-        q2.setParameter("typ", "Alko");
+        q2.setParameter("type", "Alko");
 
-        List<Napoj> l = q2.getResultList();
+        List<Beverage> l = q2.getResultList();
 
-        l.sort(Comparator.comparing(Napoj::getIdnap));
-        for (Napoj n :l) {
-            em.refresh(n);
+        l.sort(Comparator.comparing(Beverage::getId));
+        for (Beverage b :l) {
+            em.refresh(b);
         }
         em.close();
         emf.close();
@@ -80,16 +82,15 @@ public class daoNapoj {
     }
     /**
      * Gets the beverage from database by its id.
-     *
      * @param id Id of the beverage.
      * @return Beverage.
      */
-    public Napoj getBeverageByID(int id) {
+    public Beverage getBeverageByID(int id) {
         EntityManagerFactory emf =
                     Persistence.createEntityManagerFactory("AppPU");
             EntityManager em = emf.createEntityManager();
 
-            Napoj n = em.find(Napoj.class, id);
+            Beverage n = em.find(Beverage.class, id);
 
             em.close();
             emf.close();
@@ -98,7 +99,6 @@ public class daoNapoj {
 
     /**
      * Delete the beverage from database.
-     *
      * @param idBeverage Id of the beverage which is going to be deleted.
      */
     public void deleteBeverage(int idBeverage){
@@ -107,12 +107,12 @@ public class daoNapoj {
                 Persistence.createEntityManagerFactory("AppPU");
         EntityManager em = emf.createEntityManager();
 
-        Napoj n = em.find(Napoj.class, idBeverage);
+        Beverage b = em.find(Beverage.class, idBeverage);
 
         EntityTransaction et = em.getTransaction();
 
         et.begin();
-        em.remove(n);
+        em.remove(b);
         et.commit();
 
         em.close();
@@ -121,24 +121,23 @@ public class daoNapoj {
 
     /**
      * Update the beverage in database.
-     *
-     * @param n The beverage which is going to be updated.
+     * @param b The beverage which is going to be updated.
      */
-    public void updateBeverage(Napoj n){
+    public void updateBeverage(Beverage b){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
         EntityManager em = emf.createEntityManager();
 
-        Napoj beverage = em.find(Napoj.class, n.getIdnap());
+        Beverage beverage = em.find(Beverage.class, b.getId());
         EntityTransaction et = em.getTransaction();
 
         et.begin();
-        beverage.setPrichut(n.getPrichut());
-        beverage.setDruh(n.getDruh());
-        beverage.setZnacka(n.getZnacka());
-        beverage.setCena(n.getCena());
-        beverage.setTyp(n.getTyp());
-        beverage.setDodavatel(n.getDodavatel());
+        beverage.setFlavor(b.getFlavor());
+        beverage.setCategory(b.getCategory());
+        beverage.setBrand(b.getBrand());
+        beverage.setPrice(b.getPrice());
+        beverage.setType(b.getType());
+        beverage.setSupplier(b.getSupplier());
         em.merge(beverage);
         et.commit();
 

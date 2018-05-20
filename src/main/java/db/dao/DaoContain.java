@@ -1,10 +1,14 @@
 package db.dao;
 
-import db.e.Obsahuje;
+import db.entity.Contain;
 
 import javax.persistence.*;
 
-public class daoObsahuje {
+
+/*
+Class for communicating with database - table contain and for queries using this table.
+*/
+public class DaoContain {
     /**
      * Gets amount of the beverage from the warehouse.
      * @param storage The id of the warehouse in which beverage is stored.
@@ -12,8 +16,9 @@ public class daoObsahuje {
      * @return Amount of the selected beverages in the warehouse.
      */
     public int getAmount(int storage, int beverage){
-        Obsahuje o  = getContentInfo(storage, beverage);
-        return o.getMnozstvo();
+
+        Contain c  = getContentInfo(storage, beverage);
+        return c.getAmount();
     }
 
     /**
@@ -27,15 +32,15 @@ public class daoObsahuje {
                 Persistence.createEntityManagerFactory("AppPU");
         EntityManager em = emf.createEntityManager();
 
-        Obsahuje o = getContentInfo(storage, beverage);
+        Contain c  = getContentInfo(storage, beverage);
 
         EntityTransaction et = em.getTransaction();
-        if (!em.contains(o)) {
-            o = em.merge(o);
+        if (!em.contains(c)) {
+            c = em.merge(c);
         }
         
         et.begin();
-        em.remove(o);
+        em.remove(c);
         et.commit();
 
         em.close();
@@ -44,19 +49,20 @@ public class daoObsahuje {
 
     /**
      * Update the chosen content.
-     *  @param ob The content which is going to be updated.
+     *  @param c The content which is going to be updated.
      */
-    public void updateAmount(Obsahuje ob){
+    public void updateAmount(Contain c){
+
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
         EntityManager em = emf.createEntityManager();
 
-        Obsahuje o = getContentInfo(ob.getIdsklad(), ob.getIdnap());
+        Contain o = getContentInfo(c.getStorageid(), c.getBeverageid());
 
         EntityTransaction et = em.getTransaction();
 
         et.begin();
-        o.setMnozstvo(ob.getMnozstvo());
+        o.setAmount(c.getAmount());
         em.merge(o);
         et.commit();
 
@@ -65,33 +71,30 @@ public class daoObsahuje {
     }
 
     /**
-     * Gets Content of the beverage from the warehouse.
-     *
+     * Gets Content of the beverage from the warehouse.     *
      * @param storage The id of the warehouse in which beverage is stored.
      * @param beverage The id of the Beverage we want to delete from the warehouse.
      * @return Content.
      */
-    public Obsahuje getContentInfo(int storage, int beverage){
+    public Contain getContentInfo(int storage, int beverage){
 
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
         EntityManager em = emf.createEntityManager();
 
 
-        TypedQuery<Obsahuje> q3 = em.createQuery(
-                "SELECT o FROM Obsahuje AS o WHERE (o.idsklad = :StorageID) AND (o.idnap = :BeverageID)",
-                Obsahuje.class
+        TypedQuery<Contain> q3 = em.createQuery(
+                "SELECT c FROM Contain AS c WHERE (c.storageid = :StorageID) AND (c.beverageid = :BeverageID)",
+                Contain.class
         );
 
         q3.setParameter("StorageID", storage);
         q3.setParameter("BeverageID", beverage);
-        Obsahuje o  = q3.getSingleResult();
+        Contain c  = q3.getSingleResult();
 
         em.close();
         emf.close();
 
-        return o;
-
+        return c;
     }
-
 }

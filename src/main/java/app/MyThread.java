@@ -9,6 +9,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
 
+
+/*
+Class using thread to get actual time and set it to Jlabel.
+*/
+
 public class MyThread extends Thread {
     private Logger logr = GuiMain.getLogr();
     private JLabel lab;

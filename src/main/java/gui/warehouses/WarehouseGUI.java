@@ -1,6 +1,6 @@
 package gui.warehouses;
 
-import db.e.*;
+import db.entity.*;
 import db.dao.*;
 
 
@@ -13,6 +13,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.RollbackException;
 import javax.swing.*;
+
+/*
+Class representing window for managing all warehouses and beverages in the warehouses.
+*/
 
 public class WarehouseGUI extends JFrame {
     private JPanel whPanel;
@@ -86,19 +90,19 @@ public class WarehouseGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     int chosenId = Integer.valueOf((String)warehousesCB.getSelectedItem());
-                    Sklad s = new daoSklad().getWarehouseById(chosenId);
-                    telLabel.setText(s.getTel());
-                    streetLabel.setText(s.getUlica());
-                    cityLabel.setText(s.getMesto());
-                    pscLabel.setText(s.getPsc());
-                    webLabel.setText(s.getWeb());
-                    List<Napoj> list = s.getNapoje();
+                    Warehouse w = new DaoWarehouse().getWarehouseById(chosenId);
+                    telLabel.setText(w.getTel());
+                    streetLabel.setText(w.getStreet());
+                    cityLabel.setText(w.getCity());
+                    pscLabel.setText(w.getPostalcode());
+                    webLabel.setText(w.getWeb());
+                    List<Beverage> list = w.getBeverages();
                     DefaultListModel<String> listModel = new DefaultListModel<>();
                     if (list.isEmpty()){
                         listModel.addElement("This warehouse is empty!");
                     }else {
-                        for (Napoj items : list) {
-                            int amount = new daoObsahuje().getAmount(chosenId, items.getIdnap());
+                        for (Beverage items : list) {
+                            int amount = new DaoContain().getAmount(chosenId, items.getId());
                             String itemsForList = items.toString() + " | " + amount + "pcs";
                             listModel.addElement(itemsForList);
                         }
@@ -127,7 +131,7 @@ public class WarehouseGUI extends JFrame {
                                 "Do you really want to delete this warehouse ?",
                                 "Delete confirmation",JOptionPane.YES_NO_OPTION);
                         if (optionButton == JOptionPane.YES_OPTION) {
-                        Sklad s1 = new daoSklad().getWarehouseById(chosenId);
+                        Warehouse s1 = new DaoWarehouse().getWarehouseById(chosenId);
                         if (deleteSelectedWarehouse(s1)) {
                             JOptionPane.showMessageDialog(
                                     null,
@@ -184,7 +188,7 @@ public class WarehouseGUI extends JFrame {
 
                 try {
                     int chosenId = Integer.valueOf((String)warehousesCB.getSelectedItem());
-                    Sklad s1 = new daoSklad().getWarehouseById(chosenId);
+                    Warehouse s1 = new DaoWarehouse().getWarehouseById(chosenId);
 
                     if(uw == null || !(uw.isVisible())) {
                         uw = null;
@@ -248,7 +252,7 @@ public class WarehouseGUI extends JFrame {
                     String parts[] = fromPanel.split(" ");
                     int beverageID = Integer.valueOf(parts[1]);
 
-                    Obsahuje c = new daoObsahuje().getContentInfo(warehouseId, beverageID);
+                    Contain c = new DaoContain().getContentInfo(warehouseId, beverageID);
 
                     if(ua == null || !(ua.isVisible())) {
                         ua = null;
@@ -326,23 +330,23 @@ public class WarehouseGUI extends JFrame {
      * Get all warehouses and prepare them for choosing.
      */
     public void setData(){
-        List<Sklad> l = new daoSklad().getAllWarehouses();
+        List<Warehouse> l = new DaoWarehouse().getAllWarehouses();
         warehousesCB.removeAllItems();
         warehousesCB.addItem("Select Number");
-        for (Sklad s :l) {
-            String item = String.valueOf(s.getIdsklad());
+        for (Warehouse w :l) {
+            String item = String.valueOf(w.getId());
             warehousesCB.addItem(item);
         }
     }
 
     /**
      * Deletes chosen warehouse.
-     * @param s The warehouse who is going to be deleted.
+     * @param w The warehouse who is going to be deleted.
      * @return True on success, false otherwise.
      */
-    private boolean deleteSelectedWarehouse(Sklad s) {
+    private boolean deleteSelectedWarehouse(Warehouse w) {
         try{
-            new daoSklad().deleteWarehouse(s.getIdsklad());
+            new DaoWarehouse().deleteWarehouse(w.getId());
             return true;
         }catch (RollbackException e){
             logr.warning("Selected warehouse cannot be deleted.");
@@ -358,7 +362,7 @@ public class WarehouseGUI extends JFrame {
      */
     private boolean deleteSelectedContent(int warehouse, int beverage){
         try{
-            new daoObsahuje().deleteContentOfItem(warehouse, beverage);
+            new DaoContain().deleteContentOfItem(warehouse, beverage);
             return true;
         }catch (RollbackException e){
             logr.warning("Selected item cannot be deleted from warehouse.");
@@ -368,7 +372,6 @@ public class WarehouseGUI extends JFrame {
 
     /**
      * Checks whether city, street, web page, telephone number and postal code are correct.
-     *
      * @param city City where the warehouse is located.
      * @param street Street on which the warehouse is located.
      * @param web Web page of the warehouse.

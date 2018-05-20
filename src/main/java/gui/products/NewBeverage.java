@@ -1,7 +1,7 @@
 package gui.products;
 
 import db.dao.*;
-import db.e.*;
+import db.entity.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -9,6 +9,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
+/*
+Class representing window for creating a new beverage.
+*/
 
 public class NewBeverage extends JFrame {
     private JTextField flavorTextField;
@@ -24,7 +28,7 @@ public class NewBeverage extends JFrame {
     private JPanel actionPanel;
     private static int new_id = 1;
     private static Logger logr = ProductsGui.getLogr();
-    private static Napoj newBeverage = null;
+    private static Beverage newBeverage = null;
 
     /**
      * Class constructor for creating new beverage.
@@ -38,11 +42,11 @@ public class NewBeverage extends JFrame {
         }
         pack();
         setLocationRelativeTo(null);
-        List<Dodavatel> l = new daoDodavatel().getAllSuppliers();
+        List<Supplier> l = new DaoSupplier().getAllSuppliers();
         suppliersCB.removeAllItems();
         suppliersCB.addItem("Select supplier");
-        for (Dodavatel s :l) {
-            String item = String.valueOf(s.getNazov());
+        for (Supplier s :l) {
+            String item = String.valueOf(s.getName());
             suppliersCB.addItem(item);
         }
 
@@ -77,7 +81,7 @@ public class NewBeverage extends JFrame {
                 String brand = brandTextField.getText();
                 short price = Short.valueOf(priceTextField.getText());
                 if (createNewBeverage(flavor, category, brand, price)) {
-                    new daoBasics().addAnything(newBeverage);
+                    new DaoBasics().addAnything(newBeverage);
                     JOptionPane.showMessageDialog(null,
                             "Succesfully added beverage No. "+new_id+".");
                     dispose();
@@ -101,7 +105,7 @@ public class NewBeverage extends JFrame {
         boolean ret = false;
         List<Integer> ids = new ArrayList<>();
         String chosenSupp;
-        Dodavatel dod;
+        Supplier dod;
         //Checks whether category, price, brand are valid
         if(!(new ProductsGui().areValidData(c, b, String.valueOf(p))))
             return ret;
@@ -116,7 +120,7 @@ public class NewBeverage extends JFrame {
         //Set supplier
         try{
             chosenSupp = (String)suppliersCB.getSelectedItem();
-            dod = new daoDodavatel().getSupplierByName(chosenSupp);
+            dod = new DaoSupplier().getSupplierByName(chosenSupp);
         }catch (javax.persistence.NoResultException | IllegalArgumentException | NullPointerException ex){
             JOptionPane.showConfirmDialog(
                     null,"Supplier is not selected!",
@@ -125,28 +129,28 @@ public class NewBeverage extends JFrame {
             dod = null;
         }
         // Generate the smallest possible id for new beverage
-        List<Napoj> l = new daoNapoj().getAllBeverages();
-        for (Napoj  st: l) {
-            ids.add(st.getIdnap());
+        List<Beverage> l = new DaoBeverage().getAllBeverages();
+        for (Beverage bev: l) {
+            ids.add(bev.getId());
         }
         while (ids.contains(new_id)){
             new_id++;
         }
         // Create new beverage
-        newBeverage = new Napoj();
-        newBeverage.setIdnap(new_id);
+        newBeverage = new Beverage();
+        newBeverage.setId(new_id);
         if(f.equals(""))
-            newBeverage.setPrichut("Bez prichute");
+            newBeverage.setFlavor("Bez prichute");
         else
-            newBeverage.setPrichut(f);
-        newBeverage.setDruh(c);
-        newBeverage.setZnacka(b);
-        newBeverage.setCena(p);
+            newBeverage.setFlavor(f);
+        newBeverage.setCategory(c);
+        newBeverage.setBrand(b);
+        newBeverage.setPrice(p);
         if (alcoholicRadioButton.isSelected())
-            newBeverage.setTyp("Alko");
+            newBeverage.setType("Alko");
         else
-            newBeverage.setTyp("Nealko");
-        newBeverage.setDodavatel(dod);
+            newBeverage.setType("Nealko");
+        newBeverage.setSupplier(dod);
 
         ret = true;
         return ret;

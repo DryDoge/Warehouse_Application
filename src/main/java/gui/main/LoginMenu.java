@@ -5,6 +5,9 @@ import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/*
+Class for login into main menu.
+*/
 public class LoginMenu extends JFrame {
 
     private final JTextField errtext = new JTextField("Incorrect login or password");

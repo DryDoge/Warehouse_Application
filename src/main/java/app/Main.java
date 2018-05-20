@@ -1,6 +1,10 @@
 package app;
 
 import gui.main.LoginMenu;
+
+/*
+Main class which we use for running program.
+*/
 public class Main {
 
 

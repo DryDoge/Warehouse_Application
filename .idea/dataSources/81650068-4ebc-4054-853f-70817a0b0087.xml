@@ -6023,8 +6023,8 @@
     <schema id="1332" parent="446" name="public">
       <ObjectId>2200</ObjectId>
       <Comment>standard public schema</Comment>
-      <IntrospectionTimestamp>2018-05-12.16:20:53.660</IntrospectionTimestamp>
-      <IntrospectionStateNumber>1377444</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2018-05-20.18:23:43.910</IntrospectionTimestamp>
+      <IntrospectionStateNumber>1408641</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -6048,27 +6048,23 @@
       <ObjectId>4000</ObjectId>
       <Comment>SP-GiST index access method</Comment>
     </access-method>
-    <table id="1338" parent="1332" name="dodavatel">
-      <ObjectId>2733319</ObjectId>
-      <StateNumber>1377444</StateNumber>
-    </table>
-    <table id="1339" parent="1332" name="napoj">
+    <table id="1338" parent="1332" name="beverage">
       <ObjectId>2733326</ObjectId>
-      <StateNumber>1377444</StateNumber>
+      <StateNumber>1408641</StateNumber>
     </table>
-    <table id="1340" parent="1332" name="obsahuje">
+    <table id="1339" parent="1332" name="contain">
       <ObjectId>2733365</ObjectId>
-      <StateNumber>1372642</StateNumber>
+      <StateNumber>1408633</StateNumber>
     </table>
-    <table id="1341" parent="1332" name="sklad">
+    <table id="1340" parent="1332" name="supplier">
+      <ObjectId>2733319</ObjectId>
+      <StateNumber>1408615</StateNumber>
+    </table>
+    <table id="1341" parent="1332" name="warehouse">
       <ObjectId>2733359</ObjectId>
-      <StateNumber>1372644</StateNumber>
+      <StateNumber>1408636</StateNumber>
     </table>
-    <table id="1342" parent="1332" name="zamestnanec">
-      <ObjectId>2733380</ObjectId>
-      <StateNumber>1372643</StateNumber>
-    </table>
-    <routine id="1343" parent="1332" name="kontrola_mnozstvo">
+    <routine id="1342" parent="1332" name="kontrola_mnozstvo">
       <ObjectId>2703835</ObjectId>
       <StateNumber>1358209</StateNumber>
       <VolatilityKind>volatile</VolatilityKind>
@@ -6077,7 +6073,7 @@
       <RoutineKind>function</RoutineKind>
       <Cost>100.0</Cost>
     </routine>
-    <routine id="1344" parent="1332" name="predavanie">
+    <routine id="1343" parent="1332" name="predavanie">
       <ObjectId>2703834</ObjectId>
       <StateNumber>1358208</StateNumber>
       <VolatilityKind>volatile</VolatilityKind>
@@ -6087,353 +6083,257 @@
       <RoutineKind>function</RoutineKind>
       <Cost>100.0</Cost>
     </routine>
-    <column id="1345" parent="1338" name="iddod">
+    <column id="1344" parent="1338" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1372636</StateNumber>
+      <StateNumber>1408619</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="1346" parent="1338" name="nazov">
+    <column id="1345" parent="1338" name="flavor">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <StateNumber>1408620</StateNumber>
+      <DefaultExpression>NULL::character varying</DefaultExpression>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="1346" parent="1338" name="price">
+      <Position>3</Position>
+      <DataType>smallint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1408621</StateNumber>
+      <TypeId>21</TypeId>
+    </column>
+    <column id="1347" parent="1338" name="category">
+      <Position>4</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1408622</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="1348" parent="1338" name="brand">
+      <Position>5</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1408623</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="1349" parent="1338" name="type">
+      <Position>6</Position>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1408624</StateNumber>
+      <TypeId>1043</TypeId>
+    </column>
+    <column id="1350" parent="1338" name="supplier">
+      <Position>7</Position>
+      <DataType>integer|0s</DataType>
+      <StateNumber>1408626</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="1351" parent="1338" name="napoj_pk">
+      <ObjectId>2733330</ObjectId>
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="1352" parent="1338" name="napoj_uq_napoj">
+      <ObjectId>2733332</ObjectId>
+      <ColNames>flavor
+category
+brand</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1353" parent="1338" name="napoj_pk">
+      <ObjectId>2733331</ObjectId>
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>napoj_pk</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <key id="1354" parent="1338" name="napoj_uq_napoj">
+      <ObjectId>2733333</ObjectId>
+      <ColNames>flavor
+category
+brand</ColNames>
+      <UnderlyingIndexName>napoj_uq_napoj</UnderlyingIndexName>
+    </key>
+    <column id="1355" parent="1339" name="storageid">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1408629</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="1356" parent="1339" name="beverageid">
+      <Position>2</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1408632</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="1357" parent="1339" name="amount">
+      <Position>3</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1408630</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <index id="1358" parent="1339" name="obsahuje_pkey">
+      <ObjectId>2733368</ObjectId>
+      <ColNames>storageid
+beverageid</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="1359" parent="1339" name="obsahuje_pkey">
+      <ObjectId>2733369</ObjectId>
+      <ColNames>storageid
+beverageid</ColNames>
+      <UnderlyingIndexName>obsahuje_pkey</UnderlyingIndexName>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="1360" parent="1339" name="obsahuje_fk_sklad">
+      <ObjectId>2733370</ObjectId>
+      <ColNames>storageid</ColNames>
+      <RefTableId>2733359</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>warehouse</RefTableName>
+      <RefKeyName>sklad_pkey</RefKeyName>
+      <RefColNames>idsklad</RefColNames>
+    </foreign-key>
+    <column id="1361" parent="1340" name="id">
+      <Position>1</Position>
+      <DataType>integer|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>1408616</StateNumber>
+      <TypeId>23</TypeId>
+    </column>
+    <column id="1362" parent="1340" name="name">
       <Position>2</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1372636</StateNumber>
+      <StateNumber>1408617</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="1347" parent="1338" name="email">
+    <column id="1363" parent="1340" name="email">
       <Position>3</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1372636</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="1348" parent="1338" name="tel">
+    <column id="1364" parent="1340" name="tel">
       <Position>4</Position>
       <DataType>char(9)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1372636</StateNumber>
       <TypeId>1042</TypeId>
     </column>
-    <column id="1349" parent="1338" name="web">
+    <column id="1365" parent="1340" name="web">
       <Position>5</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1372636</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="1350" parent="1338" name="dodavatel_pkey">
+    <index id="1366" parent="1340" name="dodavatel_pkey">
       <ObjectId>2733324</ObjectId>
-      <ColNames>iddod</ColNames>
+      <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="1351" parent="1338" name="dodavatel_pkey">
+    <key id="1367" parent="1340" name="dodavatel_pkey">
       <ObjectId>2733325</ObjectId>
-      <ColNames>iddod</ColNames>
+      <ColNames>id</ColNames>
       <UnderlyingIndexName>dodavatel_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <check id="1352" parent="1338" name="dodavatel_ch_email">
+    <check id="1368" parent="1340" name="dodavatel_ch_email">
       <ObjectId>2733322</ObjectId>
       <ColNames>email</ColNames>
       <Predicate>(email)::text ~~ &apos;_%@_%._%&apos;::text</Predicate>
     </check>
-    <check id="1353" parent="1338" name="dodavatel_ch_web">
+    <check id="1369" parent="1340" name="dodavatel_ch_web">
       <ObjectId>2733323</ObjectId>
       <ColNames>web</ColNames>
       <Predicate>(web)::text ~~ &apos;_%._%&apos;::text</Predicate>
     </check>
-    <column id="1354" parent="1339" name="idnap">
+    <column id="1370" parent="1341" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1372637</StateNumber>
+      <StateNumber>1408637</StateNumber>
       <TypeId>23</TypeId>
     </column>
-    <column id="1355" parent="1339" name="prichut">
-      <Position>2</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <StateNumber>1372637</StateNumber>
-      <DefaultExpression>NULL::character varying</DefaultExpression>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="1356" parent="1339" name="cena">
-      <Position>3</Position>
-      <DataType>smallint|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>1372637</StateNumber>
-      <TypeId>21</TypeId>
-    </column>
-    <column id="1357" parent="1339" name="druh">
-      <Position>4</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>1372637</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="1358" parent="1339" name="znacka">
-      <Position>5</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>1372637</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="1359" parent="1339" name="typ">
-      <Position>6</Position>
-      <DataType>varchar(20)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>1372637</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="1360" parent="1339" name="dodavatel">
-      <Position>7</Position>
-      <DataType>integer|0s</DataType>
-      <StateNumber>1374907</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <index id="1361" parent="1339" name="napoj_pk">
-      <ObjectId>2733330</ObjectId>
-      <ColNames>idnap</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <index id="1362" parent="1339" name="napoj_uq_napoj">
-      <ObjectId>2733332</ObjectId>
-      <ColNames>prichut
-druh
-znacka</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <key id="1363" parent="1339" name="napoj_pk">
-      <ObjectId>2733331</ObjectId>
-      <ColNames>idnap</ColNames>
-      <UnderlyingIndexName>napoj_pk</UnderlyingIndexName>
-      <Primary>1</Primary>
-    </key>
-    <key id="1364" parent="1339" name="napoj_uq_napoj">
-      <ObjectId>2733333</ObjectId>
-      <ColNames>prichut
-druh
-znacka</ColNames>
-      <UnderlyingIndexName>napoj_uq_napoj</UnderlyingIndexName>
-    </key>
-    <foreign-key id="1365" parent="1339" name="dodavatel_fk">
-      <ObjectId>2740724</ObjectId>
-      <ColNames>dodavatel</ColNames>
-      <RefTableId>2733319</RefTableId>
-      <RefColPositions>1</RefColPositions>
-      <RefTableName>dodavatel</RefTableName>
-      <RefKeyName>dodavatel_pkey</RefKeyName>
-      <RefColNames>iddod</RefColNames>
-      <OnDelete>set-null</OnDelete>
-      <OnUpdate>cascade</OnUpdate>
-    </foreign-key>
-    <column id="1366" parent="1340" name="idsklad">
-      <Position>1</Position>
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>1372642</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="1367" parent="1340" name="idnap">
-      <Position>2</Position>
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>1372642</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="1368" parent="1340" name="mnozstvo">
-      <Position>3</Position>
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>1372642</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <index id="1369" parent="1340" name="obsahuje_pkey">
-      <ObjectId>2733368</ObjectId>
-      <ColNames>idsklad
-idnap</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <key id="1370" parent="1340" name="obsahuje_pkey">
-      <ObjectId>2733369</ObjectId>
-      <ColNames>idsklad
-idnap</ColNames>
-      <UnderlyingIndexName>obsahuje_pkey</UnderlyingIndexName>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="1371" parent="1340" name="obsahuje_fk_sklad">
-      <ObjectId>2733370</ObjectId>
-      <ColNames>idsklad</ColNames>
-      <RefTableId>2733359</RefTableId>
-      <RefColPositions>1</RefColPositions>
-      <RefTableName>sklad</RefTableName>
-      <RefKeyName>sklad_pkey</RefKeyName>
-      <RefColNames>idsklad</RefColNames>
-    </foreign-key>
-    <foreign-key id="1372" parent="1340" name="obsahuje_fk_nap">
-      <ObjectId>2733375</ObjectId>
-      <ColNames>idnap</ColNames>
-      <RefTableId>2733326</RefTableId>
-      <RefColPositions>1</RefColPositions>
-      <RefTableName>napoj</RefTableName>
-      <RefKeyName>napoj_pk</RefKeyName>
-      <RefColNames>idnap</RefColNames>
-    </foreign-key>
-    <column id="1373" parent="1341" name="idsklad">
-      <Position>1</Position>
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>1372641</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="1374" parent="1341" name="tel">
+    <column id="1371" parent="1341" name="tel">
       <Position>2</Position>
       <DataType>char(9)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1372641</StateNumber>
       <TypeId>1042</TypeId>
     </column>
-    <column id="1375" parent="1341" name="ulica">
+    <column id="1372" parent="1341" name="street">
       <Position>3</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1372641</StateNumber>
+      <StateNumber>1408638</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="1376" parent="1341" name="mesto">
+    <column id="1373" parent="1341" name="city">
       <Position>4</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1372641</StateNumber>
+      <StateNumber>1408639</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <column id="1377" parent="1341" name="psc">
+    <column id="1374" parent="1341" name="postalcode">
       <Position>5</Position>
       <DataType>char(5)|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>1372641</StateNumber>
+      <StateNumber>1408640</StateNumber>
       <TypeId>1042</TypeId>
     </column>
-    <column id="1378" parent="1341" name="web">
+    <column id="1375" parent="1341" name="web">
       <Position>6</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <StateNumber>1372641</StateNumber>
       <TypeId>1043</TypeId>
     </column>
-    <index id="1379" parent="1341" name="sklad_pkey">
+    <index id="1376" parent="1341" name="sklad_pkey">
       <ObjectId>2733363</ObjectId>
-      <ColNames>idsklad</ColNames>
+      <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="1380" parent="1341" name="sklad_pkey">
+    <key id="1377" parent="1341" name="sklad_pkey">
       <ObjectId>2733364</ObjectId>
-      <ColNames>idsklad</ColNames>
+      <ColNames>id</ColNames>
       <UnderlyingIndexName>sklad_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
-    <check id="1381" parent="1341" name="sklad_ch_web">
+    <check id="1378" parent="1341" name="sklad_ch_web">
       <ObjectId>2733362</ObjectId>
       <ColNames>web</ColNames>
       <Predicate>(web)::text ~~ &apos;_%._%&apos;::text</Predicate>
     </check>
-    <column id="1382" parent="1342" name="idsklad">
-      <Position>1</Position>
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>1372643</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="1383" parent="1342" name="idzam">
-      <Position>2</Position>
-      <DataType>integer|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>1372643</StateNumber>
-      <TypeId>23</TypeId>
-    </column>
-    <column id="1384" parent="1342" name="meno">
-      <Position>3</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>1372643</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="1385" parent="1342" name="priezvisko">
-      <Position>4</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>1372643</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="1386" parent="1342" name="tel">
-      <Position>5</Position>
-      <DataType>char(9)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>1372643</StateNumber>
-      <TypeId>1042</TypeId>
-    </column>
-    <column id="1387" parent="1342" name="rc">
-      <Position>6</Position>
-      <DataType>varchar(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>1372643</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <column id="1388" parent="1342" name="email">
-      <Position>7</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-      <StateNumber>1372643</StateNumber>
-      <TypeId>1043</TypeId>
-    </column>
-    <index id="1389" parent="1342" name="zamestnanec_pkey">
-      <ObjectId>2733384</ObjectId>
-      <ColNames>idsklad
-idzam</ColNames>
-      <Unique>1</Unique>
-    </index>
-    <key id="1390" parent="1342" name="zamestnanec_pkey">
-      <ObjectId>2733385</ObjectId>
-      <ColNames>idsklad
-idzam</ColNames>
-      <UnderlyingIndexName>zamestnanec_pkey</UnderlyingIndexName>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="1391" parent="1342" name="zamestnanec_fk_sklad">
-      <ObjectId>2733386</ObjectId>
-      <ColNames>idsklad</ColNames>
-      <RefTableId>2733359</RefTableId>
-      <RefColPositions>1</RefColPositions>
-      <RefTableName>sklad</RefTableName>
-      <RefKeyName>sklad_pkey</RefKeyName>
-      <RefColNames>idsklad</RefColNames>
-    </foreign-key>
-    <check id="1392" parent="1342" name="zamestnanec_ch_email">
-      <ObjectId>2733383</ObjectId>
-      <ColNames>email</ColNames>
-      <Predicate>(email)::text ~~ &apos;_%@_%._%&apos;::text</Predicate>
-    </check>
-    <argument id="1393" parent="1343">
+    <argument id="1379" parent="1342">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>trigger|0s</DataType>
     </argument>
-    <argument id="1394" parent="1344" name="zak">
+    <argument id="1380" parent="1343" name="zak">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
     </argument>
-    <argument id="1395" parent="1344" name="nap">
+    <argument id="1381" parent="1343" name="nap">
       <Position>2</Position>
       <DataType>integer|0s</DataType>
     </argument>
-    <argument id="1396" parent="1344" name="skl">
+    <argument id="1382" parent="1343" name="skl">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
     </argument>
-    <argument id="1397" parent="1344" name="mno">
+    <argument id="1383" parent="1343" name="mno">
       <Position>4</Position>
       <DataType>integer|0s</DataType>
     </argument>
-    <argument id="1398" parent="1344">
+    <argument id="1384" parent="1343">
       <ArgumentDirection>R</ArgumentDirection>
       <DataType>boolean|0s</DataType>
     </argument>

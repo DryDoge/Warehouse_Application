@@ -13,6 +13,10 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+
+/*
+Class representing main menu for this application.
+*/
 public class GuiMain extends JFrame {
     private JPanel mainPanel;
     private JButton homeButton;

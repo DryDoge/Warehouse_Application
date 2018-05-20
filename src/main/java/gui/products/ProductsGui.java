@@ -1,8 +1,7 @@
 package gui.products;
 
-import db.dao.daoNapoj;
-import db.e.*;
-import org.eclipse.persistence.exceptions.*;
+import db.dao.DaoBeverage;
+import db.entity.*;
 
 import javax.persistence.RollbackException;
 import javax.swing.*;
@@ -15,6 +14,10 @@ import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+/*
+Class representing window for managing all beverages.
+*/
 
 public class ProductsGui extends JFrame {
 
@@ -80,25 +83,25 @@ public class ProductsGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     int chosenId = Integer.valueOf((String)beveragesCB.getSelectedItem());
-                    Napoj n = new daoNapoj().getBeverageByID(chosenId);
-                    flavorInfoLabel.setText(n.getPrichut());
-                    typeInfoLabel.setText(n.getDruh());
-                    brandInfoLabel.setText(n.getZnacka());
-                    priceInfoLabel.setText(String.valueOf(n.getCena())+"€");
-                    if(n.getDodavatel() == null)
+                    Beverage n = new DaoBeverage().getBeverageByID(chosenId);
+                    flavorInfoLabel.setText(n.getFlavor());
+                    typeInfoLabel.setText(n.getCategory());
+                    brandInfoLabel.setText(n.getBrand());
+                    priceInfoLabel.setText(String.valueOf(n.getPrice())+"€");
+                    if(n.getSupplier() == null)
                         supplierInfoLabel.setText("No supplier");
                     else
-                        supplierInfoLabel.setText(n.getDodavatel().getNazov());
+                        supplierInfoLabel.setText(n.getSupplier().getName());
 
-                    List<Sklad> list = n.getSklady();
-                    list.sort(Comparator.comparing(Sklad::getIdsklad));
+                    List<Warehouse> list = n.getWarehouses();
+                    list.sort(Comparator.comparing(Warehouse::getId));
                     DefaultListModel<String> listModel = new DefaultListModel<>();
                     if (list.isEmpty()){
                         listModel.addElement("This beverage is not stored yet!");
                     }else {
-                        for (Sklad storage : list) {
-                            String itemsForList = String.valueOf(storage.getIdsklad()) +
-                                    " | " +storage.getMesto()+ "| " + storage.getWeb() +
+                        for (Warehouse storage : list) {
+                            String itemsForList = String.valueOf(storage.getId()) +
+                                    " | " +storage.getCity()+ "| " + storage.getWeb() +
                                     " | " + storage.getTel();
                             listModel.addElement(itemsForList);
                         }
@@ -127,7 +130,7 @@ public class ProductsGui extends JFrame {
                             "Do you really want to delete this warehouse ?",
                             "Delete confirmation",JOptionPane.YES_NO_OPTION);
                     if (optionButton == JOptionPane.YES_OPTION) {
-                        Napoj n1 = new daoNapoj().getBeverageByID(chosenId);
+                        Beverage n1 = new DaoBeverage().getBeverageByID(chosenId);
                         if (deleteSelectedBeverage(n1)) {
                             JOptionPane.showMessageDialog(
                                     null,
@@ -211,7 +214,7 @@ public class ProductsGui extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
                     int chosenId = Integer.valueOf((String) beveragesCB.getSelectedItem());
-                    Napoj n = new daoNapoj().getBeverageByID(chosenId);
+                    Beverage n = new DaoBeverage().getBeverageByID(chosenId);
 
                     if (ub == null || !(ub.isVisible())) {
                         ub = null;
@@ -254,18 +257,18 @@ public class ProductsGui extends JFrame {
      * Get selected type of beverages and prepare them for choosing.
      */
     public void setData() {
-        List<Napoj> l;
+        List<Beverage> l;
         if (allRadioButton.isSelected()){
-             l = new daoNapoj().getAllBeverages();
+             l = new DaoBeverage().getAllBeverages();
         }else if (alcoRadioButton.isSelected()){
-             l = new daoNapoj().getAllAlcoBeverages();
+             l = new DaoBeverage().getAllAlcoBeverages();
         }else {
-             l = new daoNapoj().getAllNonAlcoBeverages();
+             l = new DaoBeverage().getAllNonAlcoBeverages();
         }
         beveragesCB.removeAllItems();
         beveragesCB.addItem("Select Number");
-        for (Napoj s :l) {
-            String item = String.valueOf(s.getIdnap());
+        for (Beverage b :l) {
+            String item = String.valueOf(b.getId());
             beveragesCB.addItem(item);
         }
     }
@@ -275,10 +278,10 @@ public class ProductsGui extends JFrame {
      * @param n Beverage.
      * @return True on success, false otherwise.
      */
-    private boolean deleteSelectedBeverage(Napoj n) {
+    private boolean deleteSelectedBeverage(Beverage b) {
         try {
 
-            new daoNapoj().deleteBeverage(n.getIdnap());
+            new DaoBeverage().deleteBeverage(b.getId());
             return true;
         }catch (RollbackException e){
             logr.warning("Selected beverage cannot be deleted.");

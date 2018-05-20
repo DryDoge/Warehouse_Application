@@ -1,36 +1,35 @@
-package db.e;
+package db.entity;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
-public class Dodavatel {
+public class Supplier {
     @Id
-    private int iddod;
-    private String nazov;
+    private int id;
+    private String name;
     private String email;
     private String tel;
     private String web;
 
-
-    @Column(name = "iddod", nullable = false)
-    public int getIddod() {
-        return iddod;
+    @Column(name = "id", nullable = false)
+    public int getId() {
+        return id;
     }
 
-    public void setIddod(int iddod) {
-        this.iddod = iddod;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Basic
-    @Column(name = "nazov", nullable = false, length = 100)
-    public String getNazov() {
-        return nazov;
+    @Column(name = "name", nullable = false, length = 100)
+    public String getName() {
+        return name;
     }
 
-    public void setNazov(String nazov) {
-        this.nazov = nazov;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Basic
@@ -67,26 +66,26 @@ public class Dodavatel {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Dodavatel dodavatel = (Dodavatel) o;
-        return iddod == dodavatel.iddod &&
-                Objects.equals(nazov, dodavatel.nazov) &&
-                Objects.equals(email, dodavatel.email) &&
-                Objects.equals(tel, dodavatel.tel) &&
-                Objects.equals(web, dodavatel.web);
+        Supplier supplier = (Supplier) o;
+        return id == supplier.id &&
+                Objects.equals(name, supplier.name) &&
+                Objects.equals(email, supplier.email) &&
+                Objects.equals(tel, supplier.tel) &&
+                Objects.equals(web, supplier.web);
     }
-
-    @OneToMany(mappedBy="dodavatel")
-    private List<Napoj> napoje;
-
-
-    public List<Napoj> getNapoje() {
-        return napoje;
-    }
-
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(iddod, nazov, email, tel, web);
+        return Objects.hash(id, name, email, tel, web);
     }
+
+    @OneToMany(mappedBy="supplier")
+    private List<Beverage> beverages;
+
+
+    public List<Beverage> getBeverages() {
+        return beverages;
+    }
+
 }

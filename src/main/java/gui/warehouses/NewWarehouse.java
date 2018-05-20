@@ -1,18 +1,18 @@
 package gui.warehouses;
 
-import db.dao.daoBasics;
-import db.dao.daoSklad;
-import db.e.Sklad;
+import db.dao.DaoBasics;
+import db.dao.DaoWarehouse;
+import db.entity.Warehouse;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/*
+Class representing window for creating a new warehouse.
+*/
 
 public class NewWarehouse extends JFrame{
     private JPanel newPanel;
@@ -35,7 +35,7 @@ public class NewWarehouse extends JFrame{
     private JLabel infoPCLabel;
     private JLabel infoWebLabel;
     private static int new_id = 1;
-    private Sklad newWarehouse = null;
+    private Warehouse newWarehouse = null;
 
     /**
      * Class constructor for creating new warehouse.
@@ -66,7 +66,7 @@ public class NewWarehouse extends JFrame{
                 String tel = telephoneTextfield.getText();
                 String pcode = postalCodeTextField.getText();
                 if (createNewWarehouse(city, street, web, tel, pcode)) {
-                    new daoBasics().addAnything(newWarehouse);
+                    new DaoBasics().addAnything(newWarehouse);
                     JOptionPane.showMessageDialog(null,
                             "Succesfully added warehouse No. " + new_id + ".");
                     dispose();
@@ -77,7 +77,7 @@ public class NewWarehouse extends JFrame{
     }
 
     /**
-     * Create new warehouse from user's inputs.     *
+     * Create new warehouse from user's inputs.
      * @param c Name of City.
      * @param s Name of street and number.
      * @param w Web page.
@@ -89,24 +89,24 @@ public class NewWarehouse extends JFrame{
         boolean ret = false;
         List<Integer> ids = new ArrayList<>();
 
-        List<Sklad> l = new daoSklad().getAllWarehouses();
+        List<Warehouse> l = new DaoWarehouse().getAllWarehouses();
         //Checks whether city, street, web page, telephone number and postal code are valid
         if(!(WarehouseGUI.areValidData(c,s,w,t,p)))
             return ret;
         // Generate the smallest possible id for new warehouse
-        for (Sklad  st: l) {
-            ids.add(st.getIdsklad());
+        for (Warehouse st: l) {
+            ids.add(st.getId());
         }
         while (ids.contains(new_id)){
             new_id++;
         }
         // Create new warehouse
-        newWarehouse  = new Sklad();
-        newWarehouse.setIdsklad(new_id);
+        newWarehouse  = new Warehouse();
+        newWarehouse.setId(new_id);
         newWarehouse.setTel(t);
-        newWarehouse.setMesto(c);
-        newWarehouse.setUlica(s);
-        newWarehouse.setPsc(p);
+        newWarehouse.setCity(c);
+        newWarehouse.setStreet(s);
+        newWarehouse.setPostalcode(p);
         newWarehouse.setWeb(w);
 
         ret = true;

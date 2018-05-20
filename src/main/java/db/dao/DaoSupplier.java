@@ -1,33 +1,34 @@
 package db.dao;
 
-import db.e.Dodavatel;
+import db.entity.Supplier;
 
 import javax.persistence.*;
 import java.util.Comparator;
 import java.util.List;
 
-
-public class daoDodavatel {
+/*
+Class for communicating with database - table supplier and for queries using this table.
+*/
+public class DaoSupplier {
 
     /**
      * Gets all suppliers from database.
-     *
      * @return List of suppliers.
      */
-    public List<Dodavatel> getAllSuppliers(){
+    public List<Supplier> getAllSuppliers(){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
         EntityManager em = emf.createEntityManager();
 
 
-        TypedQuery<Dodavatel> q2 = em.createQuery(
-                "SELECT d FROM Dodavatel AS d", Dodavatel.class
+        TypedQuery<Supplier> q2 = em.createQuery(
+                "SELECT s FROM Supplier AS s", Supplier.class
         );
-        List<Dodavatel> l = q2.getResultList();
+        List<Supplier> l = q2.getResultList();
 
-        l.sort(Comparator.comparing(Dodavatel::getIddod));
-        for (Dodavatel d :l) {
-            em.refresh(d);
+        l.sort(Comparator.comparing(Supplier::getId));
+        for (Supplier s :l) {
+            em.refresh(s);
         }
         em.close();
         emf.close();
@@ -37,48 +38,45 @@ public class daoDodavatel {
 
     /**
      * Gets the supplier from database by its id.
-     *
      * @param id Id of the supplier.
      * @return Supplier.
      */
-    public Dodavatel getSupplierById(int id){
+    public Supplier getSupplierById(int id){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
         EntityManager em = emf.createEntityManager();
 
-        Dodavatel d = em.find(Dodavatel.class, id);
+        Supplier s = em.find(Supplier.class, id);
 
         em.close();
         emf.close();
-        return d;
+        return s;
     }
 
     /**
      * Gets the supplier from database by its name.
-     *
      * @param name Name of the supplier.
      * @return Supplier.
      */
-    public Dodavatel getSupplierByName(String name){
+    public Supplier getSupplierByName(String name){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
         EntityManager em = emf.createEntityManager();
 
-        TypedQuery<Dodavatel> q2 = em.createQuery(
-                "SELECT d FROM Dodavatel AS d WHERE (d.nazov = :Name)" ,
-                Dodavatel.class
+        TypedQuery<Supplier> q2 = em.createQuery(
+                "SELECT s FROM Supplier AS s WHERE (s.name = :Name)" ,
+                Supplier.class
         );
         q2.setParameter("Name", name);
 
-        Dodavatel d = q2.getSingleResult();
+        Supplier s = q2.getSingleResult();
         em.close();
         emf.close();
-        return d;
+        return s;
     }
 
     /**
      * Delete the supplier from database.
-     *
      * @param idSupplier Id of the supplier who is going to be deleted.
      * */
     public void deleteSupplier(int idSupplier){
@@ -87,7 +85,7 @@ public class daoDodavatel {
                 Persistence.createEntityManagerFactory("AppPU");
         EntityManager em = emf.createEntityManager();
 
-        Dodavatel s = em.find(Dodavatel.class, idSupplier);
+        Supplier s = em.find(Supplier.class, idSupplier);
 
         EntityTransaction et = em.getTransaction();
 
@@ -101,22 +99,21 @@ public class daoDodavatel {
 
     /**
      * Update the supplier in database.
-     *
-     * @param d The supplier who is going to be updated.
+     * @param s The supplier who is going to be updated.
      */
-    public void updateSupplier(Dodavatel d){
+    public void updateSupplier(Supplier s){
         EntityManagerFactory emf =
                 Persistence.createEntityManagerFactory("AppPU");
         EntityManager em = emf.createEntityManager();
 
-        Dodavatel supplier = em.find(Dodavatel.class, d.getIddod());
+        Supplier supplier = em.find(Supplier.class, s.getId());
         EntityTransaction et = em.getTransaction();
 
         et.begin();
-        supplier.setTel(d.getTel());
-        supplier.setNazov(d.getNazov());
-        supplier.setEmail(d.getEmail());
-        supplier.setWeb(d.getWeb());
+        supplier.setTel(s.getTel());
+        supplier.setName(s.getName());
+        supplier.setEmail(s.getEmail());
+        supplier.setWeb(s.getWeb());
         em.merge(supplier);
         et.commit();
 

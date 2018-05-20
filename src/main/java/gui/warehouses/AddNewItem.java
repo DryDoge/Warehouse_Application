@@ -1,8 +1,8 @@
 package gui.warehouses;
 
-import db.dao.daoBasics;
-import db.dao.daoNapoj;
-import db.e.*;
+import db.dao.DaoBasics;
+import db.dao.DaoBeverage;
+import db.entity.*;
 
 
 import javax.persistence.RollbackException;
@@ -11,6 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.logging.Logger;
+
+/*
+Class representing window for adding a new beverage into the warehouse.
+*/
 
 public class AddNewItem extends JFrame{
     private JPanel addItemPanel;
@@ -26,25 +30,24 @@ public class AddNewItem extends JFrame{
     private static final Logger logr = WarehouseGUI.getLogr();
 
     /**
-     *Class constructor for adding a beverage to the warehouse.     *
+     *Class constructor for adding a beverage to the warehouse.
      * @param wareID Id of the warehouse in which we want to add an item.
      */
     AddNewItem(int wareID) {
         super("Add item to warehouse");
         warehouseID = wareID;
         setContentPane(addItemPanel);
-        pack();
+        setSize(400, 150);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setData();
-
 
         beveragesComboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
                     int chosenId = Integer.valueOf((String) beveragesComboBox.getSelectedItem());
-                    Napoj n = new daoNapoj().getBeverageByID(chosenId);
+                    Beverage n = new DaoBeverage().getBeverageByID(chosenId);
                     inforamtionsLabel.setText(n.toString());
                 }catch (IllegalArgumentException | NullPointerException ex) {
                     inforamtionsLabel.setText("Please choose number!");
@@ -106,11 +109,11 @@ public class AddNewItem extends JFrame{
                     "Warning",JOptionPane.DEFAULT_OPTION);
             return false;
         }
-        Obsahuje con = new Obsahuje();
-        con.setIdsklad(warehouseID);
-        con.setIdnap(beveId);
-        con.setMnozstvo(Integer.valueOf(amount));
-        new daoBasics().addAnything(con);
+        Contain con = new Contain();
+        con.setStorageid(warehouseID);
+        con.setBeverageid(beveId);
+        con.setAmount(Integer.valueOf(amount));
+        new DaoBasics().addAnything(con);
         return true;
     }
 
@@ -118,11 +121,11 @@ public class AddNewItem extends JFrame{
      * Get all Beverages from database and prepare them for choosing.
      */
     void setData(){
-        List<Napoj> l = new daoNapoj().getAllBeverages();
+        List<Beverage> l = new DaoBeverage().getAllBeverages();
         beveragesComboBox.removeAllItems();
         beveragesComboBox.addItem("Select Number");
-        for (Napoj n :l) {
-            String item = String.valueOf(n.getIdnap());
+        for (Beverage b :l) {
+            String item = String.valueOf(b.getId());
             beveragesComboBox.addItem(item);
         }
     }

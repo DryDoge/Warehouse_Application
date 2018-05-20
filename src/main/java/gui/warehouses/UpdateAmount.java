@@ -1,7 +1,8 @@
 package gui.warehouses;
 
-import db.dao.daoObsahuje;
-import db.e.Obsahuje;
+import db.dao.DaoContain;
+import db.entity.Contain;
+
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -9,20 +10,24 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/*
+Class representing window for updating amount of a beverage in the warehouse.
+*/
+
 public class UpdateAmount extends JFrame {
     private JPanel updateamountPanel;
     private JTextField newAmountTextField;
     private JButton saveButton;
     private JButton cancelButton;
-    private Obsahuje ContainsToUpdate;
+    private Contain ContainsToUpdate;
     /**
      * Class constructor for updating amount of a beverage in the selected warehouse.
      *
-     * @param o Content to update.
+     * @param c Content to update.
      */
-    UpdateAmount(Obsahuje o){
-        super("Update amount of item No. " + o.getIdnap() + " in warehouse No. "+ o.getIdsklad());
-        this.ContainsToUpdate = o;
+    UpdateAmount(Contain c){
+        super("Update amount of item No. " + c.getBeverageid() + " in warehouse No. "+ c.getStorageid());
+        this.ContainsToUpdate = c;
         setContentPane(updateamountPanel);
         int optionButton = getDefaultCloseOperation();
         if(optionButton == WindowConstants.EXIT_ON_CLOSE){
@@ -30,7 +35,7 @@ public class UpdateAmount extends JFrame {
         }
         pack();
         setLocationRelativeTo(null);
-        newAmountTextField.setText(String.valueOf(ContainsToUpdate.getMnozstvo()));
+        newAmountTextField.setText(String.valueOf(ContainsToUpdate.getAmount()));
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
@@ -46,7 +51,7 @@ public class UpdateAmount extends JFrame {
                         "Update confirmation",JOptionPane.YES_NO_OPTION);
                 if (optionButton == JOptionPane.YES_OPTION){
                     if(updateAmount()){
-                        new daoObsahuje().updateAmount(ContainsToUpdate);
+                        new DaoContain().updateAmount(ContainsToUpdate);
                         JOptionPane.showMessageDialog(
                                 null,
                                 "Succesfully updated amount."
@@ -80,7 +85,7 @@ public class UpdateAmount extends JFrame {
                     "Warning",JOptionPane.DEFAULT_OPTION);
             return false;
         }
-        ContainsToUpdate.setMnozstvo(Integer.valueOf(newAmount));
+        ContainsToUpdate.setAmount(Integer.valueOf(newAmount));
         return true;
     }
 }

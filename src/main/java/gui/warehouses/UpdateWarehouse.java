@@ -1,14 +1,15 @@
 package gui.warehouses;
 
-import db.dao.daoBasics;
-import db.dao.daoSklad;
-import db.e.Sklad;
+import db.dao.DaoWarehouse;
+import db.entity.Warehouse;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+
+/*
+Class representing window for updating a warehouse.
+*/
 
 public class UpdateWarehouse extends JFrame {
     private JPanel updatePanel;
@@ -29,14 +30,14 @@ public class UpdateWarehouse extends JFrame {
     private JLabel infoTelLabel;
     private JLabel infoPCLabel;
     private JLabel telLabel;
-    private Sklad warehouseToUpdate = null;
+    private Warehouse warehouseToUpdate = null;
 
     /**
      * Class constructor specifying which warehouse is going to be updated.
      * @param w Warehouse to update.
      */
-    UpdateWarehouse(Sklad w){
-        super("Update Warehouse No. "+w.getIdsklad());
+    UpdateWarehouse(Warehouse w){
+        super("Update Warehouse No. "+w.getId());
         this.warehouseToUpdate = w;
         setContentPane(updatePanel);
         int optionButton = getDefaultCloseOperation();
@@ -47,9 +48,9 @@ public class UpdateWarehouse extends JFrame {
         setLocationRelativeTo(null);
 
         String tel = warehouseToUpdate.getTel();
-        String street = warehouseToUpdate.getUlica();
-        String city = warehouseToUpdate.getMesto();
-        String postalCode = warehouseToUpdate.getPsc();
+        String street = warehouseToUpdate.getStreet();
+        String city = warehouseToUpdate.getCity();
+        String postalCode = warehouseToUpdate.getPostalcode();
         String web = warehouseToUpdate.getWeb();
 
         telTextField.setText(tel);
@@ -74,10 +75,10 @@ public class UpdateWarehouse extends JFrame {
                         "Update confirmation",JOptionPane.YES_NO_OPTION);
                 if (optionButton == JOptionPane.YES_OPTION){
                     if(updateSelectedWarehouse()){
-                        new daoSklad().updateWarehouse(warehouseToUpdate);
+                        new DaoWarehouse().updateWarehouse(warehouseToUpdate);
                         JOptionPane.showMessageDialog(
                                 null,
-                                "Succesfully updated warehouse No. "+ warehouseToUpdate.getIdsklad()+"."
+                                "Succesfully updated warehouse No. "+ warehouseToUpdate.getId() + "."
                         );
                         dispose();
                     }
@@ -102,9 +103,9 @@ public class UpdateWarehouse extends JFrame {
         if(!(WarehouseGUI.areValidData(c,s,w,t,p)))
             return ret;
         warehouseToUpdate.setTel(t);
-        warehouseToUpdate.setUlica(s);
-        warehouseToUpdate.setMesto(c);
-        warehouseToUpdate.setPsc(p);
+        warehouseToUpdate.setStreet(s);
+        warehouseToUpdate.setCity(c);
+        warehouseToUpdate.setPostalcode(p);
         warehouseToUpdate.setWeb(w);
 
         ret = true;

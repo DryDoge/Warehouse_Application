@@ -1,16 +1,19 @@
 package gui.products;
 
-import db.dao.daoDodavatel;
-import db.dao.daoNapoj;
-import db.e.Dodavatel;
-import db.e.Napoj;
+import db.dao.DaoSupplier;
+import db.dao.DaoBeverage;
+import db.entity.Supplier;
+import db.entity.Beverage;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+
+/*
+Class representing window for updating a beverage.
+*/
 
 public class UpdateBeverage extends JFrame {
 
@@ -26,15 +29,15 @@ public class UpdateBeverage extends JFrame {
     private JPanel actionPanel;
     private JPanel updatePanel;
     private static final Logger logr = ProductsGui.getLogr();
-    private Napoj beverageToUpdate = null;
+    private Beverage beverageToUpdate = null;
 
     /**
      * Class constructor specifying which beverage is going to be updated.     *
-     * @param n Beverage to update.
+     * @param b Beverage to update.
      */
-    UpdateBeverage(Napoj n) {
-        super("Update beverage No. " + n.getIdnap());
-        this.beverageToUpdate = n;
+    UpdateBeverage(Beverage b) {
+        super("Update beverage No. " + b.getId());
+        this.beverageToUpdate = b;
         setContentPane(updatePanel);
         int optionButton = getDefaultCloseOperation();
         if (optionButton == WindowConstants.EXIT_ON_CLOSE) {
@@ -43,16 +46,16 @@ public class UpdateBeverage extends JFrame {
         pack();
         setLocationRelativeTo(null);
 
-        String flavor = beverageToUpdate.getPrichut();
-        String category = beverageToUpdate.getDruh();
-        String brand = beverageToUpdate.getZnacka();
-        int price = beverageToUpdate.getCena();
+        String flavor = beverageToUpdate.getFlavor();
+        String category = beverageToUpdate.getCategory();
+        String brand = beverageToUpdate.getBrand();
+        int price = beverageToUpdate.getPrice();
 
         flavorTF.setText(flavor);
         categoryTF.setText(category);
         brandTF.setText(brand);
         priceTF.setText(String.valueOf(price));
-        if (n.getTyp().equals("Alko")) {
+        if (b.getType().equals("Alko")) {
             alcoholicRadioButton.setSelected(true);
             nonalcoholicRadioButton.setSelected(false);
         } else {
@@ -60,14 +63,14 @@ public class UpdateBeverage extends JFrame {
             alcoholicRadioButton.setSelected(false);
         }
 
-        List<Dodavatel> l = new daoDodavatel().getAllSuppliers();
+        List<Supplier> l = new DaoSupplier().getAllSuppliers();
         suppliersCB.removeAllItems();
         suppliersCB.addItem("Select supplier");
-        for (Dodavatel s : l) {
-            String item = String.valueOf(s.getNazov());
+        for (Supplier s : l) {
+            String item = String.valueOf(s.getName());
             suppliersCB.addItem(item);
         }
-        suppliersCB.setSelectedItem(n.getIdnap());
+        suppliersCB.setSelectedItem(b.getId());
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
@@ -84,10 +87,10 @@ public class UpdateBeverage extends JFrame {
                         "Update confirmation", JOptionPane.YES_NO_OPTION);
                 if (optionButton == JOptionPane.YES_OPTION) {
                     if (updateSelectedBeverage()) {
-                        new daoNapoj().updateBeverage(beverageToUpdate);
+                        new DaoBeverage().updateBeverage(beverageToUpdate);
                         JOptionPane.showMessageDialog(
                                 null,
-                                "Succesfully updated beverage No. " + beverageToUpdate.getIdnap() + "."
+                                "Succesfully updated beverage No. " + beverageToUpdate.getId() + "."
                         );
                         dispose();
                     }
@@ -107,7 +110,7 @@ public class UpdateBeverage extends JFrame {
         String b = brandTF.getText();
         String p = priceTF.getText();
         String chosenSupp;
-        Dodavatel dod;
+        Supplier dod;
         if(!(new ProductsGui().areValidData(c, b, p)))
             return ret;
         if(!(alcoholicRadioButton.isSelected()) && !(nonalcoholicRadioButton.isSelected())){
@@ -118,7 +121,7 @@ public class UpdateBeverage extends JFrame {
         }
         try{
             chosenSupp = (String)suppliersCB.getSelectedItem();
-            dod = new daoDodavatel().getSupplierByName(chosenSupp);
+            dod = new DaoSupplier().getSupplierByName(chosenSupp);
         }catch (javax.persistence.NoResultException | IllegalArgumentException | NullPointerException ex){
             JOptionPane.showConfirmDialog(
                     null,"Supplier is not selected!",
@@ -128,17 +131,17 @@ public class UpdateBeverage extends JFrame {
         }
         //Update beverage
         if(f.equals(""))
-            beverageToUpdate.setPrichut("Bez prichute");
+            beverageToUpdate.setFlavor("Bez prichute");
         else
-            beverageToUpdate.setPrichut(f);
-        beverageToUpdate.setDruh(c);
-        beverageToUpdate.setZnacka(b);
-        beverageToUpdate.setCena(Short.valueOf(p));
+            beverageToUpdate.setFlavor(f);
+        beverageToUpdate.setCategory(c);
+        beverageToUpdate.setBrand(b);
+        beverageToUpdate.setPrice(Short.valueOf(p));
         if (alcoholicRadioButton.isSelected())
-            beverageToUpdate.setTyp("Alko");
+            beverageToUpdate.setType("Alko");
         else
-            beverageToUpdate.setTyp("Nealko");
-        beverageToUpdate.setDodavatel(dod);
+            beverageToUpdate.setType("Nealko");
+        beverageToUpdate.setSupplier(dod);
         ret = true;
 
         return ret;

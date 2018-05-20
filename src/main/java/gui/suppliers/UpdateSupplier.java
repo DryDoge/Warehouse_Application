@@ -1,11 +1,15 @@
 package gui.suppliers;
 
-import db.dao.daoDodavatel;
-import db.e.Dodavatel;
+import db.dao.DaoSupplier;
+import db.entity.Supplier;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+/*
+Class representing window for updating a supplier.
+*/
 
 public class UpdateSupplier extends JFrame {
 
@@ -18,16 +22,16 @@ public class UpdateSupplier extends JFrame {
     private JTextField emailTF;
     private JTextField telTF;
     private int id;
-    private Dodavatel supplierToUpdate = null;
+    private Supplier supplierToUpdate = null;
 
     /**
      * Class constructor specifying which supplier is going to be updated.
      *
-     * @param d Supplier to update.
+     * @param s Supplier to update.
      */
-    UpdateSupplier(Dodavatel d){
-    super("Update supplier No. "+d.getIddod());
-    this.supplierToUpdate = d;
+    UpdateSupplier(Supplier s){
+    super("Update supplier No. " + s.getId());
+    this.supplierToUpdate = s;
     setContentPane(updateSupplierPanel);
     int optionButton = getDefaultCloseOperation();
     if (optionButton == WindowConstants.EXIT_ON_CLOSE) {
@@ -36,8 +40,8 @@ public class UpdateSupplier extends JFrame {
     pack();
     setLocationRelativeTo(null);
 
-    this.id = supplierToUpdate.getIddod();
-    String name = supplierToUpdate.getNazov();
+    this.id = supplierToUpdate.getId();
+    String name = supplierToUpdate.getName();
     String email = supplierToUpdate.getEmail();
     String tel = supplierToUpdate.getTel();
     String web = supplierToUpdate.getWeb();
@@ -62,7 +66,7 @@ public class UpdateSupplier extends JFrame {
                         "Update confirmation", JOptionPane.YES_NO_OPTION);
                 if (optionButton == JOptionPane.YES_OPTION) {
                     if (updateSelectedSupplier()) {
-                        new daoDodavatel().updateSupplier(supplierToUpdate);
+                        new DaoSupplier().updateSupplier(supplierToUpdate);
                         JOptionPane.showMessageDialog(
                                 null,
                                 "Succesfully updated Supplier No. " + id + "."
@@ -87,7 +91,7 @@ public class UpdateSupplier extends JFrame {
 
         if(!(SuppliersGui.areValidData(n, w, t, e)))
             return ret;
-        supplierToUpdate.setNazov(n);
+        supplierToUpdate.setName(n);
         supplierToUpdate.setTel(t);
         supplierToUpdate.setEmail(e);
         supplierToUpdate.setWeb(w);

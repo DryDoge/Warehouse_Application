@@ -1,8 +1,8 @@
 package gui.suppliers;
 
-import db.dao.daoBasics;
-import db.dao.daoDodavatel;
-import db.e.Dodavatel;
+import db.dao.DaoBasics;
+import db.dao.DaoSupplier;
+import db.entity.Supplier;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +10,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/*
+Class representing window for creating a new supplier.
+*/
 
 public class NewSupplier extends JFrame {
     private JPanel newSupplierPanel;
@@ -23,7 +25,7 @@ public class NewSupplier extends JFrame {
     private JPanel actionPanel;
     private JLabel infoTelLabel;
     private static int new_id = 1;
-    private Dodavatel newSupplier = null;
+    private Supplier newSupplier = null;
 
     /**
      * Class constructor for creating new supplier.
@@ -55,7 +57,7 @@ public class NewSupplier extends JFrame {
                 String tel = telTF.getText();
                 String email = emailTF.getText();
                 if (createNewSupplier(name, web, tel, email)) {
-                    new daoBasics().addAnything(newSupplier);
+                    new DaoBasics().addAnything(newSupplier);
                     JOptionPane.showMessageDialog(null,
                             "Succesfully added Supplier No. " + new_id+".");
                     dispose();
@@ -76,21 +78,21 @@ public class NewSupplier extends JFrame {
     private boolean createNewSupplier(String n, String w, String t, String e) {
         boolean ret = false;
         List<Integer> ids = new ArrayList<>();
-        List<Dodavatel> l = new daoDodavatel().getAllSuppliers();
+        List<Supplier> l = new DaoSupplier().getAllSuppliers();
         //Checks whether name, web page, telephone number and email are valid
         if (!(SuppliersGui.areValidData(n, w, t, e)))
             return ret;
         // Generate the smallest possible id for new beverage
-        for (Dodavatel d : l) {
-            ids.add(d.getIddod());
+        for (Supplier s : l) {
+            ids.add(s.getId());
         }
         while (ids.contains(new_id)) {
             new_id++;
         }
         // Create new supplier
-        newSupplier = new Dodavatel();
-        newSupplier.setIddod(new_id);
-        newSupplier.setNazov(n);
+        newSupplier = new Supplier();
+        newSupplier.setId(new_id);
+        newSupplier.setName(n);
         newSupplier.setEmail(e);
         newSupplier.setWeb(w);
         newSupplier.setTel(t);

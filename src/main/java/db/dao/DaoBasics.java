@@ -6,7 +6,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-public class daoBasics {
+/*
+Class for an adding any object into the database.
+*/
+public class DaoBasics {
 
     /**
      * Add object to database

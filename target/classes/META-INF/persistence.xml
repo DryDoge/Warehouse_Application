@@ -3,10 +3,11 @@
 
     <persistence-unit name="AppPU">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <class>db.e.Dodavatel</class>
-        <class>db.e.Napoj</class>
-        <class>db.e.Obsahuje</class>
-        <class>db.e.Sklad</class>
+        <class>db.entity.Beverage</class>
+        <class>db.entity.Contain</class>
+        <class>db.entity.Supplier</class>
+        <class>db.entity.Warehouse</class>
+
 
         <properties>
             <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://slon.felk.cvut.cz:5432/db18_suchype1"/>

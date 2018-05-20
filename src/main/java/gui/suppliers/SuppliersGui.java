@@ -1,8 +1,8 @@
 package gui.suppliers;
 
-import db.dao.daoDodavatel;
-import db.e.Dodavatel;
-import db.e.Napoj;
+import db.dao.DaoSupplier;
+import db.entity.Supplier;
+import db.entity.Beverage;
 
 import javax.persistence.RollbackException;
 import javax.swing.*;
@@ -14,6 +14,10 @@ import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+/*
+Class representing window for managing all suppliers.
+*/
 
 public class SuppliersGui extends JFrame
 {
@@ -80,17 +84,17 @@ public class SuppliersGui extends JFrame
             public void actionPerformed(ActionEvent e) {
                 try {
                     int chosenId = Integer.valueOf((String) suppliersCB.getSelectedItem());
-                    Dodavatel d = new daoDodavatel().getSupplierById(chosenId);
-                    telLabel.setText(d.getTel());
-                    nameLabel.setText(d.getNazov());
-                    emailLabel.setText(d.getEmail());
-                    webLabel.setText(d.getWeb());
-                    List<Napoj> list = d.getNapoje();
+                    Supplier s = new DaoSupplier().getSupplierById(chosenId);
+                    telLabel.setText(s.getTel());
+                    nameLabel.setText(s.getName());
+                    emailLabel.setText(s.getEmail());
+                    webLabel.setText(s.getWeb());
+                    List<Beverage> list = s.getBeverages();
                     DefaultListModel<String> listModel = new DefaultListModel<>();
                     if (list.isEmpty()){
                         listModel.addElement("This supplier does not delivery anything!");
                     }else {
-                        for (Napoj items : list) {
+                        for (Beverage items : list) {
                             listModel.addElement(items.toString());
                         }
                     }
@@ -118,7 +122,7 @@ public class SuppliersGui extends JFrame
                             "Do you really want to delete this supplier?",
                             "Delete confirmation",JOptionPane.YES_NO_OPTION);
                     if (optionButton == JOptionPane.YES_OPTION) {
-                        Dodavatel d = new daoDodavatel().getSupplierById(chosenId);
+                        Supplier d = new DaoSupplier().getSupplierById(chosenId);
                         if (deleteSelectedSupplier(d)) {
                             JOptionPane.showMessageDialog(
                                     null,
@@ -158,7 +162,7 @@ public class SuppliersGui extends JFrame
             public void actionPerformed(ActionEvent e) {
                 try {
                     int chosenId = Integer.valueOf((String)suppliersCB.getSelectedItem());
-                    Dodavatel d = new daoDodavatel().getSupplierById(chosenId);
+                    Supplier d = new DaoSupplier().getSupplierById(chosenId);
 
                     if(us == null || !(us.isVisible())) {
                         us = null;
@@ -199,24 +203,24 @@ public class SuppliersGui extends JFrame
      * Get all suppliers and prepare them for choosing.
      */
     public void setData() {
-        List<Dodavatel> l = new daoDodavatel().getAllSuppliers();
+        List<Supplier> l = new DaoSupplier().getAllSuppliers();
         suppliersCB.removeAllItems();
         suppliersCB.addItem("Select Number");
-        for (Dodavatel s :l) {
-            String item = String.valueOf(s.getIddod());
+        for (Supplier s :l) {
+            String item = String.valueOf(s.getId());
             suppliersCB.addItem(item);
         }
     }
 
     /**
-     * Deletes chosen supplier.     *
-     * @param d The supplier who is going to be deleted.
+     * Deletes chosen supplier.
+     * @param s The supplier who is going to be deleted.
      * @return True on success, false otherwise.
      */
-    private boolean deleteSelectedSupplier(Dodavatel d){
+    private boolean deleteSelectedSupplier(Supplier s){
         try {
 
-            new daoDodavatel().deleteSupplier(d.getIddod());
+            new DaoSupplier().deleteSupplier(s.getId());
             return true;
         }catch (RollbackException e){
             logr.warning("Cannot delete supplier from database.");
