@@ -49,7 +49,7 @@ public class UpdateBeverage extends JFrame {
         String flavor = beverageToUpdate.getFlavor();
         String category = beverageToUpdate.getCategory();
         String brand = beverageToUpdate.getBrand();
-        int price = beverageToUpdate.getPrice();
+        short price = beverageToUpdate.getPrice();
 
         flavorTF.setText(flavor);
         categoryTF.setText(category);

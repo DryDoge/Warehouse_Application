@@ -14,6 +14,11 @@ public class Warehouse {
     private String city;
     private String postalcode;
     private String web;
+    @ManyToMany
+    @JoinTable(name="contain",
+            joinColumns = @JoinColumn(name="storageid", referencedColumnName= "id"),
+            inverseJoinColumns = @JoinColumn(name="beverageid", referencedColumnName="id"))
+    private List<Beverage> beverages;
 
 
     @Column(name = "id", nullable = false)
@@ -93,13 +98,6 @@ public class Warehouse {
 
         return Objects.hash(id, tel, street, city, postalcode, web);
     }
-
-
-    @ManyToMany
-    @JoinTable(name="contain",
-            joinColumns = @JoinColumn(name="storageid", referencedColumnName= "id"),
-            inverseJoinColumns = @JoinColumn(name="beverageid", referencedColumnName="id"))
-    private List<Beverage> beverages;
 
     public void setBeverages(List<Beverage> beverages) {
         this.beverages = beverages;

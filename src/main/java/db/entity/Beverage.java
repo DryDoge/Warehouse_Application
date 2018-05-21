@@ -14,6 +14,13 @@ public class Beverage {
     private String brand;
     private String type;
 
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="supplier")
+    private Supplier supplier;
+
+    @ManyToMany(mappedBy = "beverages")
+    private List<Warehouse> warehouses;
+
 
     @Column(name = "id", nullable = false)
     public int getId() {
@@ -96,9 +103,7 @@ public class Beverage {
         return Objects.hash(id, flavor, price, category, brand, type, supplier);
     }
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="supplier")
-    private Supplier supplier;
+
 
     @Column(name = "supplier", nullable = false)
     public Supplier getSupplier() {
@@ -109,8 +114,11 @@ public class Beverage {
         this.supplier = supplier;
     }
 
-    @ManyToMany(mappedBy = "beverages")
-    private List<Warehouse> warehouses;
+
+
+    public void setWarehouses(List<Warehouse> warehouses) {
+        this.warehouses = warehouses;
+    }
 
     public List<Warehouse> getWarehouses() {
         return warehouses;

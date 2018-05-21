@@ -12,6 +12,8 @@ public class Supplier {
     private String email;
     private String tel;
     private String web;
+    @OneToMany(mappedBy="supplier")
+    private List<Beverage> beverages;
 
     @Column(name = "id", nullable = false)
     public int getId() {
@@ -80,9 +82,11 @@ public class Supplier {
         return Objects.hash(id, name, email, tel, web);
     }
 
-    @OneToMany(mappedBy="supplier")
-    private List<Beverage> beverages;
 
+
+    public void setBeverages(List<Beverage> beverages) {
+        this.beverages = beverages;
+    }
 
     public List<Beverage> getBeverages() {
         return beverages;

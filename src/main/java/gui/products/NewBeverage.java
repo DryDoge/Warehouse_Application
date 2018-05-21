@@ -79,7 +79,7 @@ public class NewBeverage extends JFrame {
                 String flavor = flavorTextField.getText();
                 String category = categoryTextField.getText();
                 String brand = brandTextField.getText();
-                short price = Short.valueOf(priceTextField.getText());
+                String price = priceTextField.getText();
                 if (createNewBeverage(flavor, category, brand, price)) {
                     new DaoBasics().addAnything(newBeverage);
                     JOptionPane.showMessageDialog(null,
@@ -101,13 +101,13 @@ public class NewBeverage extends JFrame {
      * @param p Price of beverage.
      * @return True on success, false otherwise.
      */
-    private boolean createNewBeverage(String f, String c, String b, short p){
+    private boolean createNewBeverage(String f, String c, String b, String p){
         boolean ret = false;
         List<Integer> ids = new ArrayList<>();
         String chosenSupp;
         Supplier dod;
         //Checks whether category, price, brand are valid
-        if(!(new ProductsGui().areValidData(c, b, String.valueOf(p))))
+        if(!(new ProductsGui().areValidData(c, b, p)))
             return ret;
         //Checks whether type is selected
         if(!(alcoholicRadioButton.isSelected())
@@ -145,7 +145,7 @@ public class NewBeverage extends JFrame {
             newBeverage.setFlavor(f);
         newBeverage.setCategory(c);
         newBeverage.setBrand(b);
-        newBeverage.setPrice(p);
+        newBeverage.setPrice(Short.valueOf(p));
         if (alcoholicRadioButton.isSelected())
             newBeverage.setType("Alko");
         else

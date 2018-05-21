@@ -275,7 +275,7 @@ public class ProductsGui extends JFrame {
 
     /**
      * Removes a beverage and all information about its.
-     * @param n Beverage.
+     * @param b Beverage.
      * @return True on success, false otherwise.
      */
     private boolean deleteSelectedBeverage(Beverage b) {
@@ -313,7 +313,7 @@ public class ProductsGui extends JFrame {
         }
 
 
-        if(Integer.valueOf(p) == null || Integer.valueOf(p) <= 0){
+        if(p.equals("") || p.equals("0") || !(p.matches("[0-9]+"))){
             JOptionPane.showConfirmDialog(
                     null,"Price is not filled or wrong!",
                     "Warning",JOptionPane.DEFAULT_OPTION);
