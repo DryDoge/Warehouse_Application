@@ -6,8 +6,7 @@
 
 **Databázový model:**
 
-![Databázový model](/uploads/5903a1542f254e6604a959f87ad878e1/Warehouse__1_.png)
-
+![Warehouse](/uploads/500854a69453ef156ee2e953b0c0e52a/Warehouse.png)
 
 **Spustenie:** V balíčku app spustíme v triede Main.
 
