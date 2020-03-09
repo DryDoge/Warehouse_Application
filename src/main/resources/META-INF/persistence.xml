@@ -10,10 +10,10 @@
 
 
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://slon.felk.cvut.cz:5432/db18_suchype1"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://hostname"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-            <property name="javax.persistence.jdbc.user" value="db18_suchype1"/>
-            <property name="javax.persistence.jdbc.password" value="slayerko"/>
+            <property name="javax.persistence.jdbc.user" value="username"/>
+            <property name="javax.persistence.jdbc.password" value="password"/>
             <property name="javax.persistence.schema-generation.database.action" value="create"/>
         </properties>
     </persistence-unit>
